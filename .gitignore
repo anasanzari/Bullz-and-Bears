@@ -6,3 +6,4 @@ Homestead.json
 .env
 /config/jwt.php
 bower_components/
+.sass-cache

@@ -3,8 +3,8 @@
 	'use strict';
 
 	angular
-		.module('moments', ['ui.router', 'satellizer','ui.materialize','AppControllers'])
-		.config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider, $provide) {
+		.module('moments', ['ui.router', 'satellizer','ui.materialize','AppControllers','AppConfig'])
+		.config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider, $provide, config) {
 
 			function redirectWhenLoggedOut($q, $injector) {
 				return {
@@ -26,7 +26,7 @@
 			$provide.factory('redirectWhenLoggedOut', redirectWhenLoggedOut);
 			$httpProvider.interceptors.push('redirectWhenLoggedOut');
 
-			$authProvider.loginUrl = '../api/authenticate';
+			$authProvider.loginUrl = config.baseUrl + 'api/authenticate';
 
 			$urlRouterProvider.otherwise('/auth');
 
@@ -43,13 +43,15 @@
 				});
 		})
 
-		.run(function($rootScope, $state) {
+		.run(function($rootScope, $state,$auth) {
 
 			$rootScope.$on('$stateChangeStart', function(event, toState) {
 
+				console.log('stateChange:');
 				var user = JSON.parse(localStorage.getItem('user'));
+				console.log(user);
 
-				if(user) {
+				if(user){
 
 					$rootScope.authenticated = true;
 					$rootScope.currentUser = user;
@@ -61,6 +63,20 @@
 
 					}
 				}
+
 			});
+
+		 	$rootScope.logout = function() {
+
+				$auth.logout().then(function() {
+
+
+					localStorage.removeItem('user');
+					$rootScope.authenticated = false;
+					$rootScope.currentUser = null;
+
+				});
+			}
+
 		});
 })();

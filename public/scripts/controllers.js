@@ -5,7 +5,7 @@
 	var controllers = angular.module('AppControllers',[]);
 
 	/*** Auth Controller **/
-	controllers.controller('AuthController', function($scope, $auth, $state) {
+	controllers.controller('AuthController', function($scope, $auth, $state,$http,$routeScope) {
 
 		$scope.login = function() {
 
@@ -14,12 +14,25 @@
 				password: $scope.password
 			}
 
-			// Use Satellizer's $auth service to login
 			$auth.login(credentials).then(function(data) {
-				//login successful
-				$state.go('users');
+				console.log(data);
+				return $http.get('api/authenticate/user');
+
 			}, function(error) {
-				console.log(error);
+
+				$scope.loginError = true;
+				$scope.loginErrorText = error.data.error;
+
+			}).then(function(response) {
+
+				var user = JSON.stringify(response.data.user);
+
+				localStorage.setItem('user', user);
+
+				$rootScope.authenticated = true;
+				$rootScope.currentUser = response.data.user;
+				$state.go('users');
+
 			});
 		}
 
