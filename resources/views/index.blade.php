@@ -24,4 +24,5 @@
     <script src="scripts/app.js"></script>
     <script src="scripts/config.js"></script>
     <script src="scripts/controllers.js"></script>
+    <script src="scripts/services.js"></script>
 </html>

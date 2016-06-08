@@ -17,12 +17,16 @@ class CreateTableHistory extends Migration
           $table->increments('id');
           $table->integer('playerid')->unsigned();
           $table->string('symbol');
-          //$table->integer('skey');
+          $table->integer('skey')->unsigned()->nullable();
           $table->string('transaction_type',20);
           $table->decimal('amount', 15, 2);
           $table->decimal('value',15,2);
           $table->timestamp('transaction_time');
 
+          $table->decimal('p_liquidcash', 10, 2);
+          $table->decimal('p_marketvalue', 10, 2);
+
+          $table->foreign('skey')->references('id')->on('schedules');
           $table->foreign('playerid')->references('id')->on('users');
           $table->foreign('symbol')->references('symbol')->on('stocks');
       });
@@ -35,6 +39,6 @@ class CreateTableHistory extends Migration
      */
     public function down()
     {
-        Schema::drop('schedules');
+        Schema::drop('history');
     }
 }

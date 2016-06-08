@@ -3,7 +3,7 @@
 	'use strict';
 
 	angular
-		.module('moments', ['ui.router', 'satellizer','ui.materialize','AppControllers','AppConfig'])
+		.module('moments', ['ui.router', 'satellizer','ui.materialize','AppControllers','AppConfig','AppServices'])
 		.config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider, $provide, config) {
 
 			function redirectWhenLoggedOut($q, $injector) {
@@ -26,7 +26,7 @@
 			$provide.factory('redirectWhenLoggedOut', redirectWhenLoggedOut);
 			$httpProvider.interceptors.push('redirectWhenLoggedOut');
 
-			$authProvider.loginUrl = config.baseUrl + 'api/authenticate';
+			$authProvider.loginUrl = config.baseUrl + 'api/fbauthenticate';
 
 			$urlRouterProvider.otherwise('/auth');
 
@@ -43,7 +43,36 @@
 				});
 		})
 
-		.run(function($rootScope, $state,$auth) {
+		.run(function($rootScope, $state,$auth, $window, AuthService) {
+
+			  $rootScope.user = {};
+
+			  $window.fbAsyncInit = function() {
+
+			    FB.init({
+			      appId: '882961331768341',
+			      status: true,
+			      cookie: true,
+			      xfbml: true
+			    });
+
+			    AuthService.watchLoginChange();
+
+			  };
+	   	//sdk
+			  (function(d){
+			    var js,
+			    id = 'facebook-jssdk',
+			    ref = d.getElementsByTagName('script')[0];
+			    if (d.getElementById(id)) {
+			      return;
+			    }
+			    js = d.createElement('script');
+			    js.id = id;
+			    js.async = true;
+			    js.src = "//connect.facebook.net/en_US/all.js";
+			    ref.parentNode.insertBefore(js, ref);
+			  }(document));
 
 			$rootScope.$on('$stateChangeStart', function(event, toState) {
 
@@ -59,7 +88,7 @@
 					if(toState.name === "auth") {
 
 						event.preventDefault();
-						$state.go('users');
+						//$state.go('users');
 
 					}
 				}

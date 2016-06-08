@@ -7,8 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 class History extends Model
 {
 
+  const TYPE_BUY = "Buy";
+  const TYPE_SELL = "Sell";
+  const TYPE_COVER = "Cover";
+  const TYPE_SHORT_SELL = "Short Sell";
+
+  const TYPES =  array(
+                        History::TYPE_BUY,
+                        History::TYPE_SELL,
+                        History::TYPE_COVER,
+                        History::TYPE_SHORT_SELL
+                      );
+
   protected $fillable = [
-      'id', 'playerid', 'symbol', 'transaction_type', 'amount', 'value', 'transaction_time'
+      'playerid', 'symbol',
+      'transaction_type', 'amount', 'value',
+      'transaction_time',
+      'skey', 'p_marketvalue', 'p_liquidcash'
   ];
 
   public $timestamps = false;

@@ -19,4 +19,23 @@ Route::group(['prefix' => 'api'], function(){
 	Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);
 	Route::post('authenticate', 'AuthenticateController@authenticate');
   Route::get('authenticate/user', 'AuthenticateController@getAuthenticatedUser');
+  Route::post('fbauthenticate','AuthenticateController@fb_authenticate');
+
+  Route::post('stocks','ApiController@getStocks');
+  Route::post('player','ApiController@getPlayer');
+  //portfolio
+  Route::post('bought','ApiController@getBought');
+  Route::post('shorted','ApiController@getShorted');
+  Route::post('history','ApiController@getHistory');
+  //rankings
+  Route::post('rankings/daily','ApiController@getDailyRankings');
+  Route::post('rankings/weekly','ApiController@getWeeklyRankings');
+  Route::post('rankings/overall','ApiController@getOverallRankings');
+  //scheduled
+  Route::post('scheduled','ApiController@getScheduled');
+  Route::post('cancelschedule','ApiController@cancelSchedule');
+  //trade n schedule
+  Route::post('dotrade','ApiController@doTrade');
+  Route::post('doschedule','ApiController@doSchedule');
+
 });

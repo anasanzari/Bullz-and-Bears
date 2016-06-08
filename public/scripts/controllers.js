@@ -5,7 +5,7 @@
 	var controllers = angular.module('AppControllers',[]);
 
 	/*** Auth Controller **/
-	controllers.controller('AuthController', function($scope, $auth, $state,$http,$routeScope) {
+	controllers.controller('AuthController', function($scope, $auth, $state,$http, $rootScope) {
 
 		$scope.login = function() {
 

@@ -20,7 +20,7 @@ class AuthenticateController extends Controller
       // Apply the jwt.auth middleware to all methods in this controller
       // except for the authenticate method. We don't want to prevent
       // the user from retrieving their token if they don't already have it
-      $this->middleware('jwt.auth', ['except' => ['authenticate']]);
+      $this->middleware('jwt.auth', ['except' => ['authenticate','fb_authenticate']]);
   }
 
   /**
@@ -37,11 +37,47 @@ class AuthenticateController extends Controller
       return $users;
   }
 
-  /**
-   * Return a JWT
-   *
-   * @return Response
-   */
+
+  public function fb_authenticate(Request $request){
+
+    $values = $request->all();
+    $fb_token = $values['fb_token'];
+    $res = @file_get_contents("https://graph.facebook.com/me?access_token=$fb_token");
+    $data = json_decode($res,TRUE);
+
+    if(!isset($data) || isset($data['error'])){
+      return response()->json(['error' => 'invalid_token'], 401);
+    }
+    $fbid = $data['id'];
+
+    $user = User::where('fbid',$fbid)->get();
+
+    if($user->isEmpty()){
+      //new fb user.
+      $start_money = config('bullz.start_money');
+      $user = User::create(['name'=>$data['name'],'fbid'=>$fbid, 'liquidcash'=> $start_money,
+                            'marketvalue'=>$start_money, 'shortval' => $start_money,
+                             'weekWorth'=>0,'dayWorth'=>0,'rank'=>0,
+                             'email'=> "mail"]);
+    }
+    
+    $user->setDetails();
+
+    try {
+        if (! $token = JWTAuth::fromUser($user)) {
+            return response()->json(['error' => 'invalid_credentials'], 401);
+        }
+    } catch (JWTException $e) {
+        // something went wrong
+        return response()->json(['error' => 'could_not_create_token'], 500);
+    }
+
+    return ['token'=> $token, 'user' => $user];
+
+
+  }
+
+
   public function authenticate(Request $request)
   {
       $credentials = $request->only('email', 'password');

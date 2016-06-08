@@ -14,7 +14,7 @@ class CreateTableSchedules extends Migration
     {
       Schema::create('schedules', function (Blueprint $table) {
 
-          $table->increments('skey');
+          $table->increments('id');
           $table->integer('playerid')->unsigned();
           $table->string('symbol');
           $table->string('transaction_type',20);
@@ -22,7 +22,7 @@ class CreateTableSchedules extends Migration
           $table->integer('no_shares');
           $table->integer('pend_no_shares');
           $table->string('flag', 10);
-
+          
           $table->foreign('playerid')->references('id')->on('users');
           $table->foreign('symbol')->references('symbol')->on('stocks');
       });
