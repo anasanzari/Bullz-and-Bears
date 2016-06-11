@@ -16,6 +16,8 @@ use App\Schedules;
 use Carbon\Carbon;
 use Validator;
 
+use App\Transaction;
+
 
 class ApiController extends Controller
 {
@@ -37,6 +39,9 @@ class ApiController extends Controller
     $user = User::find(1);
     return $this->stocks($user);
   }
+
+
+
 
   private function stocks($user){
 
@@ -214,17 +219,13 @@ class ApiController extends Controller
       $stock = $stocks->first();
       switch ($type) {
         case History::TYPE_BUY:
-          $floor1 = floor( ($user->liquidcash - ($user->shortval / 4) ) / (1.002 * $stock->value ) );
-          $floor2 = floor( ($user->liquidcash + $user->market_value) / (6*1.002*$stock->value) );
-          $max_amount = max(min($floor1, $floor2 - $stock->bought_amount), 0);
+          $max_amount = Transaction::getMaxBuyAmount($user,$stock->value,$stock->bought_amount);
           break;
         case History::TYPE_SELL:
           $max_amount = $stock->bought_amount;
           break;
         case History::TYPE_SHORT_SELL:
-          $floor1 = floor( ((4 * $user->liquidcash ) - $user->shortval ) / ( $stock->value*1.004 ) );
-          $floor2 = floor( ($user->liquidcash + $user->marketvalue - $user->shortval ) / (6*$stock->value*1.004) );
-          $max_amount = max(min($floor1, $floor2 - $stock->shorted_amount), 0);
+          $max_amount = Transaction::getMaxShortAmount($user,$stock->value,$stock->shorted_amount);
           break;
         case History::TYPE_COVER:
           $max_amount = $stock->shorted_amount;
@@ -241,10 +242,10 @@ class ApiController extends Controller
       $db = [];
 
       switch($type){
-          case History::TYPE_BUY :  $r = $this->Buy($user, $symbol, $amount, $stock, NULL);break;
-          case History::TYPE_SELL: $r = $this->Sell($user, $symbol, $amount, $stock, NULL);break;
-          case History::TYPE_SHORT_SELL: $r = $this->Short($user, $symbol, $amount, $stock, NULL);break;
-          case History::TYPE_COVER : $r = $this->Cover($user, $symbol, $amount, $stock, NULL);break;
+          case History::TYPE_BUY :  $r = Transaction::Buy($user, $symbol, $amount, $stock, NULL);break;
+          case History::TYPE_SELL: $r = Transaction::Sell($user, $symbol, $amount, $stock, NULL);break;
+          case History::TYPE_SHORT_SELL: $r = Transaction::Short($user, $symbol, $amount, $stock, NULL);break;
+          case History::TYPE_COVER : $r = Transaction::Cover($user, $symbol, $amount, $stock, NULL);break;
       }
 
       if($r){
@@ -327,6 +328,11 @@ class ApiController extends Controller
 
   }
 
+  public function valupdate(){
+
+    
+
+  }
 
   private function schedules($user){
     $schedules = schedules::join('stocks',
@@ -336,128 +342,6 @@ class ApiController extends Controller
                     })->orderBy('skey','ASC')->get();
     return $schedules;
   }
-
-  private function Buy($user, $symbol, $amount, $stock_data, $skey) {
-    try{
-        DB::transaction(function() use($user,$symbol,$amount,$stock_data,$skey){
-          BoughtStock::buyUpdate($user, $symbol, $amount,$stock_data['value']);
-          History::create([
-            'playerid' => $user->id,
-            'symbol' => $symbol,
-            'transaction_type' => History::TYPE_BUY,
-            'amount' => $amount,
-            'value' => $stock_data['value'],
-            'skey' => $skey,
-            'transaction_time' => Carbon::now(),
-            'p_marketvalue' => $user->marketvalue,
-            'p_liquidcash' => $user->liquidcash
-          ]);
-          $user->buyUpdate($amount, $stock_data['value']);
-
-          if ($skey != null){ //make it null
-              Schedules::updateShares($amount, $skey);
-          }
-        });
-        return true;
-    }catch(Exception $e){
-        return false;
-    }
-
-	}
-
-
-	private function Sell($user, $symbol, $amount, $stock_data, $skey) {
-
-    try{
-        DB::transaction(function() use($user,$symbol,$amount,$stock_data,$skey){
-          BoughtStock::sellUpdate($user, $symbol, $amount,$stock_data);
-          History::create([
-            'playerid' => $user->id,
-            'symbol' => $symbol,
-            'transaction_type' => History::TYPE_SELL,
-            'amount' => $amount,
-            'value' => $stock_data['value'],
-            'skey' => $skey,
-            'transaction_time' => Carbon::now(),
-            'p_marketvalue' => $user->marketvalue,
-            'p_liquidcash' => $user->liquidcash
-          ]);
-          $user->sellUpdate($amount, $stock_data['value']);
-
-          if ($skey != null){ //make it null
-              Schedules::updateShares($amount, $skey);
-          }
-        });
-        return true;
-    }catch(Exception $e){
-        return false;
-    }
-	}
-
-	private function Short($user, $symbol, $amount, $stock_data, $skey) {
-
-    try{
-        DB::transaction(function() use($user,$symbol,$amount,$stock_data,$skey){
-          ShortSell::shortUpdate($user, $symbol, $amount,$stock_data['value']);
-          History::create([
-            'playerid' => $user->id,
-            'symbol' => $symbol,
-            'transaction_type' => History::TYPE_SHORT_SELL,
-            'amount' => $amount,
-            'value' => $stock_data['value'],
-            'skey' => $skey,
-            'transaction_time' => Carbon::now(),
-            'p_marketvalue' => $user->marketvalue,
-            'p_liquidcash' => $user->liquidcash
-          ]);
-          $user->shortUpdate($amount, $stock_data['value']);
-
-          if ($skey != null){
-              Schedules::updateShares($amount, $skey);
-          }
-        });
-        return true;
-    }catch(Exception $e){
-        return false;
-    }
-
-	}
-
-	private function Cover($user, $symbol, $amount, $stock_data, $skey) {
-
-    try{
-        DB::transaction(function() use($user,$symbol,$amount,$stock_data,$skey){
-          //extra db call!
-          $short = ShortSell::where('playerid', $user->id)
-                                ->where('symbol', $symbol)
-                                ->first();
-          $oldaverage = $short->avg;
-
-          ShortSell::coverUpdate($user, $symbol, $amount,$stock_data);
-          History::create([
-            'playerid' => $user->id,
-            'symbol' => $symbol,
-            'transaction_type' => History::TYPE_COVER,
-            'amount' => $amount,
-            'value' => $stock_data['value'],
-            'skey' => $skey,
-            'transaction_time' => Carbon::now(),
-            'p_marketvalue' => $user->marketvalue,
-            'p_liquidcash' => $user->liquidcash
-          ]);
-          $user->coverUpdate($amount, $stock_data['value'], $oldaverage);
-
-          if ($skey != null){
-              Schedules::updateShares($amount, $skey);
-          }
-
-        });
-        return true;
-    }catch(Exception $e){
-        return false;
-    }
-
-	}
 
 
 

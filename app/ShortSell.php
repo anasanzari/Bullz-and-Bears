@@ -16,19 +16,19 @@ class ShortSell extends Model
 
   public $table = 'short_sell';
 
-  public static function shortUpdate($user, $symbol, $amount, $average){
+  public static function shortUpdate($userid, $symbol, $amount, $average){
 
-      $short = ShortSell::where('playerid', $user->id)
+      $short = ShortSell::where('playerid', $userid)
                             ->where('symbol', $symbol)
                             ->first();
       if($short){
         $short->avg = ($short->avg * $short->amount + $amount * $average)/( $short->amount + $amount);
         $short->amount += $amount;
-        $short->updateValues($user,$symbol);
+        $short->updateValues($userid,$symbol);
 
       }else{
         $short = ShortSell::create([
-          'playerid' => $user->id,
+          'playerid' => $userid,
           'symbol' => $symbol,
           'amount' => $amount,
           'avg' => $average
@@ -37,9 +37,9 @@ class ShortSell extends Model
       return $short;
   }
 
-  public static function coverUpdate($user, $symbol, $amount, $stock_data){
+  public static function coverUpdate($userid, $symbol, $amount, $stock_data){
     $average = $stock_data['value'];
-    $short = ShortSell::where('playerid', $user->id)
+    $short = ShortSell::where('playerid', $userid)
                           ->where('symbol', $symbol)
                           ->first();
     if($short){
@@ -47,9 +47,9 @@ class ShortSell extends Model
       if ($amount != $stock_data['shorted_amount']){
         $short->avg = ($short->avg * $short->amount - $amount * $average)/( $short->amount - $amount);
         $short->amount -= $amount;
-        $short->updateValues($user,$symbol);
+        $short->updateValues($userid,$symbol);
       }else{
-        $short->deleteStock($user,$symbol);
+        $short->deleteStock($userid,$symbol);
       }
 
     }else{
@@ -58,16 +58,16 @@ class ShortSell extends Model
     return $short;
   }
 
-  public function updateValues($user,$symbol){
+  public function updateValues($userid,$symbol){
     DB::table($this->table)
-        ->where('playerid', $user->id)
+        ->where('playerid', $userid)
         ->where('symbol', $symbol)
         ->update(['avg' => $this->avg, 'amount' => $this->amount]);
   }
 
-  public function deleteStock($user,$symbol){
+  public function deleteStock($userid,$symbol){
     DB::table($this->table)
-        ->where('playerid', $user->id)
+        ->where('playerid', $userid)
         ->where('symbol', $symbol)
         ->delete();
   }

@@ -16,19 +16,19 @@ class CreateTableHistory extends Migration
 
           $table->increments('id');
           $table->integer('playerid')->unsigned();
-          $table->string('symbol');
+          $table->string('symbol')->nullable();
           $table->integer('skey')->unsigned()->nullable();
           $table->string('transaction_type',20);
           $table->decimal('amount', 15, 2);
           $table->decimal('value',15,2);
           $table->timestamp('transaction_time');
 
-          $table->decimal('p_liquidcash', 10, 2);
-          $table->decimal('p_marketvalue', 10, 2);
+          // $table->decimal('p_liquidcash', 10, 2);
+          // $table->decimal('p_marketvalue', 10, 2);
 
-          $table->foreign('skey')->references('id')->on('schedules');
+          $table->foreign('skey')->references('id')->on('schedules')->onDelete('set null');
           $table->foreign('playerid')->references('id')->on('users');
-          $table->foreign('symbol')->references('symbol')->on('stocks');
+          $table->foreign('symbol')->references('symbol')->on('stocks')->onDelete('set null');
       });
     }
 

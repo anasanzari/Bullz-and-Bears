@@ -23,7 +23,7 @@ class History extends Model
       'playerid', 'symbol',
       'transaction_type', 'amount', 'value',
       'transaction_time',
-      'skey', 'p_marketvalue', 'p_liquidcash'
+      'skey'
   ];
 
   public $timestamps = false;

@@ -22,12 +22,12 @@ class BoughtStock extends Model
 	    return $this->belongsTo('App\Stock','symbol','symbol');
 	}
 
-  public static function buyUpdate($user, $symbol, $amount, $average){
+  public static function buyUpdate($userid, $symbol, $amount, $average){
 
       // updateOrCreate doesn't support composite keys. Laravel Design Desicions!!
       // Performance is least of my worries now. The following could be implemented in a single query.
 
-      $bought = BoughtStock::where('playerid', $user->id)
+      $bought = BoughtStock::where('playerid', $userid)
                             ->where('symbol', $symbol)
                             ->first();
       if($bought){
@@ -36,11 +36,11 @@ class BoughtStock extends Model
         $bought->avg = ($bought->avg * $bought->amount + $amount * $average)/( $bought->amount + $amount);
         $bought->amount += $amount;
         //$bought->save();
-        $bought->updateValues($user,$symbol);
+        $bought->updateValues($userid,$symbol);
 
       }else{
         $bought = BoughtStock::create([
-          'playerid' => $user->id,
+          'playerid' => $userid,
           'symbol' => $symbol,
           'amount' => $amount,
           'avg' => $average
@@ -49,9 +49,9 @@ class BoughtStock extends Model
       return $bought;
   }
 
-  public static function sellUpdate($user, $symbol, $amount, $stock_data){
+  public static function sellUpdate($userid, $symbol, $amount, $stock_data){
     $average = $stock_data['value'];
-    $bought = BoughtStock::where('playerid', $user->id)
+    $bought = BoughtStock::where('playerid', $userid)
                           ->where('symbol', $symbol)
                           ->first();
     if($bought){
@@ -59,9 +59,9 @@ class BoughtStock extends Model
       if ($amount != $stock_data['bought_amount']){
         $bought->avg = ($bought->avg * $bought->amount - $amount * $average)/( $bought->amount - $amount);
         $bought->amount -= $amount;
-        $bought->updateValues($user,$symbol);
+        $bought->updateValues($userid,$symbol);
       }else{
-        $bought->deleteStock($user,$symbol);
+        $bought->deleteStock($userid,$symbol);
       }
 
     }else{
@@ -69,16 +69,16 @@ class BoughtStock extends Model
     }
   }
 
-  public function updateValues($user,$symbol){
+  public function updateValues($userid,$symbol){
     DB::table($this->table)
-        ->where('playerid', $user->id)
+        ->where('playerid', $userid)
         ->where('symbol', $symbol)
         ->update(['avg' => $this->avg, 'amount' => $this->amount]);
   }
 
-  public function deleteStock($user,$symbol){
+  public function deleteStock($userid,$symbol){
     DB::table($this->table)
-        ->where('playerid', $user->id)
+        ->where('playerid', $userid)
         ->where('symbol', $symbol)
         ->delete();
   }
