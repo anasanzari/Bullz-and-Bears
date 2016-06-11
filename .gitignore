@@ -7,3 +7,9 @@ Homestead.json
 /config/jwt.php
 bower_components/
 .sass-cache
+
+public/app
+public/css
+public/templates
+public/views
+public/index.html

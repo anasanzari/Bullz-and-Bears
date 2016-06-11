@@ -19,7 +19,7 @@
       			     console.log(data);
       			}, function(error) {
                  console.log(error);
-      			})
+      			});
           });
 
         }else {
@@ -27,17 +27,17 @@
           console.log('not logged');
         }
       });
-    }
+    };
 
     var getUserInfo = function(callback) {
       FB.api('/me', function(res) {
-        var token =  FB.getAuthResponse()['accessToken'];
+        var token =  FB.getAuthResponse().accessToken;
         $rootScope.$apply(function() {
           $rootScope.user = res;
           callback(res,token);
         });
       });
-    }
+    };
 
     var logout = function() {
       FB.logout(function(response) {
@@ -45,13 +45,13 @@
           $rootScope.user = _self.user = {};
         });
       });
-    }
+    };
 
-    return{
+    return {
       watchLoginChange: watchLoginChange,
       getUserInfo: getUserInfo,
       logout: logout
-    }
+    };
   });
 
 })();

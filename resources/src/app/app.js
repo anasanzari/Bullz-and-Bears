@@ -2,6 +2,8 @@
 
 	'use strict';
 
+	var x = 9;
+
 	angular
 		.module('moments', ['ui.router', 'satellizer','ui.materialize','AppControllers','AppConfig','AppServices'])
 		.config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider, $provide, config) {
@@ -20,7 +22,7 @@
 						});
 						return $q.reject(rejection);
 					}
-				}
+				};
 			}
 
 			$provide.factory('redirectWhenLoggedOut', redirectWhenLoggedOut);
@@ -33,12 +35,12 @@
 			$stateProvider
 				.state('auth', {
 					url: '/auth',
-					templateUrl: './views/authView.html',
+					templateUrl: './templates/authView.html',
 					controller: 'AuthController'
 				})
 				.state('users', {
 					url: '/users',
-					templateUrl: './views/userView.html',
+					templateUrl: './templates/userView.html',
 					controller: 'UserController'
 				});
 		})
@@ -105,7 +107,7 @@
 					$rootScope.currentUser = null;
 
 				});
-			}
+			};
 
 		});
 })();

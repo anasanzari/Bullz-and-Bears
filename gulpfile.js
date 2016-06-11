@@ -1,3 +1,9 @@
+var gulp = require('gulp');
+
+gulp.task('default', function() {
+  
+});
+
 var elixir = require('laravel-elixir');
 
 /*

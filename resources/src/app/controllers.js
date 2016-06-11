@@ -12,7 +12,7 @@
 			var credentials = {
 				email: $scope.email,
 				password: $scope.password
-			}
+			};
 
 			$auth.login(credentials).then(function(data) {
 				console.log(data);
@@ -34,7 +34,7 @@
 				$state.go('users');
 
 			});
-		}
+		};
 
 	});
 
@@ -48,7 +48,7 @@
 			}).error(function(error) {
 				$scope.error = error;
 			});
-		}
+		};
 	});
 
 
