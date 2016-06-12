@@ -1,0 +1,48 @@
+body{
+  min-height: 100vh;
+  margin-bottom: -20px; /* bug */
+}
+
+body{
+  background: #222C32;
+  overflow-x: hidden;
+}
+
+.header {
+    background-color: #1E262B;
+    min-height: $toolbar-height;
+    box-shadow: 0 2px 5px rgba(0,0,0,.3);
+    user-select: none;
+    position: fixed;
+    z-index: 11;
+    width: 100%;
+    left: 0;
+    top: 0;
+    padding: 0 20px;
+    color:#fff;
+
+}
+
+.maincontainer {
+    height: 100%;
+    width: 100%;
+    transform: translateX($sidebar-width);
+    padding-top: $toolbar-height;
+    padding-right: $sidebar-width;
+    @include transition(all .6s ease-in);
+    box-shadow: 0 1px 1px rgba(0,0,0,.1);
+
+    @media (max-width: $screen-sm-max) {
+      transform: translateX(0);
+      padding-right: 0;
+    }
+
+}
+
+.main-sidebar-closed{
+  transform: translateX(0);
+  padding-right: 0;
+  @media (max-width: $screen-sm-max) {
+
+  }
+}

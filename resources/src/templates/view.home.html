@@ -1,0 +1,132 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+
+      <div class="p+">
+
+        <div class="card customcard">
+          <div class="p+">
+            <h1 style="text-align:center">{{player.name}}</h1>
+            <ul class="customlist">
+              <li class="customlist-item">
+                <div class="row center-xs">
+                  <div class="col-xs">
+                    <p class="small">Cash At Hand</p>
+                    <p class="main">{{player.liquidcash|currency:"&#8377"}}</p>
+                  </div>
+                  <div class="col-xs">
+                    <p class="small">Market Value</p>
+                    <p class="main">{{player.marketvalue|currency:"&#8377"}}</p>
+                  </div>
+                </div>
+              </li>
+              <li class="customlist-item">
+                <div class="row">
+                  <div class="col-xs center-xs">
+                    <p class="small">Net Worth</p>
+                    <p class="large">{{player.networth|currency:"&#8377"}}</p>
+                  </div>
+                </div>
+
+              </li>
+
+              <li class="customlist-item">
+
+                <div class="row  center-xs">
+                  <div class="col-xs">
+                    <p>Today's Gain:
+                      <span ng-bind-html="player.daygain| change:false:true"></span>
+                    </p>
+                  </div>
+                  <div class="col-xs">
+                    <p>Week's Gain:
+                      <span ng-bind-html="player.weekgain| change:false:true"></span>
+                    </p>
+                  </div>
+                </div>
+
+              </li>
+
+            </ul>
+
+          </div>
+        </div>
+
+        <div class="card customcard">
+          <div class="p+">
+            <div class="row middle-xs">
+              <div class="col-xs-6 center-xs">
+                <i style="font-size:6rem" class="mdi mdi-trophy" ></i>
+              </div>
+
+              <div class="col-xs-6">
+                <ul class="customlist">
+                  <li class="customlist-item">
+                    <p class="small">Overall Rank</p>
+                    <p class="main">{{player.overallrank}}</p>
+                  </li>
+                  <li class="customlist-item">
+                    <p class="small">Daily Rank</p>
+                    <p class="main">{{player.dailyrank}}</p>
+                  </li>
+                  <li class="customlist-item">
+                    <p class="small">Weekly Rank</p>
+                    <p class="main">{{player.weeklyrank}}</p>
+                  </li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-md-6">
+
+      <div class="p+">
+
+        <div class="card customcard">
+          <div class="p+">
+            <div class="nifty-chart">
+              <img src="http://chart.finance.yahoo.com/t?s=^NSEI&lang=en-IN&region=IN&width=800&height=300"/>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+</div>
+
+<!--div class="container-fluid">
+
+    <div class="row home">
+
+        <div class="col-md-offset-1 col-md-5">
+            <div class="md-whiteframe-z1">
+
+            <h1>{{player.name}}</h1>
+
+            <p>Cash At Hand: {{player.liq_cash|currency:"&#8377"}}</p>
+            <p>Market Value: {{player.market_val|currency:"&#8377"}}</p>
+            <p>Overall Rank: {{player.overall_rank}}</p>
+            <p>Daily Rank: {{player.daily_rank}}</p>
+            <p>Weekly Rank: {{player.weekly_rank}}</p>
+
+            <h2>Net Worth: {{player.net_worth|currency:"&#8377"}}</h2>
+
+            <p>Today's Gain:<span ng-bind-html="player.day_gain| change:false:true"></span></p>
+            <p>Week's Gain: <span ng-bind-html="player.week_gain| change:false:true"></span></p>
+            </div>
+        </div>
+        <div class="col-md-offset-1 col-md-5">
+            <div class="md-whiteframe-z1 nifty-chart-img" style="margin-top: 15px" ></div>
+        </div>
+
+    </div>
+
+</div-->

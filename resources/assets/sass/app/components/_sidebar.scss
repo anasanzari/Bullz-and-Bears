@@ -1,15 +1,15 @@
 .sidebar {
-    width:260px;
+    width: $sidebar-width;
     position: fixed;
     background: #2b343a;
     height: calc(100% - 65px);
     top: 70px;
-    @include transition(all .3s ease-in);
+    @include transition(all .6s ease-in);
     z-index: 10;
     overflow-y: auto;
     box-shadow: 0 1px 1px rgba(0,0,0,.1);
     @media (max-width: $screen-sm-max) {
-      left:-260px;
+      left:-$sidebar-width;
     }
     @media (min-width: $screen-sm-min) {
 
@@ -17,24 +17,8 @@
 }
 
 .sidebar-closed{
-  @include transform(translateX(-260px));
+  @include transform(translateX(-$sidebar-width));
   @media (max-width: $screen-sm-max) {
-      @include transform(translateX(260px));
+      @include transform(translateX($sidebar-width));
   }
-}
-
-
-.header {
-    background-color: #1E262B;
-    min-height: 70px;
-    box-shadow: 0 2px 5px rgba(0,0,0,.3);
-    user-select: none;
-    position: fixed;
-    z-index: 11;
-    width: 100%;
-    left: 0;
-    top: 0;
-    padding: 0 20px;
-    color:#fff;
-
 }

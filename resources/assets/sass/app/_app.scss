@@ -19,5 +19,11 @@
 }
 
 /* Components */
+@import "components/_variables.scss";
 @import "components/_breakpoints.scss";
+@import "components/_layout.scss";
 @import "components/_sidebar.scss";
+@import "components/_sidemenu.scss";
+@import "components/_customcard.scss";
+@import "components/_customlist.scss";
+@import "components/_niftychart.scss";

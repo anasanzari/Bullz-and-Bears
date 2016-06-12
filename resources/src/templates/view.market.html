@@ -1,0 +1,44 @@
+
+
+<div layout="column" layout-align="center center" style="margin-top:20px">
+<md-whiteframe class="md-whiteframe-z1" layout layout-align="center center" style="width: 90%" >
+  
+<md-content layout="column"  style="min-height: 500px;max-height: 550px;width:100%;">
+    
+    <div style="width:100%;padding: 0px 20px;">
+       <md-input-container>
+      <label>Search</label>
+      <input ng-model="name">
+    </md-input-container>
+    </div>
+    
+    <div class="container-fluid" style="width:90%">
+        <div class="row"  ng-repeat="stock in stocks | filter:name">
+
+            <div class="row maindetails" style="padding-left: 0px">
+                <div class="col-md-6"><h1>{{stock.name}}</h1></div>
+                <div class="col-md-6"><h1>{{stock.value|currency:"&#8377"}}</h1></div>
+            </div>
+            <div class="row subdetails">
+                <div class="col-md-3">
+                    <p>Day High: {{stock.day_high|currency:"&#8377"}}</p>
+                    <p>Day Low: {{stock.day_low|currency:"&#8377"}}</p>
+                </div>
+                <div class="col-md-3">
+                     <p>Week High: {{stock.week_high|currency:"&#8377"}}</p>
+                    <p>Week Low: {{stock.week_low|currency:"&#8377"}}</p>
+                </div>
+                <div class="col-md-3">
+                    <p class="change">Change: <span ng-bind-html="stock.change_perc| change:true:false"></span></p>
+                    
+                </div>
+            </div>
+            
+                        
+        </div> 
+    </div>
+       
+</md-content>
+    
+      </md-whiteframe>
+</div>

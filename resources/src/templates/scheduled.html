@@ -1,0 +1,70 @@
+
+        
+<div layout="column" layout-align="center center" style="margin-top:20px">
+<md-whiteframe class="md-whiteframe-z1" layout layout-align="center center" style="width: 90%" >
+                
+             <md-tabs md-dynamic-height md-swipe-content class="md-accent" md-selected="data.selectedIndex" style="width: 100%">
+                 <md-tab id="tab1">
+                    <md-tab-label>Scheduled Transactions</md-tab-label>
+                    <md-tab-body>
+                            <md-content style="max-height: 400px">  
+                            
+                                <div class="container-fluid" style="width:90%">
+                                    <p ng-show="schedules.length==0" style="padding: 20px 0px";>You haven no Scheduled Transactions.</p>
+                                  
+                                <div class="row portfolio"  ng-repeat="schedule in schedules">
+                                    <div class="row" style="padding-left: 0px">
+                                        <div class="col-md-12">
+                                            <h1 style="display:inline-block">{{schedule.name}} </h1>
+                                            <div class="commonbtn-container" style="display:inline-block" >
+                                                <md-button class="md-raised" ng-click="cancel(schedule)" ng-disabled="schedule.isCancelling">{{ schedule.pend_no_shares ==0 ? "Remove": "Cancel"}}</md-button>
+                                                <div ng-show="schedule.isCancelling">
+                                                    <md-progress-circular class="md-accent md-hue-1" md-mode="indeterminate" ></md-progress-circular>
+                                               </div>  
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="row subdetails">
+                                        <div class="col-md-4">
+                                            <p>Transaction : {{schedule.transaction_type|transactionFilter}}</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p>Scheduled Price : {{schedule.scheduled_price|currency:"&#8377"}}</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p>Current Price : {{schedule.value|currency:"&#8377"}}</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p>Amount: {{schedule.no_shares}}</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p>Pending : {{schedule.pend_no_shares}}</p>
+                                        </div>
+                                         <div class="col-md-4">
+                                            <p>Status : {{ schedule.pend_no_shares ==0 ? "Done": "Waiting"}}</p>
+                                        </div>
+                                        
+                                    </div>
+
+                                </div>
+
+                              </div> 
+                                
+                            </md-content>
+                  </md-tab-body>
+                </md-tab>
+                
+             </md-tabs>
+                
+            </md-whiteframe>
+</div>           
+            
+            
+            
+            
+      
+       
+              
+         

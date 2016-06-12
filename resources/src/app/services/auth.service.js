@@ -1,8 +1,8 @@
-(function(){
+(function() {
 
-  'use strict';
+	'use strict';
 
-  var services = angular.module('AppServices',[]);
+  var services = angular.module('AppServices');
 
   services.factory('AuthService', function($rootScope,$auth){
 
@@ -53,5 +53,6 @@
       logout: logout
     };
   });
+
 
 })();

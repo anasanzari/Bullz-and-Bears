@@ -1,0 +1,8 @@
+
+<div layout="column"  layout-align="center center" style="padding-top: 25px" >
+    <img src="./images/logo.png" class="logo">
+    <md-progress-linear md-mode="indeterminate" ng-show="isWaiting" style="width:50%"></md-progress-linear>
+    <p ng-show="isLoading" style="text-align: center;margin-top: 25px"> Initialising... </p>
+    <md-button class="md-raised" ng-click="login()" ng-hide="isWaiting">Login with Facebook</md-button>
+</div>
+

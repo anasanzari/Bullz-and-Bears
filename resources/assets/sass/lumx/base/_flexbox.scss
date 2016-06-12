@@ -204,7 +204,7 @@
             max-width: #{(100 / 12) * $i + '%'};
         }
     }
-    
+
     [flex-container="column"] > [flex-item="#{$i}"],
     [flex-container="column"][flex-column="12"] > [flex-item="#{$i}"] {
         @include media-query(desk) {

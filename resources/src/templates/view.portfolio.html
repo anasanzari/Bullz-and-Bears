@@ -1,0 +1,215 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 col-md-12">
+
+      <div class="p+">
+
+        <div class="card customcard">
+
+          <lx-tabs lx-active-tab="vm.activeTab" lx-color="white">
+              <lx-tab lx-label="Bought Stocks" >
+                <div class="container-fluid">
+
+                  <p ng-show="bought.length==0" style="padding: 20px 0px">You have no Bought Stocks </p>
+
+                  <ul class="customlist">
+                    <li class="customlist-item" ng-repeat="stock in bought">
+                      <div class="row">
+                        <div class="col-xs">
+                          <p class="large">{{stock.name}}</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-xs-6 col-md-4">
+                            <p>Amount : {{stock.amount}}</p>
+                        </div>
+                        <div class="col-xs-6 col-md-4">
+                            <p>Avg. Bought Price : {{stock.avg|currency:"&#8377"}}</p>
+                        </div>
+                        <div class="col-xs-6 col-md-4">
+                            <p>Live Price : {{stock.value|currency:"&#8377"}}</p>
+                        </div>
+                        <div class="col-xs-6 col-md-4">
+                            <p>Investment Value : {{stock.invested_value|currency:"&#8377"}}</p>
+                        </div>
+                        <div class="col-xs-6 col-md-4">
+                            <p>Latest Value : {{stock.present_value|currency:"&#8377"}}</p>
+                        </div>
+                         <div class="col-xs-6 col-md-4">
+                            <p>Brokerage : {{stock.brokerage|currency:"&#8377"}}</p>
+                        </div>
+                        <div class="col-xs-6 col-md-4">
+                            <p>Overall Gain : <span ng-bind-html="stock.gain| change:false:true"></p>
+                        </div>
+                      </div>
+
+                    </li>
+                  </ul>
+
+
+                </div>
+              </lx-tab>
+
+              <lx-tab lx-label="Lorem Ipsum 2" ng-disabled="vm.tabIsDisabled">
+                  <p class="p+">Lorem Ipsum Content 2</p>
+              </lx-tab>
+
+              <lx-tab lx-label="Lorem Ipsum 3">
+                  <p class="p+">Lorem Ipsum Content 3</p>
+              </lx-tab>
+          </lx-tabs>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!--div layout="column" layout-align="center center" style="margin-top:20px">
+<md-whiteframe class="md-whiteframe-z1" layout layout-align="center center" style="width: 90%;margin-bottom: 25px" >
+  <md-tabs md-dynamic-height md-swipe-content class="md-accent" md-selected="data.selectedIndex" style="width: 100%">
+                 <md-tab id="tab1">
+                    <md-tab-label>Bought Stocks</md-tab-label>
+                    <md-tab-body>
+                            <md-content layout="column"  style="max-height: 400px;width:100%;">
+
+                              <div class="container-fluid" style="width:90%">
+                                  <p ng-show="bought.length==0" style="padding: 20px 0px">You have no Bought Stocks </p>
+
+                                <div class="row portfolio"  ng-repeat="stock in bought">
+                                    <div class="row" style="padding-left: 0px">
+                                        <div class="col-md-12">
+                                            <h1>{{stock.name}}<md-button ng-click="navigateTo()" class="md-raised" style="margin-left:25px">Sell</md-button></h1>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="row subdetails">
+                                        <div class="col-md-4">
+                                            <p>Amount : {{stock.amount}}</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p>Avg. Bought Price : {{stock.avg|currency:"&#8377"}}</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p>Live Price : {{stock.value|currency:"&#8377"}}</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p>Investment Value : {{stock.invested_value|currency:"&#8377"}}</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p>Latest Value : {{stock.present_value|currency:"&#8377"}}</p>
+                                        </div>
+                                         <div class="col-md-4">
+                                            <p>Brokerage : {{stock.brokerage|currency:"&#8377"}}</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p>Overall Gain : <span ng-bind-html="stock.gain| change:false:true"></p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                              </div>
+
+                            </md-content>
+                    </md-tab-body>
+                </md-tab>
+                <md-tab id="tab2">
+                  <md-tab-label>Shorted Stocks</md-tab-label>
+                  <md-tab-body>
+
+                                <md-content layout="column"  style="max-height: 400px;width:100%;">
+
+                                  <div class="container-fluid" style="width:90%">
+                                      <p ng-show="shorted.length==0" style="padding: 20px 0px">You have no Short Stocks </p>
+
+                                    <div class="row portfolio"  ng-repeat="stock in shorted">
+                                        <div class="row" style="padding-left: 0px">
+                                            <div class="col-md-12">
+                                                <h1>{{stock.name}}<md-button ng-click="navigateTo()" class="md-raised" style="margin-left:25px">Cover</md-button></h1>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="row subdetails">
+                                            <div class="col-md-4">
+                                                <p>Amount : {{stock.amount}}</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>Avg. Sold Price : {{stock.val|currency:"&#8377"}}</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>Live Price : {{stock.value|currency:"&#8377"}}</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>Total Sold Value : {{stock.sold_value|currency:"&#8377"}}</p>
+                                            </div>
+
+                                             <div class="col-md-4">
+                                                <p>Brokerage : {{stock.brokerage|currency:"&#8377"}}</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>Overall Gain : <span ng-bind-html="stock.gain| change:false:true"></p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                  </div>
+
+                                </md-content>
+                      </md-tab-body>
+                </md-tab>
+                <md-tab id="tab3">
+                  <md-tab-label>History</md-tab-label>
+                  <md-tab-body>
+
+                                    <load-more list-type="daily" style="width:100%">
+                                                            <md-content class="history" style="max-height: 400px;width:100%">
+
+                                                                <p ng-show="history.length==0" style="padding: 20px 50px";>You haven't done any transactions yet.</p>
+
+
+                                                            <div ng-repeat="entry in history">
+                                                                <div class="container-fluid">
+
+                                                                    <div class="row subdetails">
+                                                                        <div class="col-md-4">
+                                                                            <p>{{entry.t_time|date:"h:mm a, MMM d"}}</p>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <p>{{entry.t_type}}</p>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <p>{{entry.symbol}}</p>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <p>Amount : {{entry.amount}}</p>
+                                                                        </div>
+
+                                                                         <div class="col-md-4">
+                                                                            <p>Stock Price : {{entry.value|currency:"&#8377"}}</p>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <p>Value : {{entry.ytotal|currency:"&#8377"}}</p>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <p>Brokerage : {{entry.brokerage|currency:"&#8377"}}</p>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+                                                            </md-content>
+                                    </load-more>
+                  </md-tab-body>
+                </md-tab>
+  </md-tabs>
+
+</md-whiteframe>
+
+</div-->

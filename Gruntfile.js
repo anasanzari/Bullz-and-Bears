@@ -19,11 +19,20 @@ module.exports = function(grunt) {
           dest: 'public/css',
           ext: '.css'
         }]
+      },
+      vendor:{
+        files: [{
+          expand: true,
+          cwd: 'resources/assets/sass',
+          src: ['vendor.scss'],
+          dest: 'public/css',
+          ext: '.css'
+        }]
       }
     },
     concat: {
       basic: {
-        src: ['resources/src/app/*.js'],
+        src: ['resources/src/app/**/*.js'],
         dest: 'public/app/app.js',
       },
       extras: {
@@ -41,7 +50,8 @@ module.exports = function(grunt) {
       fonts:{
         expand: true,
         files:[
-          {expand: true, cwd: 'public/bower_components/mdi/fonts', src:"**", dest:'public/fonts'}
+          {expand: true, cwd: 'public/bower_components/mdi/fonts', src:"**", dest:'public/fonts'},
+          {expand: true, cwd: 'public/bower_components/font-awesome/fonts', src:"**", dest:'public/fonts'}
         ]
       }
     },
@@ -112,6 +122,7 @@ module.exports = function(grunt) {
        grunt.task.run([
            'configureProxies:server',
            'connect',
+           'concat:basic',
            'watch'
        ]);
    });

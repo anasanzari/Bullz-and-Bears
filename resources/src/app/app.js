@@ -2,11 +2,22 @@
 
 	'use strict';
 
-	var x = 9;
+	var app = angular.module('moments', [
+			'ui.router',
+			'satellizer',
+			'lumx',
+			'AppControllers',
+			'AppConfig',
+			'AppServices',
+			'AppFilters',
+			'ngResource'
+		]);
 
-	angular
-		.module('moments', ['ui.router', 'satellizer','lumx','AppControllers','AppConfig','AppServices'])
-		.config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider, $provide, config) {
+	angular.module('AppControllers',[]);
+	angular.module('AppServices',['ngResource']);
+	angular.module('AppFilters',[]);
+
+	app.config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider, $provide, config) {
 
 			function redirectWhenLoggedOut($q, $injector) {
 				return {
@@ -32,17 +43,7 @@
 
 			$urlRouterProvider.otherwise('/auth');
 
-			$stateProvider
-				.state('auth', {
-					url: '/auth',
-					templateUrl: './templates/authView.html',
-					controller: 'AuthController'
-				})
-				.state('users', {
-					url: '/users',
-					templateUrl: './templates/userView.html',
-					controller: 'UserController'
-				});
+
 		})
 
 		.run(function($rootScope, $state,$auth, $window, AuthService) {
