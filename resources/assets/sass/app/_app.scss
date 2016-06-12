@@ -1,0 +1,23 @@
+@font-face {
+    font-family: main;
+    src: url(../fonts/AvenirLTStd-Medium.otf);
+}
+
+@font-face {
+    font-family: heavy;
+    src: url(../fonts/BebasNeue.otf);
+}
+
+*{
+  font-family: main;
+}
+
+/* helpers */
+
+.center{
+  text-align: center;
+}
+
+/* Components */
+@import "components/_breakpoints.scss";
+@import "components/_sidebar.scss";

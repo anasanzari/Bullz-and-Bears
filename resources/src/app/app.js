@@ -5,7 +5,7 @@
 	var x = 9;
 
 	angular
-		.module('moments', ['ui.router', 'satellizer','ui.materialize','AppControllers','AppConfig','AppServices'])
+		.module('moments', ['ui.router', 'satellizer','lumx','AppControllers','AppConfig','AppServices'])
 		.config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider, $provide, config) {
 
 			function redirectWhenLoggedOut($q, $injector) {

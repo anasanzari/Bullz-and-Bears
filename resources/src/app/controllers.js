@@ -4,6 +4,17 @@
 
 	var controllers = angular.module('AppControllers',[]);
 
+
+	/* Nav Controller */
+
+	controllers.controller('NavController', function($scope){
+		$scope.isOpen = true;
+		$scope.toggle = function(){
+			$scope.isOpen = !$scope.isOpen;
+			console.log('click');
+		};
+	});
+
 	/*** Auth Controller **/
 	controllers.controller('AuthController', function($scope, $auth, $state,$http, $rootScope) {
 

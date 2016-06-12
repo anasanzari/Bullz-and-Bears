@@ -38,6 +38,12 @@ module.exports = function(grunt) {
           {expand: true, cwd:'resources/src/templates/', src: '**', dest: 'public/templates'}
         ],
       },
+      fonts:{
+        expand: true,
+        files:[
+          {expand: true, cwd: 'public/bower_components/mdi/fonts', src:"**", dest:'public/fonts'}
+        ]
+      }
     },
     uglify: {
       my_target: {
@@ -94,6 +100,14 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
 
   grunt.registerTask('default', ['jshint']);
+
+  grunt.registerTask('build', function (target) {
+       grunt.task.run([
+         'copy:main',
+         'copy:fonts'
+       ]);
+   });
+
   grunt.registerTask('server', function (target) {
        grunt.task.run([
            'configureProxies:server',
