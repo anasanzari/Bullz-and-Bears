@@ -1,3 +1,4 @@
+
 /vendor
 /node_modules
 /public/storage
@@ -13,3 +14,15 @@ public/css
 public/templates
 public/views
 public/index.html
+
+# Laravel 4 specific
+bootstrap/compiled.php
+app/storage/
+
+# Laravel 5 & Lumen specific
+bootstrap/cache/
+storage/
+.env.*.php
+.env.php
+.env
+.env.example
