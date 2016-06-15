@@ -1,150 +1,102 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-xs-12 col-md-12">
 
-        
-<div layout="column" layout-align="center center" style="margin-top:20px">
-<md-whiteframe class="md-whiteframe-z1" layout layout-align="center center" style="width: 90%" >
-                
-             <md-tabs md-dynamic-height md-swipe-content class="md-accent" md-selected="data.selectedIndex" style="width: 100%">
-                 <md-tab id="tab1">
-                    <md-tab-label>Today's Leaders</md-tab-label>
-                    <md-tab-body>
-                        <load-more list-type="daily">
-                            <md-content style="max-height: 400px">  
-                            <div ng-repeat="player in rankings.daily">
-                                <div class="container-fluid prof-details">
-                                    <div class="row">
-                                        
-                                        <div class="col-md-3 col-xs-6" style="text-align: center">
-                                            <div class="row">
-                                                <div class="col-md-6 col-xs-3">
-                                                    <h1> {{$index+1}}</h1>
-                                                </div>
-                                                <div class="col-md-6 col-xs-9">
-                                                    <img class="prof-image" ng-src="https://graph.facebook.com/{{player.id}}/picture" />     
-                                       
-                                                </div>
-                                                
-                                            </div>
-                                                
-                                               
-                                             </div>
-                                        <div class="col-md-9 col-xs-6">
-                                            <div class="row">
-                                                <div class="col-md-6 col-xs-12">
-                                                    <h1>{{player.name}}</h1>
-                                                </div>
-                                                <div class="col-md-6 col-xs-12">
-                                                    <h1><span ng-bind-html="player.tot| change:false:true"></h1>
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                                
-
-
-                            </div>
-                            </md-content>
-                          </load-more>
-                  </md-tab-body>
-                </md-tab>
-                <md-tab id="tab2">
-                  <md-tab-label>This Week's Leaders</md-tab-label>
-                  <md-tab-body>
-                    <load-more list-type="weekly">
-                            <md-content style="max-height: 400px">  
-                            <div ng-repeat="player in rankings.weekly">
-                                <div class="container-fluid prof-details">
-                                    <div class="row">
-                                        
-                                        <div class="col-md-3 col-xs-6" style="text-align: center">
-                                            <div class="row">
-                                                <div class="col-md-6 col-xs-3">
-                                                    <h1> {{$index+1}}</h1>
-                                                </div>
-                                                <div class="col-md-6 col-xs-9">
-                                                    <img class="prof-image" ng-src="https://graph.facebook.com/{{player.id}}/picture" />     
-                                       
-                                                </div>
-                                                
-                                            </div>
-                                                
-                                               
-                                             </div>
-                                        <div class="col-md-9 col-xs-6">
-                                            <div class="row">
-                                                <div class="col-md-6 col-xs-12">
-                                                    <h1>{{player.name}}</h1>
-                                                </div>
-                                                <div class="col-md-6 col-xs-12">
-                                                    <h1>{{player.tot|currency:"&#8377"}}</h1>
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                                
-
-
-                            </div>
-                            </md-content>
-                          </load-more>
-                  </md-tab-body>
-                </md-tab>
-                <md-tab id="tab3">
-                  <md-tab-label>Leaderboard</md-tab-label>
-                  <md-tab-body>
-                   <load-more list-type="overall">
-                            <md-content style="max-height: 400px">  
-                            <div ng-repeat="player in rankings.overall">
-                                <div class="container-fluid prof-details">
-                                    <div class="row">
-                                        
-                                        <div class="col-md-3 col-xs-6" style="text-align: center">
-                                            <div class="row">
-                                                <div class="col-md-6 col-xs-3">
-                                                    <h1> {{$index+1}}</h1>
-                                                </div>
-                                                <div class="col-md-6 col-xs-9">
-                                                    <img class="prof-image" ng-src="https://graph.facebook.com/{{player.id}}/picture" />     
-                                       
-                                                </div>
-                                                
-                                            </div>
-                                                
-                                               
-                                             </div>
-                                        <div class="col-md-9 col-xs-6">
-                                            <div class="row">
-                                                <div class="col-md-6 col-xs-12">
-                                                    <h1>{{player.name}}</h1>
-                                                </div>
-                                                <div class="col-md-6 col-xs-12">
-                                                    <h1>{{player.tot|currency:"&#8377"}}</h1>
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                                
-
-
-                            </div>
-                            </md-content>
-                          </load-more>
-                  </md-tab-body>
-                </md-tab>
-             </md-tabs>
-                
-            </md-whiteframe>
-</div>           
-            
-            
-            
-            
-      
-       
-              
-         
+			<div class="p+">
+			
+				<div class="card customcard">
+	
+		          	<lx-tabs lx-active-tab="activeTab" lx-color="white">
+		              
+		              <lx-tab lx-label="Today's Leaders" >
+		                <div class="container-fluid">
+		
+		                  <ul class="customlist">
+		                    <li class="customlist-item" ng-repeat="player in rankings.daily">
+		                      
+		                      <div class="row">
+		                        <div class="col-xs-6 col-md-4">
+		                            <p>{{$index+1}}</p>
+		                        </div>
+		                        <div class="col-xs-6 col-md-4">
+		                            <img class="prof-image" ng-src="https://graph.facebook.com/{{player.id}}/picture" />     
+		                        </div>
+		                        <div class="col-xs-6 col-md-4">
+		                            <p>{{player.name}}</p>
+		                        </div>
+		                        <div class="col-xs-6 col-md-4">
+		                            <p><span ng-bind-html="player.tot| change:false:true"></p>
+		                        </div>
+		                        
+		                      </div>
+		
+		                    </li>
+		              	  </ul>
+		
+		                </div>
+		              </lx-tab>
+		
+		              <lx-tab lx-label="This Week's Leaders">
+		                  <div class="container-fluid">
+		
+		                  <ul class="customlist">
+		                    <li class="customlist-item" ng-repeat="player in rankings.weekly">
+		                      
+		                      <div class="row">
+		                        <div class="col-xs-6 col-md-4">
+		                            <p>{{$index+1}}</p>
+		                        </div>
+		                        <div class="col-xs-6 col-md-4">
+		                            <img class="prof-image" ng-src="https://graph.facebook.com/{{player.id}}/picture" />     
+		                        </div>
+		                        <div class="col-xs-6 col-md-4">
+		                            <p>{{player.name}}</p>
+		                        </div>
+		                        <div class="col-xs-6 col-md-4">
+		                            <p><span ng-bind-html="player.tot| change:false:true"></p>
+		                        </div>
+		                        
+		                      </div>
+		
+		                    </li>
+		              	  </ul>
+		
+		                </div>
+		               </lx-tab>
+		
+		              <lx-tab lx-label="Leaderboard">
+		                  <div class="container-fluid">
+		
+		                  <ul class="customlist">
+		                    <li class="customlist-item" ng-repeat="player in rankings.overall">
+		                      
+		                      <div class="row">
+		                        <div class="col-xs-6 col-md-4">
+		                            <p>{{$index+1}}</p>
+		                        </div>
+		                        <div class="col-xs-6 col-md-4">
+		                            <img class="prof-image" ng-src="https://graph.facebook.com/{{player.id}}/picture" />     
+		                        </div>
+		                        <div class="col-xs-6 col-md-4">
+		                            <p>{{player.name}}</p>
+		                        </div>
+		                        <div class="col-xs-6 col-md-4">
+		                            <p><span ng-bind-html="player.tot| change:false:true"></p>
+		                        </div>
+		                        
+		                      </div>
+		
+		                    </li>
+		              	  </ul>
+		
+		                </div>
+		              </lx-tab>
+		          	
+		          	</lx-tabs>
+	        	</div>
+			
+			</div>
+		</div>
+	</div>
+</div>
+          
