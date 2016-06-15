@@ -28,7 +28,7 @@
             type: 'history'
           },
           cache: false,
-          isArray: true
+          isArray: false
         }
 
 

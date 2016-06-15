@@ -4,7 +4,90 @@
   var controllers = angular.module('AppControllers');
 
   controllers.controller('TradeController',
-      function($scope,$routeParams) {
+      function($scope,StockService) {
+
+        $scope.isLive = true;
+
+        $scope.state = {}; // inputs
+
+        StockService.getStocks(function(data){
+          console.log(data);
+          $scope.stocks = data;
+        },function(err){
+          console.log(err);
+        });
+
+        $scope.options = [{
+          option: 'Buy'
+        },{
+          option: 'Sell'
+        },{
+          option: 'Short Sell'
+        },{
+          option: 'Cover'
+        }];
+
+        $scope.typeChange = function(){
+            console.log('Type Change');
+            $scope.noStocks = true;
+            $scope.selectedStock = null;
+        };
+
+        $scope.changeStock = function(){
+
+           if(!$scope.selectedStock) return;
+           switch($scope.selectedTradeOption.option){
+                case "Buy": $scope.maxAmount = $scope.selectedStock.max_buy;
+                            break;
+                case "Short Sell":$scope.maxAmount = $scope.selectedStock.max_short;
+                             break;
+                case "Cover":$scope.maxAmount = $scope.selectedStock.shorted_amount;
+                              break;
+                case "Sell": $scope.maxAmount = $scope.selectedStock.bought_amount;
+                              break;
+                default:
+                    console.log($scope.transationType+"error");
+                break;
+            }
+          $scope.value = $scope.selectedStock.value;
+          if($scope.tAmount)
+              $scope.tAmount= 0;
+        };
+
+        $scope.$watch('state.tAmount', function(){
+
+            if($scope.state.tAmount> $scope.maxAmount){
+                $scope.state.tAmount = $scope.maxAmount;
+            }
+            if(!$scope.selectedStock) return;
+            $scope.total = $scope.state.tAmount * $scope.selectedStock.value;
+            console.log('ch');
+
+        });
+
+        $scope.filterStocks = function(stock,index){
+            if($scope.transactionType==='Buy'&&stock.max_buy !==0){
+               $scope.noStocks = false;
+               return true;
+            }
+
+            if($scope.transactionType==='Short Sell'&&stock.max_short !==0){
+               $scope.noStocks = false;
+               return true;
+            }
+
+            if($scope.transactionType==='Sell'&&stock.bought_amount!==0){
+                $scope.noStocks = false;
+                return true;
+            }
+            if($scope.transactionType==='Cover'&&stock.shorted_amount!==0){
+                $scope.noStocks = false;
+                return true;
+            }
+            return false;
+        };
+
+
 /*
           if(!FacebookService.getIsLoggedIn()){
               $location.path('/');
@@ -51,7 +134,7 @@
         }
         checkTime();
 
-        $scope.$watch('tradeAmount', function(){
+        $scope.$watch('amount', function(){
 
             if($scope.tradeAmount> $scope.maxAmount){
                 $scope.tradeAmount = $scope.maxAmount;

@@ -146,7 +146,7 @@ class ApiController extends Controller
       $value = $value->value;
       $transactions[$key]->total = number_format($value*$amount, 2, '.', '');
       $transactions[$key]->brokerage = number_format(0.002*$value*$amount, 2, '.', '');
-
+      
     }
 
     return $transactions;
@@ -330,7 +330,7 @@ class ApiController extends Controller
 
   public function valupdate(){
 
-    
+
 
   }
 

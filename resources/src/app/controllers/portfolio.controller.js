@@ -13,6 +13,22 @@
         console.log(err);
       });
 
+      PortfolioService.getShorted(function(data){
+        console.log(data);
+        $scope.shorted = data;
+      },function(err){
+        console.log(err);
+      });
+
+      PortfolioService.getHistory(function(response){
+        console.log(response.data);
+        $scope.history = response.data; /*c*/
+      },function(err){
+        console.log(err);
+      });
+
+
+
       /*var player = new PlayerService();
       player.$get(function(data) {
           $scope.player = data;

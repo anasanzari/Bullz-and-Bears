@@ -5,6 +5,8 @@
 
   controllers.controller('MarketController',
       function ($scope) {
+
+      
 /*
           if(!FacebookService.getIsLoggedIn()){
               $location.path('/');

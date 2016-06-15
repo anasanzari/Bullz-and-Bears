@@ -1,15 +1,41 @@
 module.exports = function(grunt) {
 
+  require('load-grunt-tasks')(grunt);
+  require('time-grunt')(grunt);
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     jshint: {
       files: ['Gruntfile.js', 'resources/src/**/*.js', 'test/**/*.js'],
       options: {
         globals: {
-          jQuery: true
+          'jQuery': true,
+          'angular': true,
+          'console': true,
+          '$': true,
+          '_': true,
+          'moment': true
         }
       }
     },
+
+    htmlhint: {
+          options: {
+            'attr-lower-case': true,
+            'attr-value-not-empty': false,
+            'tag-pair': true,
+            'tag-self-close': true,
+            'tagname-lowercase': true,
+            'id-class-value': true,
+            'id-unique': true,
+            'img-alt-require': true,
+            'img-alt-not-empty': true
+          },
+          main: {
+            src: ['resources/src/index.template', 'resources/src/templates/**/*.html']
+          }
+    },
+
     sass: {
       dist: {
         files: [{
@@ -62,14 +88,68 @@ module.exports = function(grunt) {
         }
       }
     },
+
     watch: {
-      options: {
-        spawn: false,
-        livereload: true
-      },
-      files: ['resources/**/*.js','resources/**/*.scss','resources/**/*.html'],
-      tasks: ['jshint','sass','concat:basic','copy:main']
+         grunt: {
+           files: ['Gruntfile.js'],
+           options: {
+             nospawn: true,
+             keepalive: true,
+             livereload: true
+           },
+           tasks: ['build:dev']
+         },
+         js: {
+           files: 'resources/src/app/**/*.js',
+           options: {
+             nospawn: true,
+             livereload: true
+           },
+           tasks: ['jshint', 'concat:basic']
+         },
+         html: {
+           files: ['resources/src/index.template', 'resources/src/templates/**/*.html'],
+           options: {
+             nospawn: true,
+             livereload: true
+           },
+           tasks: [ 'copy:main', 'preprocess:dev', 'preprocess:prod']
+         },
+         sass: {
+           files: ['resources/assets/sass/**'],
+           options: {
+             nospawn: true,
+             livereload: true
+           },
+           tasks: ['sass:dist']
+         }
+
     },
+
+    preprocess: {
+          dev: {
+            options: {
+              context: {
+                MODE: 'dev',
+                BUILD_TS: '<%= ((new Date()).valueOf().toString()) + (Math.floor((Math.random()*1000000)+1).toString()) %>'
+              }
+            },
+            src: 'resources/src/index.template',
+            dest: 'build/index.template'
+          },
+          prod: {
+            options: {
+              context: {
+                MODE: 'prod',
+                BUILD_TS: '<%= ((new Date()).valueOf().toString()) + (Math.floor((Math.random()*1000000)+1).toString()) %>'
+              }
+            },
+            src: 'resources/src/index.template',
+            dest: 'resources/views/index.blade.php'
+          }
+    },
+
+
     connect: {
         server: {
             options: {
@@ -98,31 +178,26 @@ module.exports = function(grunt) {
 
   });
 
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-sass');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-serve');
-  grunt.loadNpmTasks('grunt-connect-proxy');
-  grunt.loadNpmTasks('grunt-contrib-connect');
 
   grunt.registerTask('default', ['jshint']);
 
-  grunt.registerTask('build', function (target) {
+  grunt.registerTask('build:dev', function (target) {
        grunt.task.run([
          'copy:main',
-         'copy:fonts'
+         'copy:fonts',
+/*         'htmlhint',*/
+         'jshint',
+         'sass',
+         'preprocess:dev',
+         'preprocess:prod'
        ]);
    });
 
   grunt.registerTask('server', function (target) {
        grunt.task.run([
+           'build:dev',
            'configureProxies:server',
            'connect',
-           'concat:basic',
            'watch'
        ]);
    });

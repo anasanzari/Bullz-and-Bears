@@ -1,44 +1,139 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 col-md-12">
 
-<div layout="row" layout-align="center center" style="margin-top:20px">
-<md-whiteframe class="md-whiteframe-z1" style="width: 90%;background:#eeeeee" > 
+      <div class="p+">
+
+        <div class="card customcard formpage">
+
+          <h3>Trade</h3>
+          <h4 class="status" ng-hide="isLive">
+              The Market is now closed.
+              The Market is open from 9:30 AM - 3:30 PM on all weekdays except public holidays.
+              Happy Trading!!
+          </h4>
+
+          <div>
+            <form name="trade">
+
+              <lx-select ng-model="selectedTradeOption"
+                 lx-allow-clear="true"
+                 lx-choices="options"
+                 lx-display-filter="false"
+                 lx-fixed-label="true"
+                 lx-theme="dark"
+                 lx-label="Select Transation Option"
+                 ng-change="typeChange()">
+                  <lx-select-selected>
+                      {{ $selected.option }}
+                  </lx-select-selected>
+
+                  <lx-select-choices>
+                      {{ $choice.option }}
+                  </lx-select-choices>
+              </lx-select>
+
+              <lx-select ng-model="selectedStock"
+                ng-show="selectedTradeOption!=null"
+                 lx-allow-clear="true"
+                 lx-choices="stocks"
+                 lx-display-filter="true"
+                 lx-fixed-label="true"
+                 lx-theme="dark"
+                 lx-label="Select a Stock"
+                 ng-change="changeStock()">
+                  <lx-select-selected>
+                      {{ $selected.name }}
+                  </lx-select-selected>
+
+                  <lx-select-choices>
+                      {{ $choice.name }}
+                  </lx-select-choices>
+              </lx-select>
+
+              <p ng-show="noStocks">You have no stock to {{selectedTradeOption.option}}</p>
+
+              <div  ng-show="selectedStock!=null">
+
+                <p class="big">Value:{{value|currency:"&#8377"}} </p>
+                <p class="big">Maximum Amount permitted : {{maxAmount}} </p>
+
+                <lx-text-field
+                  lx-label="Amount"
+                  lx-theme="dark"
+                  lx-error="trade.amount.$invalid">
+                  <input type="text" name="amount" ng-model="state.tAmount" ng-pattern="/^[0-9]+$/">
+                </lx-text-field>
+                <span class="text-field-error" ng-if="trade.amount.$dirty && !trade.amount.$valid">Invalid Amount</span>
+
+                <p class="big">Total : {{total|currency:"&#8377"}}</p>
+
+                    <md-button class="md-raised"
+                            ng-click="doTransaction()">{{transactionType}}</md-button>
+
+                 <lx-button lx-type="raised" ng-disabled="!trade.amount.$valid">{{selectedTradeOption.option}}</lx-button>
+
+              </div>
+
+
+
+
+
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--div layout="row" layout-align="center center" style="margin-top:20px">
+<md-whiteframe class="md-whiteframe-z1" style="width: 90%;background:#eeeeee" >
     <div class="container-fluid">
         <p style="text-align: center;padding-top: 20px;font-size: 20px"> Trade </p>
-        
-        <p ng-hide="isLive">The Market is now closed. 
+
+        <p ng-hide="isLive">The Market is now closed.
             The Market is open from 9:30 AM - 3:30 PM on all weekdays except public holidays. Happy Trading!!</p>
-        
-        <div ng-show="isLive">  
-        <form name="trade">    
-        <div class="row">
-            
-            <div class="col-md-10 col-md-offset-1">
+
+        <div>
+          <form name="trade">
+
+
+
                 <md-select placeholder="Select a Transaction Type" name="transactionType" ng-model="transactionType" ng-change="typeChange()">
                     <md-option value="Buy">Buy</md-option>
                     <md-option value="Sell">Sell</md-option>
                     <md-option value="Short">Short Sell</md-option>
                     <md-option value="Cover">Cover</md-option>
                 </md-select>
-                
+
                 <md-select placeholder="Select a Stock" name="selectedStock" ng-show="transactionType!=null" ng-model="selectedStock" ng-change="changeStock()">
                     <md-option ng-repeat="stock in stocks|filter:filterStocks" ng-value="{{stock}}">{{stock.name}}</md-option>
                 </md-select>
                  <p ng-show="noStocks">You have no stock to {{transactionType}}</p>
-               
+
+                 <p class="big">Value:{{value|currency:"&#8377"}} </p>
+                 <p class="big">Maximum Amount permitted : {{maxAmount}} </p>
+
 
             </div>
         </div>
-        
+
         <div class="row" ng-show="selectedStock!=null">
-            
+
             <div class="col-md-10 col-md-offset-1" >
                 <p class="big">Value:{{value|currency:"&#8377"}} </p>
                 <p class="big">Maximum Amount permitted : {{maxAmount}} </p>
-                
+
                 <div class="row">
-                    
+
                     <div class="col-md-6">
-                    <md-icon class="schedule-icon" md-svg-src="images/icons/commerce.svg" ></md-icon> 
-                    
+                    <md-icon class="schedule-icon" md-svg-src="images/icons/commerce.svg" ></md-icon>
+
                     <md-input-container style="margin-left: 24px;">
                        <label>Amount</label>
                        <input ng-model="tradeAmount" name="tradeAmount" required ng-pattern="/^[0-9]+$/">
@@ -48,33 +143,33 @@
                            </div>
                      </md-input-container>
                     </div>
-                    
-                 
-                    
+
+
+
                 </div>
-           
-                
+
+
                 <p class="big">Total : {{total|currency:"&#8377"}}</p>
                 <div class="commonbtn-container">
                     <md-button class="md-raised" ng-disabled="!trade.tradeAmount.$valid || isTrading"
                             ng-click="doTransaction()">{{transactionType}}</md-button>
-                    
+
                     <div ng-show="isTrading">
                          <md-progress-circular class="md-accent md-hue-1" md-mode="indeterminate" ></md-progress-circular>
-                    </div>  
-                    
+                    </div>
+
                 </div>
             </div>
-            
+
         </div>
-        
+
         </form>
-        
+
     </div>
-        
+
     </div>
-    
+
 
 </md-whiteframe>
-    
+
 </div>

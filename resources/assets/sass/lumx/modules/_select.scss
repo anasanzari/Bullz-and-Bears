@@ -157,7 +157,7 @@
         padding: $base-spacing-unit / 2 0;
     }
 }
-    
+
     // Select selected: value
     .lx-select-selected__value {
         display: block;
@@ -179,7 +179,7 @@
             color: $white-3;
         }
     }
-    
+
     // Select selected: clear
     .lx-select-selected__clear {
         display: block;
@@ -201,7 +201,7 @@
             color: $red-500;
         }
     }
-    
+
     // Select selected: value
     .lx-select-selected__tag {
         @include display(flex);
@@ -258,14 +258,14 @@
 .lx-select-choices {
 
 }
-    
+
     // Select choices: filter
     .lx-select-choices--default-style .lx-select-choices__filter {
         padding: $base-spacing-unit / 4 $base-spacing-unit;
         margin-bottom: $base-spacing-unit;
         border-bottom: 1px solid $black-4;
     }
-    
+
     // Select choices: choice / subheader
     .lx-select-choices--default-style .lx-select-choices__choice,
     .lx-select-choices--default-style .lx-select-choices__subheader {
@@ -287,7 +287,7 @@
             margin-right: $base-spacing-unit * 2;
         }
     }
-    
+
     // Select choices: choice / subheader
     .lx-select-choices--default-style .lx-select-choices__choice {
         cursor: pointer;
@@ -345,7 +345,7 @@
             }
         }
     }
-    
+
     // Select choices: subheader
     .lx-select-choices--default-style .lx-select-choices__subheader {
         color: $black-3;
@@ -354,7 +354,7 @@
             color: $black-3;
         }
     }
-    
+
     // Select choices: loader
     .lx-select-choices--default-style .lx-select-choices__loader {
         @include display(flex);
