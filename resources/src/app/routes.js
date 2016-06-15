@@ -16,25 +16,45 @@
         templateUrl: './templates/userView.html',
         controller: 'UserController'
       })
-			.state('home', {
+      .state('home', {
         url: '/home',
         templateUrl: './templates/view.home.html',
         controller: 'HomeController'
       })
-			.state('portfolio', {
+      .state('portfolio', {
         url: '/portfolio',
         templateUrl: './templates/view.portfolio.html',
         controller: 'PortfolioController'
       })
-			.state('trade', {
+      .state('trade', {
         url: '/trade',
         templateUrl: './templates/view.trade.html',
         controller: 'TradeController'
       })
-			.state('schedule', {
+      .state('schedule', {
         url: '/schedule',
         templateUrl: './templates/view.schedule.html',
         controller: 'ScheduleController'
+      })
+      .state('lookup', {
+        url: '/lookup',
+        templateUrl: './templates/view.lookup.html',
+        controller: 'LookUpController'
+      })
+      .state('market', {
+        url: '/market',
+        templateUrl: './templates/view.market.html',
+        controller: 'MarketController'
+      })
+      .state('rankings', {
+        url: '/rankings',
+        templateUrl: './templates/view.ranking.html',
+        controller: 'RankingController'
+      })
+      .state('help', {
+        url: '/help',
+        templateUrl: './templates/view.help.html',
+        controller: 'HelpController'
       });
 
   });
