@@ -15,7 +15,7 @@ class CreateTableShortSell extends Migration
       Schema::create('short_sell', function (Blueprint $table) {
           $table->integer('playerid')->unsigned();
           $table->string('symbol');
-          $table->decimal('amount', 15, 2);
+          $table->bigInteger('amount');
           $table->decimal('avg', 15, 2);
 
           $table->primary(['playerid','symbol']);

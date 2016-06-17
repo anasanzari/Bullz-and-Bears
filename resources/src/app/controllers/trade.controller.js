@@ -4,17 +4,17 @@
   var controllers = angular.module('AppControllers');
 
   controllers.controller('TradeController',
-      function($scope,StockService) {
+      function($scope,StockUtils,TradeService,stocksFilter,LxNotificationService) {
 
         $scope.isLive = true;
+        $scope.total = 0;
 
         $scope.state = {}; // inputs
 
-        StockService.getStocks(function(data){
-          console.log(data);
-          $scope.stocks = data;
-        },function(err){
-          console.log(err);
+        StockUtils.keepOnUpdating(function(data){
+            console.log(data);
+            $scope.stocks = data;
+            $scope.filteredStocks = stocksFilter($scope.stocks,$scope.selectedTradeOption.option);
         });
 
         $scope.options = [{
@@ -31,6 +31,8 @@
             console.log('Type Change');
             $scope.noStocks = true;
             $scope.selectedStock = null;
+            $scope.filteredStocks = stocksFilter($scope.stocks,$scope.selectedTradeOption.option);
+            console.log($scope.filteredStocks);
         };
 
         $scope.changeStock = function(){
@@ -59,39 +61,47 @@
             if($scope.state.tAmount> $scope.maxAmount){
                 $scope.state.tAmount = $scope.maxAmount;
             }
+
             if(!$scope.selectedStock) return;
             $scope.total = $scope.state.tAmount * $scope.selectedStock.value;
-            console.log('ch');
+            $scope.total = $scope.total ? $scope.total : 0;
 
         });
 
-        $scope.filterStocks = function(stock,index){
-            if($scope.transactionType==='Buy'&&stock.max_buy !==0){
-               $scope.noStocks = false;
-               return true;
-            }
-
-            if($scope.transactionType==='Short Sell'&&stock.max_short !==0){
-               $scope.noStocks = false;
-               return true;
-            }
-
-            if($scope.transactionType==='Sell'&&stock.bought_amount!==0){
-                $scope.noStocks = false;
-                return true;
-            }
-            if($scope.transactionType==='Cover'&&stock.shorted_amount!==0){
-                $scope.noStocks = false;
-                return true;
-            }
-            return false;
+        var reset = function(){
+            $scope.typeChange();
         };
 
+        $scope.doTrade = function(){
 
-/*
-          if(!FacebookService.getIsLoggedIn()){
-              $location.path('/');
-          }
+            var data = {
+                type : $scope.selectedTradeOption.option,
+                symbol : $scope.selectedStock.symbol,
+                amount : $scope.state.tAmount
+            };
+
+            console.log(data);
+
+            TradeService.trade(data,function(response){
+                $scope.stocks = data;
+                $scope.filteredStocks = stocksFilter($scope.stocks,$scope.selectedTradeOption.option);
+                LxNotificationService.alert('Success',
+                 'Transaction has been done successfully.', 'Ok', function(answer){
+
+                });
+                reset();
+            },function(err){
+                console.log(err);
+                //error logic here.
+                LxNotificationService.alert('Sorry.',
+                 'Unknown error occured.', 'Ok', function(answer){
+
+                });
+                reset();
+            });
+        };
+
+        /*
 
         StockService.updateStocks(FacebookService.user.id);
         $scope.stocks = StockService.stocks;

@@ -1,0 +1,30 @@
+p{
+    &.super{
+        font-size: .8rem;
+        margin-bottom: -5px;
+    }
+    &.xs{
+      font-size: 1rem;
+    }
+
+    &.m{
+      font-size: 1.5rem;
+    }
+
+    &.l{
+        font-size: 2rem;
+    }
+
+    &.xl{
+        font-size: 3rem;
+    }
+
+    &.cx{
+      font-size: 1.3rem;
+    }
+
+    &.cl{
+        font-size: 1.8rem;
+    }
+
+}

@@ -6,9 +6,9 @@
 
 	services.factory('TradeService',
     function($resource){
-        return $resource("./api/dotrade",{id:'@id'},
+        return $resource("./api/dotrade",{},
         {
-            trade: {method:'POST',cache:false,isArray:false}
+            trade: {method:'POST',cache:false,isArray:true}
         });
     });
 

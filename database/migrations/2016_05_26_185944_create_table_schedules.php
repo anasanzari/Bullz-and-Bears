@@ -19,8 +19,8 @@ class CreateTableSchedules extends Migration
           $table->string('symbol');
           $table->string('transaction_type',20);
           $table->decimal('scheduled_price', 15, 2);
-          $table->integer('no_shares');
-          $table->integer('pend_no_shares');
+          $table->bigInteger('no_shares');
+          $table->bigInteger('pend_no_shares');
           $table->string('flag', 10);
 
           $table->foreign('playerid')->references('id')->on('users');

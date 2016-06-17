@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-xs-12 col-md-12">
+    <div class="col-xs-12 col-md-6">
 
       <div class="p+">
 
@@ -32,16 +32,17 @@
                       {{ $choice.option }}
                   </lx-select-choices>
               </lx-select>
-
+              <!-- lx-filter wasn't working -->
               <lx-select ng-model="selectedStock"
                 ng-show="selectedTradeOption!=null"
                  lx-allow-clear="true"
-                 lx-choices="stocks"
+                 lx-choices="filteredStocks"
                  lx-display-filter="true"
                  lx-fixed-label="true"
                  lx-theme="dark"
                  lx-label="Select a Stock"
-                 ng-change="changeStock()">
+                 ng-change="changeStock()"
+                 ng-disabled="filteredStocks.length==0">
                   <lx-select-selected>
                       {{ $selected.name }}
                   </lx-select-selected>
@@ -51,12 +52,12 @@
                   </lx-select-choices>
               </lx-select>
 
-              <p ng-show="noStocks">You have no stock to {{selectedTradeOption.option}}</p>
+              <p class="text-field-error" ng-show="filteredStocks.length==0">You have no stock to {{selectedTradeOption.option}}</p>
 
               <div  ng-show="selectedStock!=null">
 
-                <p class="big">Value:{{value|currency:"&#8377"}} </p>
-                <p class="big">Maximum Amount permitted : {{maxAmount}} </p>
+                <p style="margin-top:25px">Value : {{value|currency:"&#8377"}} </p>
+                <p >Maximum Amount permitted : {{maxAmount}} </p>
 
                 <lx-text-field
                   lx-label="Amount"
@@ -65,13 +66,15 @@
                   <input type="text" name="amount" ng-model="state.tAmount" ng-pattern="/^[0-9]+$/">
                 </lx-text-field>
                 <span class="text-field-error" ng-if="trade.amount.$dirty && !trade.amount.$valid">Invalid Amount</span>
-
-                <p class="big">Total : {{total|currency:"&#8377"}}</p>
-
-                    <md-button class="md-raised"
-                            ng-click="doTransaction()">{{transactionType}}</md-button>
-
-                 <lx-button lx-type="raised" ng-disabled="!trade.amount.$valid">{{selectedTradeOption.option}}</lx-button>
+                <div class="row  middle-xs center-xs" style="margin-top:20px">
+                    <div class="col-xs">
+                      <p class="super">Total</p>
+                      <p class="l">{{total|currency:"&#8377"}}</p>
+                    </div>
+                    <div class="col-xs">
+                        <lx-button ng-click="doTrade()" lx-size="l" lx-type="raised" ng-disabled="!state.tAmount || !trade.amount.$valid">{{selectedTradeOption.option}}</lx-button>
+                    </div>
+                </div>
 
               </div>
 

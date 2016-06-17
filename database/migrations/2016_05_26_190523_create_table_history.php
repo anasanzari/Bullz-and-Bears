@@ -19,7 +19,7 @@ class CreateTableHistory extends Migration
           $table->string('symbol')->nullable();
           $table->integer('skey')->unsigned()->nullable();
           $table->string('transaction_type',20);
-          $table->decimal('amount', 15, 2);
+          $table->bigInteger('amount');
           $table->decimal('value',15,2);
           $table->timestamp('transaction_time');
 
