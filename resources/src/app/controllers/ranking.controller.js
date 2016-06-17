@@ -5,6 +5,9 @@
 
   controllers.controller('RankingController',
       function RankingCtrl($scope,$location){
+	  
+	  
+	  	
 
         /* if(!FacebookService.getIsLoggedIn()){
               $location.path('/');

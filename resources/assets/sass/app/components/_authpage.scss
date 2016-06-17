@@ -1,0 +1,43 @@
+.auth_page{
+
+	position:fixed;
+	top:0;
+	left:0;
+	height:100vh;
+	width:100%;
+	background:#fff;
+	z-index:1000;
+	
+	& .content{
+		position:fixed;
+		top:0;
+		left:0;
+		height:100vh;
+		width:100%;
+		z-index:1003;
+	}
+	
+	& .overlay{
+		position:fixed;
+		top:0;
+		left:0;
+		height:100vh;
+		width:100%;
+		z-index:1002;
+		background-color: rgba(0,0,0,.8);
+	}
+	
+	& .bg{
+		position:fixed;
+		top:0;
+		left:0;
+		height:100vh;
+		width:100%;
+		z-index:1001;
+		background-image:url('../images/wallst.jpg');
+		background-size:cover;
+	}
+	
+
+
+}

@@ -4,11 +4,112 @@
   var controllers = angular.module('AppControllers');
 
   controllers.controller('ScheduleController',
-      function($scope,$location) {
+      function($scope,$location,StockUtils) {
+	  
 
-        /*  if(!FacebookService.getIsLoggedIn()){
-              $location.path('/');
+      $scope.total = 0;
+      $scope.state = {}; // inputs
+
+      StockUtils.keepOnUpdating(function(data){
+          console.log(data);
+          $scope.stocks = data;
+          $scope.filteredStocks = stocksFilter($scope.stocks,$scope.selectedTradeOption.option);
+      });
+      
+      $scope.$on('$destroy', function() {
+          StockUtils.cancel(); //kill the timer.
+      });
+
+      $scope.options = [{
+        option: 'Buy'
+      },{
+        option: 'Sell'
+      },{
+        option: 'Short Sell'
+      },{
+        option: 'Cover'
+      }];
+
+      $scope.typeChange = function(){
+          console.log('Type Change');
+          $scope.noStocks = true;
+          $scope.selectedStock = null;
+          $scope.filteredStocks = stocksFilter($scope.stocks,$scope.selectedTradeOption.option);
+          console.log($scope.filteredStocks);
+      };
+
+      $scope.changeStock = function(){
+
+         if(!$scope.selectedStock) return;
+         switch($scope.selectedTradeOption.option){
+              case "Buy": $scope.maxAmount = $scope.selectedStock.max_buy;
+                          break;
+              case "Short Sell":$scope.maxAmount = $scope.selectedStock.max_short;
+                           break;
+              case "Cover":$scope.maxAmount = $scope.selectedStock.shorted_amount;
+                            break;
+              case "Sell": $scope.maxAmount = $scope.selectedStock.bought_amount;
+                            break;
+              default:
+                  console.log($scope.transationType+"error");
+              break;
           }
+        $scope.value = $scope.selectedStock.value;
+        $scope.tAmount = 0;
+      };
+      
+      var priceUpdate = function(){
+    	  if($scope.state.tAmount> $scope.maxAmount){
+              $scope.state.tAmount = $scope.maxAmount;
+          }
+
+          $scope.total = $scope.state.tAmount * $scope.state.sPrice;
+          $scope.total = $scope.total ? $scope.total : 0;
+      };
+
+      $scope.$watch('state.tAmount', priceUpdate);
+      $scope.$watch('state.sPrice',  priceUpdate);
+      
+      
+      
+     
+
+      var reset = function(){
+          $scope.typeChange();
+          $scope.tAmount = 0;
+      };
+      
+
+      $scope.doTrade = function(){
+
+          var data = {
+              type : $scope.selectedTradeOption.option,
+              symbol : $scope.selectedStock.symbol,
+              amount : $scope.state.tAmount
+          };
+
+          console.log(data);
+
+          TradeService.trade(data,function(response){
+              $scope.stocks = data;
+              $scope.filteredStocks = stocksFilter($scope.stocks,$scope.selectedTradeOption.option);
+              LxNotificationService.alert('Success',
+               'Transaction has been done successfully.', 'Ok', function(answer){
+
+              });
+              reset();
+          },function(err){
+              console.log(err);
+              //error logic here.
+              LxNotificationService.alert('Sorry.',
+               'Unknown error occured.', 'Ok', function(answer){
+
+              });
+              reset();
+          });
+      };
+
+        /* 
 
         StockService.updateStocks(FacebookService.user.id);
         $scope.stocks = StockService.stocks;

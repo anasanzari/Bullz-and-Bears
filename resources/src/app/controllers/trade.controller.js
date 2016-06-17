@@ -31,6 +31,10 @@
 				$scope.filteredStocks = stocksFilter($scope.stocks,$scope.selectedTradeOption.option);
 			}
         });
+        
+        $scope.$on('$destroy', function() {
+            StockUtils.cancel(); //kill the timer.
+        });
 
         $scope.options = [{
           option: 'Buy'

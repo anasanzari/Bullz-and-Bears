@@ -4,23 +4,18 @@
   var controllers = angular.module('AppControllers');
 
   controllers.controller('MarketController',
-      function ($scope) {
-
+      function ($scope,StockUtils) {
+	  
+	  StockUtils.keepOnUpdating(function(data){
+          console.log(data);
+          $scope.stocks = data;
+          $scope.filteredStocks = stocksFilter($scope.stocks,$scope.selectedTradeOption.option);
+      });
       
-/*
-          if(!FacebookService.getIsLoggedIn()){
-              $location.path('/');
-          }
-        StockService.updateStocks(FacebookService.user.id);
-        $scope.stocks = StockService.stocks;
-        $scope.isUpdating = StockService.isUpdating;
-        $scope.navigateTo = function(symbol){
-            $location.path("lookup/"+symbol);
-        };
-
-        $scope.update = function(){
-            StockService.updateStocks(FacebookService.user.id);
-        // };*/
+      $scope.$on('$destroy', function() {
+          StockUtils.cancel(); //kill the timer.
+      });
+	  
   });
 
 

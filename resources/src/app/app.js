@@ -10,6 +10,7 @@
 			'AppConfig',
 			'AppServices',
 			'AppFilters',
+			'ngAnimate',
 			'ngResource'
 		]);
 
