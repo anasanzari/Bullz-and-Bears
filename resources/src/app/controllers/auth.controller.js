@@ -5,13 +5,17 @@
 
   controllers.controller('AuthController', function($scope, $auth, $state, $http, $rootScope) {
 
-    $scope.login = function() {
+	  $rootScope.authView = true;
+      console.log('Auth');
+      console.log($rootScope.authView);
+	  
+	  $scope.login = function() {
 
       var credentials = {
         email: $scope.email,
         password: $scope.password
       };
-
+      
       $auth.login(credentials).then(function(data) {
         console.log(data);
         return $http.get('api/authenticate/user');

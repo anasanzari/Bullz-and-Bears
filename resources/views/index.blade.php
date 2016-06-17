@@ -7,6 +7,23 @@
     <link rel="stylesheet" href="css/app.css" />
   </head>
   <body ng-app="moments" ng-controller="NavController">
+  
+  	<div class="auth_page" ng-show="authView">
+  		<div class="bg"></div>
+  		<div class="overlay"></div>
+  		<div class="content">
+			<div class="container-fluid">
+			  <div class="row center-xs middle-xs" style="min-height:90vh">
+			    <div class="col-xs-12 col-md-12">
+			    	<h1>Bulls n Bears</h1>
+			    	<lx-button lx-size="l" lx-type="raised"ng-click="login()">Login with Facebook</lx-button>
+				 </div>
+			   </div>
+			 </div>
+		</div>
+	</div>
+  
+  
     <div class="header">
       <div class="toolbar">
         <div `class="toolbar__left mr++">
