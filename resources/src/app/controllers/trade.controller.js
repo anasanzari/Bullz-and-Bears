@@ -7,6 +7,19 @@
       function($scope,StockUtils,TradeService,stocksFilter,LxNotificationService) {
 
         $scope.isLive = true;
+
+        var checkTime = function(){
+             var now = new moment();
+             var start = (new moment()).hour(9).minute(15);
+             var end = (new moment()).hour(15).minute(30);
+             if(now.isAfter(start) && now.isBefore(end)){
+                 $scope.isLive = true;
+                 return;
+             }
+             $scope.isLive = false;
+        };
+        checkTime();
+
         $scope.total = 0;
 
         $scope.state = {}; // inputs
@@ -14,7 +27,9 @@
         StockUtils.keepOnUpdating(function(data){
             console.log(data);
             $scope.stocks = data;
-            $scope.filteredStocks = stocksFilter($scope.stocks,$scope.selectedTradeOption.option);
+            if($scope.selectedTradeOption){
+				$scope.filteredStocks = stocksFilter($scope.stocks,$scope.selectedTradeOption.option);
+			}
         });
 
         $scope.options = [{
