@@ -4,6 +4,47 @@
 
 			<div class="p+">
 			
+				<div class="card customcard formpage">
+				
+				<lx-text-field
+                  lx-label="Search"
+                  lx-theme="dark">
+                  <input type="text" name="name" ng-model="state.name">
+                </lx-text-field>
+                
+                <ul class="customlist">
+                    <li class="customlist-item" ng-repeat="stock in stocks | filter:name">
+                      <div class="row">
+                        <div class="col-xs">
+                          <p class="large">{{stock.name}}</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-xs-6 col-md-4">
+                            <p>Value : {{stock.value |currency:"&#8377" }}</p>
+                        </div>
+                        <div class="col-xs-6 col-md-4">
+                            <p>Day High: {{stock.day_high|currency:"&#8377"}}</p>
+                        </div>
+                        <div class="col-xs-6 col-md-4">
+                            <p>Day Low: {{stock.day_low|currency:"&#8377"}}</p>
+                        </div>
+                        <div class="col-xs-6 col-md-4">
+                            <p>Week High: {{stock.week_high|currency:"&#8377"}}</p>
+                        </div>
+                        <div class="col-xs-6 col-md-4">
+                            <p>Week Low: {{stock.week_low|currency:"&#8377"}}</p>
+                        </div>
+                         <div class="col-xs-6 col-md-4">
+                            <p>Change: <span ng-bind-html="stock.change_perc| change:true:false"></span></p>
+                        </div>
+                        
+                      </div>
+
+                    </li>
+                 </ul>
+                
+				</div>
 			
 			</div>
 		</div>
@@ -11,7 +52,7 @@
 </div>
 
 
-<div layout="column" layout-align="center center" style="margin-top:20px">
+<!--  div layout="column" layout-align="center center" style="margin-top:20px">
 <md-whiteframe class="md-whiteframe-z1" layout layout-align="center center" style="width: 90%" >
   
 <md-content layout="column"  style="min-height: 500px;max-height: 550px;width:100%;">
@@ -52,4 +93,4 @@
 </md-content>
     
       </md-whiteframe>
-</div>
+</div-->

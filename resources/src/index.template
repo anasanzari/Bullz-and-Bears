@@ -71,7 +71,7 @@
     </div>
 
     <div class="maincontainer" ng-class="{'main-sidebar-closed': !isOpen}">
-      <div ui-view></div>
+      <div class="viewcontainer" ui-view></div>
     </div>
 
       <!-- Application Dependencies -->

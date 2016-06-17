@@ -4,16 +4,18 @@
   var controllers = angular.module('AppControllers');
 
   controllers.controller('LookUpController',
-      function($scope,StockService,FacebookService,$location) {
+      function($scope,StockUtils,$location) {
 
-          if(!FacebookService.getIsLoggedIn()){
-              $location.path('/');
-          }
-          StockService.updateStocks(FacebookService.user.id);
-          $scope.stocks = StockService.stocks;
+		  StockUtils.keepOnUpdating(function(data){
+	          console.log(data);
+	          $scope.stocks = data;
+	          $scope.filteredStocks = stocksFilter($scope.stocks,$scope.selectedTradeOption.option);
+	      });
+	      
+	      $scope.$on('$destroy', function() {
+	          StockUtils.cancel(); //kill the timer.
+	      });
 
       });
-
-
 
 })();

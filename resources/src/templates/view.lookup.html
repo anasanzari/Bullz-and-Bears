@@ -4,6 +4,43 @@
 
 			<div class="p+">
 			
+				<div class="card customcard formpage">
+				
+					<lx-select ng-model="selectedStock"
+	                 lx-allow-clear="true"
+	                 lx-choices="stocks"
+	                 lx-display-filter="true"
+	                 lx-fixed-label="true"
+	                 lx-theme="dark"
+	                 lx-label="Select a Stock"
+	                 ng-change="changeStock()"
+	                >
+	                  <lx-select-selected>
+	                      {{ $selected.name }}
+	                  </lx-select-selected>
+	
+	                  <lx-select-choices>
+	                      {{ $choice.name }}
+	                  </lx-select-choices>
+	              	</lx-select>
+	              	
+	              	<div class="row" ng-show="selectedStock!=null">
+		              	<h1>Value: {{selectedStock.value|currency:"&#8377"}}</h1>
+	                    <h2>Change:<span ng-bind-html="selectedStock.change_perc| change:true"></span></h2>
+	                    <div class="row">
+	                        <div class="col-md-6">
+	                            <p>Day High: {{selectedStock.day_high|currency:"&#8377"}}</p>
+	                            <p>Day Low: {{selectedStock.day_low|currency:"&#8377"}}</p>
+	                        </div>
+	                        <div class="col-md-6">
+	                            <p>Week High: {{selectedStock.week_high|currency:"&#8377"}}</p>
+	                            <p>Week Low: {{selectedStock.week_low|currency:"&#8377"}}</p>
+	                        </div>
+	                    </div>
+	              	
+	              	</div>
+	              	
+				</div>
 			
 			</div>
 		</div>
@@ -11,7 +48,7 @@
 </div>
 
 
-<md-content layout="row" layout-align="center center" style="min-height: 500px">
+<!--  md-content layout="row" layout-align="center center" style="min-height: 500px">
     <md-card class="card-lookup" layout="column" layout-align="center center" style="width: 90%"> 
     
     <md-select placeholder="Select a Stock" ng-model="selectedStock" ng-change="changeStock()">
@@ -48,5 +85,5 @@
             
         </div>   
     </md-card>
-</md-content>
+</md-content-->
 
