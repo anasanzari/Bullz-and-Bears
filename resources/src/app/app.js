@@ -83,8 +83,8 @@
 			$rootScope.$on('$stateChangeStart', function(event, toState) {
 
 				console.log(toState);
-
-				if($rootScope.authenticated){
+				
+				/*if($rootScope.authenticated){
 
 					if(toState.name === 'login') {
 						event.preventDefault();
@@ -95,7 +95,7 @@
 						event.preventDefault();
 						$state.go('login');
 					}
-				}
+				}*/
 
 			});
 

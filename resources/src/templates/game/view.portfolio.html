@@ -10,7 +10,7 @@
               <lx-tab lx-label="Bought Stocks" >
                 <div class="container-fluid">
 
-                  <p ng-show="bought.length==0" style="padding: 20px 0px">You have no Bought Stocks </p>
+                  <p ng-show="bought.length==0" class="pad_l">You have no Bought Stocks </p>
 
                   <ul class="customlist">
                     <li class="customlist-item" ng-repeat="stock in bought">
@@ -51,7 +51,7 @@
 
               <lx-tab lx-label="Shorted Stocks" >
 
-                <p ng-show="shorted.length==0" style="padding: 20px 0px">You have no Shorted Stocks. </p>
+                <p ng-show="shorted.length==0" class="pad_l">You have no Shorted Stocks. </p>
 
                 <ul class="customlist">
                   <li class="customlist-item" ng-repeat="stock in shorted">
@@ -89,7 +89,7 @@
               </lx-tab>
 
               <lx-tab lx-label="History">
-                <p ng-show="history.length==0" style="padding: 20px 0px">You haven't done any transactions yet. </p>
+                <p ng-show="history.length==0" class="pad_l" >You haven't done any transactions yet. </p>
 
                 <ul class="customlist">
                   <li class="customlist-item" ng-repeat="entry in history">

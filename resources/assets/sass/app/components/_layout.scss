@@ -46,3 +46,11 @@ body{
 
   }
 }
+
+.container-fluid {
+
+    @media (max-width: $screen-sm-max) {
+      padding-right: 0px;
+      padding-left: 0px;
+    }
+}
