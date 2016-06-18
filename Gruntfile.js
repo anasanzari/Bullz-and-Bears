@@ -135,7 +135,7 @@ module.exports = function(grunt) {
               }
             },
             src: 'resources/src/index.template',
-            dest: 'build/index.template'
+            dest: 'public/index.html'
           },
           prod: {
             options: {
@@ -153,7 +153,7 @@ module.exports = function(grunt) {
     connect: {
         server: {
             options: {
-                port: 9500,
+                port: 80,
                 base: 'public',
                 hostname: 'localhost',
                 livereload: true,
@@ -166,7 +166,7 @@ module.exports = function(grunt) {
                 {
                 context: '/api',
                 host: 'localhost',
-                port: 80,
+                port: 8080,
                 changeOrigin: true,
                 rewrite: {
                     '^/api': '/Github/Bullz/public/api'

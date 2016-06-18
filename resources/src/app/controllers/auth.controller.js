@@ -3,40 +3,37 @@
   'use strict';
   var controllers = angular.module('AppControllers');
 
-  controllers.controller('AuthController', function($scope, $auth, $state, $http, $rootScope) {
+  controllers.controller('AuthController', function($scope, $timeout, $auth, $state, $http, $rootScope, AuthService) {
 
-	  $rootScope.authView = true;
-      console.log('Auth');
-      console.log($rootScope.authView);
-	  
-	  $scope.login = function() {
+      $scope.loading = true;
 
-      var credentials = {
-        email: $scope.email,
-        password: $scope.password
-      };
-      
-      $auth.login(credentials).then(function(data) {
-        console.log(data);
-        return $http.get('api/authenticate/user');
+      if(AuthService.getIsLoggedOut()){
+          //came here by logging out.
+          $scope.loading = false;
+      }
 
-      }, function(error) {
+      $scope.$on('onSdkLoad',function(){
+          AuthService.getLoginStatus(function(data){
 
-        $scope.loginError = true;
-        $scope.loginErrorText = error.data.error;
-
-      }).then(function(response) {
-
-        var user = JSON.stringify(response.data.user);
-
-        localStorage.setItem('user', user);
-
-        $rootScope.authenticated = true;
-        $rootScope.currentUser = response.data.user;
-        $state.go('users');
-
+              if(!data.status){
+                  console.log(data);
+                  $scope.loading = false;
+                  $scope.$apply();
+              }
+          });
       });
-    };
+
+      $scope.$on('onLoginComplete',function(e,args) {
+          $state.go('home');
+      });
+
+
+      $scope.login = function() {
+          AuthService.login(function(){
+              //event would take care of flow.
+          });
+      };
+
   });
 
 })();

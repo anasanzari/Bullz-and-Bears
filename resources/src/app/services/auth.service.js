@@ -4,30 +4,68 @@
 
   var services = angular.module('AppServices');
 
-  services.factory('AuthService', function($rootScope,$auth){
+  services.factory('AuthService', function($rootScope,$auth,$state){
+
+	var isLogggedOut = false;
 
     var watchLoginChange = function() {
       FB.Event.subscribe('auth.authResponseChange', function(res) {
         if (res.status === 'connected') {
           console.log('connected');
-          getUserInfo(function(res,token){
-            console.log('token'+token);
-            var credentials = {
-      				fb_token: token
-      			};
-      			$auth.login(credentials).then(function(data) {
-      			     console.log(data);
-      			}, function(error) {
-                 console.log(error);
-      			});
-          });
+		  getUserInfo(function(res,token){
+
+			var credentials = {
+					 fb_token: token
+			 };
+
+			$auth
+			 .login(credentials)
+			 .then(function(data) {
+
+					isLogggedOut = false;
+					$auth.setToken(data.token);
+					$rootScope.authenticated = true;
+					$rootScope.user = data.user;
+
+					$rootScope.$broadcast('onLoginComplete',{});
+
+				 }, function(error) {
+					 console.log(error);
+					 $rootScope.authenticated = false;
+					 $rootScope.user = null;
+					 $auth.removeToken();
+			 });
+
+		  });
 
         }else {
           //not logged
-          console.log('not logged');
+          //console.log('not logged');
+
         }
       });
     };
+
+	var sdkLoaded = function(){
+		$rootScope.$broadcast('onSdkLoad',{});
+	};
+
+	var getLoginStatus = function(callback){
+		var data = {};
+		data.status = false;
+		FB.getLoginStatus(function(response) {
+		  if (response.status === 'connected') {
+		    	data.userid = response.authResponse.userID;
+		    	data.accessToken = response.authResponse.accessToken;
+				data.status = true;
+				callback(data);
+		  } else if (response.status === 'not_authorized') {
+			    callback(data);
+		  } else {
+			    callback(data);
+		  }
+		 });
+	};
 
     var getUserInfo = function(callback) {
       FB.api('/me', function(res) {
@@ -39,18 +77,37 @@
       });
     };
 
-    var logout = function() {
+	var login = function(cb){
+		FB.login(function(response) {
+		    //let event system take care of login flow.
+		});
+	};
+
+    var logout = function(cb) {
+	  
       FB.logout(function(response) {
         $rootScope.$apply(function() {
-          $rootScope.user = _self.user = {};
+		  isLogggedOut = true;
+		  $rootScope.authenticated = false;
+  		  $rootScope.user = null;
+  		  $auth.removeToken();
+		  cb();
         });
       });
     };
 
+	var getIsLoggedOut = function(){
+		return isLogggedOut;
+	};
+
     return {
       watchLoginChange: watchLoginChange,
       getUserInfo: getUserInfo,
-      logout: logout
+	  getLoginStatus:getLoginStatus,
+      logout: logout,
+	  login: login,
+	  sdkLoaded: sdkLoaded,
+	  getIsLoggedOut : getIsLoggedOut
     };
   });
 

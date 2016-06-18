@@ -1,4 +1,24 @@
+@-webkit-keyframes scaleDown {
+  from { }
+  to { opacity: 0; -webkit-transform: scale(.8); }
+}
+@keyframes scaleDown {
+  from { }
+  to { opacity: 0; -webkit-transform: scale(.8); transform: scale(.8); }
+}
+
+@-webkit-keyframes moveFromLeft {
+  from { }
+  to { -webkit-transform: translateX(-100%); }
+}
+@keyframes moveFromLeft {
+  from { }
+  to { -webkit-transform: translateX(-100%); transform: translateX(-100%); }
+}
+
 .auth_page{
+
+	@include transition(all .5s ease-in);
 
 	position:fixed;
 	top:0;
@@ -7,37 +27,36 @@
 	width:100%;
 	background:#fff;
 	z-index:1000;
-	
-	& .content{
+
+	.content, .overlay, .bg{
 		position:fixed;
 		top:0;
 		left:0;
 		height:100vh;
 		width:100%;
-		z-index:1003;
 	}
-	
-	& .overlay{
-		position:fixed;
-		top:0;
-		left:0;
-		height:100vh;
-		width:100%;
+
+	.content{
+		z-index: 1003;
+	}
+
+	.overlay{
 		z-index:1002;
-		background-color: rgba(0,0,0,.8);
+		background-color: rgba(0,0,0,.7);
 	}
-	
-	& .bg{
-		position:fixed;
-		top:0;
-		left:0;
-		height:100vh;
-		width:100%;
+
+	.bg{
 		z-index:1001;
 		background-image:url('../images/wallst.jpg');
 		background-size:cover;
 	}
-	
 
+    .logbtn{
+        margin-top: 50px;
+    }
 
+}
+
+.auth_page.auth_page_hide{
+	@include animation(scale 1.0s ease-in, slide 2.0s ease);
 }

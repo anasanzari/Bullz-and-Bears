@@ -10,11 +10,13 @@
 			'AppConfig',
 			'AppServices',
 			'AppFilters',
+			'AppDirectives',
 			'ngAnimate',
 			'ngResource'
 		]);
 
 	angular.module('AppControllers',[]);
+	angular.module('AppDirectives',[]);
 	angular.module('AppServices',['ngResource']);
 	angular.module('AppFilters',[]);
 
@@ -40,9 +42,9 @@
 			$provide.factory('redirectWhenLoggedOut', redirectWhenLoggedOut);
 			$httpProvider.interceptors.push('redirectWhenLoggedOut');
 
-			$authProvider.loginUrl = config.baseUrl + 'api/fbauthenticate';
+			$authProvider.loginUrl = 'api/fbauthenticate';
 
-			$urlRouterProvider.otherwise('/auth');
+			$urlRouterProvider.otherwise('/home');
 
 
 		})
@@ -59,8 +61,8 @@
 			      cookie: true,
 			      xfbml: true
 			    });
-
 			    AuthService.watchLoginChange();
+				AuthService.sdkLoaded();
 
 			  };
 	   	//sdk
@@ -80,36 +82,22 @@
 
 			$rootScope.$on('$stateChangeStart', function(event, toState) {
 
-				console.log('stateChange:');
-				var user = JSON.parse(localStorage.getItem('user'));
-				console.log(user);
+				console.log(toState);
 
-				if(user){
+				if($rootScope.authenticated){
 
-					$rootScope.authenticated = true;
-					$rootScope.currentUser = user;
-
-					if(toState.name === "auth") {
-
+					if(toState.name === 'login') {
 						event.preventDefault();
-						//$state.go('users');
-
+						$state.go('home');
+					}
+				}else{
+					if(toState.name !== 'login'){
+						event.preventDefault();
+						$state.go('login');
 					}
 				}
 
 			});
-
-		 	$rootScope.logout = function() {
-
-				$auth.logout().then(function() {
-
-
-					localStorage.removeItem('user');
-					$rootScope.authenticated = false;
-					$rootScope.currentUser = null;
-
-				});
-			};
 
 		});
 })();

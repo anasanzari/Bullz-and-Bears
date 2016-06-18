@@ -1,9 +1,9 @@
 {
-  "name": "Moments",
+  "name": "bullsnbears",
   "authors": [
     "Anas Ansari <anasanzari@gmail.com>"
   ],
-  "description": "A personal diary application.",
+  "description": "A Virtual Stock Market.",
   "main": "",
   "moduleType": [],
   "license": "MIT",
@@ -21,6 +21,7 @@
     "angular": "^1.5.5",
     "bootstrap": "^3.3.6",
     "satellizer": "^0.14.0",
-    "angular-animate": "^1.5.7"
+    "angular-animate": "^1.5.7",
+    "lumx": "^1.0.6"
   }
 }

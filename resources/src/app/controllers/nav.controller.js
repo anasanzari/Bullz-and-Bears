@@ -4,11 +4,11 @@
 
 	var controllers = angular.module('AppControllers');
 
-	controllers.controller('NavController', function($scope){
+	controllers.controller('NavController', function($scope, $auth, AuthService, $state, $http, $rootScope){
+
 		$scope.isOpen = true;
 		$scope.toggle = function(){
 			$scope.isOpen = !$scope.isOpen;
-			console.log('click');
 		};
 
 		$scope.menu = [
@@ -19,17 +19,21 @@
 				{name:'Look Up', link: 'lookup', img: 'mdi-magnify'},
 				{name:'Market', link: 'market', img: 'mdi-chart-line'},
 				{name:'Rankings', link: 'rankings', img: 'mdi-trophy'},
-				{name:'Help', link: 'help', img: 'mdi-help-circle'},
-				{name:'LogOut', link: 'logout', img: 'mdi-logout'}
+				{name:'Help', link: 'help', img: 'mdi-help-circle'}
+
 		];
 
 		$scope.navigate = function(loc){
-				if(loc=='logout'){
-						FacebookService.logout();
-						return;
-				}
 				$location.path(loc);
 		};
+
+		$scope.logout = function() {
+
+			AuthService.logout(function(){
+				$state.go('login');
+			});
+
+        };
 
 	});
 

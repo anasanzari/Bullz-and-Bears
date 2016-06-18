@@ -5,12 +5,12 @@
 
 .viewcontainer {
 
-	
+
 	@include transition(all .5s ease-in);
-	
+
 	&.ng-enter,
 	&.ng-leave {
-			
+
 	}
 	&.ng-enter {
 	    @include transform(scale(0) rotate(-5deg));
@@ -25,6 +25,25 @@
 	    opacity: 0;
 	}
 }
+
+@-webkit-keyframes scaleDown {
+  from { }
+  to { opacity: 0; -webkit-transform: scale(.8); }
+}
+@keyframes scaleDown {
+  from { }
+  to { opacity: 0; -webkit-transform: scale(.8); transform: scale(.8); }
+}
+
+@-webkit-keyframes moveFromLeft {
+  from { }
+  to { -webkit-transform: translateX(-100%); }
+}
+@keyframes moveFromLeft {
+  from { }
+  to { -webkit-transform: translateX(-100%); transform: translateX(-100%); }
+}
+
 
 /*
 [ui-view].ng-enter, [ui-view].ng-leave {
@@ -52,7 +71,7 @@
 }
 
 [ui-view].ng-leave {
-  opacity: 1; 
+  opacity: 1;
   -webkit-transform:translate3d(0, 0, 0);
   -moz-transform:translate3d(0, 0, 0);
   transform:translate3d(0, 0, 0);

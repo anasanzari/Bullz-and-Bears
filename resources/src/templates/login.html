@@ -1,0 +1,16 @@
+<div class="auth_page">
+  <div class="bg"></div>
+  <div class="overlay"></div>
+  <div class="content">
+      <div class="container-fluid">
+        <div class="row center-xs middle-xs" style="min-height:90vh">
+          <div class="col-xs-12 col-md-12">
+              <h1>Bulls n Bears</h1>
+              <app-progress ng-if="loading" lx-diameter="100" lx-color="white" lx-type="circular"></app-progress>
+
+              <lx-button ng-if="!loading" class="logbtn" lx-size="l" lx-type="raised" ng-click="login()">Login with Facebook</lx-button>
+           </div>
+         </div>
+       </div>
+  </div>
+</div>

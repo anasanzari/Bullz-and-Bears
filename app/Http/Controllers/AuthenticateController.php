@@ -50,9 +50,9 @@ class AuthenticateController extends Controller
     }
     $fbid = $data['id'];
 
-    $user = User::where('fbid',$fbid)->get();
+    $user = User::where('fbid',$fbid)->get()->first();
 
-    if($user->isEmpty()){
+    if(!$user){
       //new fb user.
       $start_money = config('bullz.start_money');
       $user = User::create(['name'=>$data['name'],'fbid'=>$fbid, 'liquidcash'=> $start_money,
@@ -60,7 +60,7 @@ class AuthenticateController extends Controller
                              'weekWorth'=>0,'dayWorth'=>0,'rank'=>0,
                              'email'=> "mail"]);
     }
-    
+
     $user->setDetails();
 
     try {
