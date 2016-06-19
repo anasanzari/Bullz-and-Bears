@@ -4,7 +4,7 @@
   var controllers = angular.module('AppControllers');
 
   controllers.controller('PortfolioController',
-    function($scope, $location, PortfolioService) {
+    function($scope, $location, PortfolioService,ScrollBarUtils) {
 
       PortfolioService.getBought(function(data){
         console.log(data);
@@ -20,14 +20,29 @@
         console.log(err);
       });
 
-      PortfolioService.getHistory(function(response){
-        console.log(response.data);
-        $scope.history = response.data; /*c*/
-      },function(err){
-        console.log(err);
-      });
+      $scope.scrollconfig = ScrollBarUtils.getConfig('70vh');
 
-    
+      var historypage = 1;
+      $scope.history = [];
+      $scope.historyconfig = ScrollBarUtils.getCallBackConfig('70vh',function(){
+          console.log('callback');
+          load();
+      });
+      var load = function(){
+          PortfolioService.getHistory({page:historypage},function(response){
+            console.log(response);
+            $scope.history = $scope.history.concat(response.data);
+            if(response.data.length>0){
+                historypage++;
+            }
+          },function(err){
+            console.log(err);
+          });
+      };
+      load();
+
+
+
       /*var player = new PlayerService();
       player.$get(function(data) {
           $scope.player = data;

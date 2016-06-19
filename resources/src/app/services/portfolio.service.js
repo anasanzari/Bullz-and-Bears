@@ -28,7 +28,8 @@
             type: 'history'
           },
           cache: false,
-          isArray: false
+          isArray: false,
+          url: './api/:type?page=:page'
         }
 
 

@@ -62,28 +62,6 @@
             overallpage++;
         });
 
-
-
-        /* if(!FacebookService.getIsLoggedIn()){
-              $location.path('/');
-          }
-
-          RankingService.updateRankings();
-          $scope.rankings = RankingService.rankings;
-
-          $scope.loadMoreData = function (val){
-
-              RankingService.loadMore(val);
-          }
-
-          $scope.data = {
-              selectedIndex: 0,
-              secondLocked:  true,
-              secondLabel:   "Item Two",
-              bottom:        false
-          };*/
-
-
       }
   );
 
