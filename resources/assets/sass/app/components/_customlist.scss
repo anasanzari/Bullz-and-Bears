@@ -39,5 +39,16 @@ $customlist-active-color:       rgba(255,255,255,1);
     font-size: 1.6rem;
   }
 
+  .prof-image{
+      border-radius: 100%;
+      height:60px;
+      width:60px;
+      display: inline;
+  }
+
+  p.mg-1{
+      margin-top: 10px;
+      margin-bottom: 10px;
+  }
 
 }

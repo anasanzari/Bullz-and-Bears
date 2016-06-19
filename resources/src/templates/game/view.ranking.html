@@ -9,23 +9,23 @@
 		          	<lx-tabs lx-active-tab="active" lx-color="white">
 
 		              <lx-tab lx-label="Today's Leaders" >
-		                <div ng-scrollbars ng-scrollbars-config="scrollconfig">
+		                <div ng-scrollbars ng-scrollbars-config="dailyconfig">
 
 		                  <ul class="customlist">
 		                    <li class="customlist-item" ng-repeat="player in daily">
 
-		                      <div class="row">
-		                        <div class="col-xs-6 col-md-4">
-		                            <p>{{$index+1}}</p>
+		                      <div class="row around-xs middle-xs">
+		                        <div class="col-xs-6 col-md-2">
+		                            <p class="mg-1">{{$index+1}}</p>
 		                        </div>
-		                        <div class="col-xs-6 col-md-4">
-		                            <img class="prof-image" ng-src="https://graph.facebook.com/{{player.id}}/picture" />
+		                        <div class="col-xs-6 col-md">
+		                            <img class="prof-image" ng-src="https://graph.facebook.com/{{player.id}}/picture?height=100&width=100" />
 		                        </div>
-		                        <div class="col-xs-6 col-md-4">
+		                        <div class="col-xs-6 col-md">
 		                            <p>{{player.name}}</p>
 		                        </div>
-		                        <div class="col-xs-6 col-md-4">
-		                            <p><span ng-bind-html="player.tot| change:false:true"></p>
+		                        <div class="col-xs-6 col-md">
+		                            <p class="mg-1"><span ng-bind-html="player.total| change:false:true"></p>
 		                        </div>
 
 		                      </div>
@@ -37,10 +37,10 @@
 		              </lx-tab>
 
 		              <lx-tab lx-label="This Week's Leaders">
-		                <div ng-scrollbars ng-scrollbars-config="scrollconfig">
+		                <div ng-scrollbars ng-scrollbars-config="weeklyconfig">
 
 		                  <ul class="customlist">
-		                    <li class="customlist-item" ng-repeat="player in rankings.weekly">
+		                    <li class="customlist-item" ng-repeat="player in weekly">
 
 		                      <div class="row">
 		                        <div class="col-xs-6 col-md-4">
@@ -53,7 +53,7 @@
 		                            <p>{{player.name}}</p>
 		                        </div>
 		                        <div class="col-xs-6 col-md-4">
-		                            <p><span ng-bind-html="player.tot| change:false:true"></p>
+		                            <p><span ng-bind-html="player.total| change:false:true"></p>
 		                        </div>
 
 		                      </div>
@@ -65,10 +65,10 @@
 		               </lx-tab>
 
 		              <lx-tab lx-label="Leaderboard">
-		                <div ng-scrollbars ng-scrollbars-config="scrollconfig">
+		                <div ng-scrollbars ng-scrollbars-config="overallconfig">
 
 		                  <ul class="customlist">
-		                    <li class="customlist-item" ng-repeat="player in rankings.overall">
+		                    <li class="customlist-item" ng-repeat="player in overall">
 
 		                      <div class="row">
 		                        <div class="col-xs-6 col-md-4">
@@ -81,7 +81,7 @@
 		                            <p>{{player.name}}</p>
 		                        </div>
 		                        <div class="col-xs-6 col-md-4">
-		                            <p><span ng-bind-html="player.tot| change:false:true"></p>
+		                            <p><span ng-bind-html="player.total| change:false:true"></p>
 		                        </div>
 
 		                      </div>

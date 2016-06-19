@@ -35,6 +35,8 @@ body{
     @media (max-width: $screen-sm-max) {
       transform: translateX(0);
       padding-right: 0;
+      margin-right: -20px; /*stupid bug */
+      overflow: hidden;
     }
 
 }
@@ -52,5 +54,13 @@ body{
     @media (max-width: $screen-sm-max) {
       padding-right: 0px;
       padding-left: 0px;
+    }
+}
+
+.p\+ {
+
+    @media (max-width: $screen-sm-max) {
+      padding-right: 8px !important;
+      padding-left: 8px !important;
     }
 }

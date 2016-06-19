@@ -100,19 +100,7 @@
 
 			});
 
-			$rootScope.scrollconfig = {
-	              autoHideScrollbar: false,
-	              theme: 'light',
-	              advanced:{
-	                  updateOnContentResize: true
-	              },
-	              setHeight: '70vh',
-	              scrollInertia: 500,
-	              mouseWheel:{
-	                  scrollAmount: 250
-	              }
-
-	        };
+			
 
 
 		});
