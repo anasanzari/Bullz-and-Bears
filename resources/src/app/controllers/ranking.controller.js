@@ -4,10 +4,18 @@
   var controllers = angular.module('AppControllers');
 
   controllers.controller('RankingController',
-      function RankingCtrl($scope,$location){
-	  
-	  
-	  	
+      function RankingCtrl($scope,$location,RankingService){
+
+        $scope.ranking = {};
+        var dailypage, weeklypage, overallpage;
+        dailypage = weeklypage = overallpage = 1;
+
+	  	RankingService.load({type:'daily',page:dailypage},function(response){
+            console.log(response);
+            $scope.daily = response.data;
+        },function(err){
+            console.log(err);
+        });
 
         /* if(!FacebookService.getIsLoggedIn()){
               $location.path('/');

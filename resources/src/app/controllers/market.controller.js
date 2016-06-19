@@ -5,17 +5,32 @@
 
   controllers.controller('MarketController',
       function ($scope,StockUtils) {
-	  
+
 	  StockUtils.keepOnUpdating(function(data){
           console.log(data);
           $scope.stocks = data;
-          $scope.filteredStocks = stocksFilter($scope.stocks,$scope.selectedTradeOption.option);
       });
-      
+
+      $scope.state = {};
+
       $scope.$on('$destroy', function() {
           StockUtils.cancel(); //kill the timer.
       });
-	  
+
+      $scope.scrollconfig = {
+            autoHideScrollbar: false,
+            theme: 'light',
+            advanced:{
+                updateOnContentResize: true
+            },
+            setHeight: '60vh',
+            scrollInertia: 500,
+            mouseWheel:{
+                scrollAmount: 250
+            }
+
+      };
+
   });
 
 

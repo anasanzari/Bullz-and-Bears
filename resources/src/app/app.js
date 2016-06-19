@@ -12,11 +12,12 @@
 			'AppFilters',
 			'AppDirectives',
 			'ngAnimate',
-			'ngResource'
+			'ngResource',
+			'ngScrollbars'
 		]);
 
 	angular.module('AppControllers',[]);
-	angular.module('AppDirectives',[]);
+	angular.module('AppDirectives',[]); /*er*/
 	angular.module('AppServices',['ngResource']);
 	angular.module('AppFilters',[]);
 
@@ -38,7 +39,7 @@
 					}
 				};
 			}
-
+			/* check */
 			$provide.factory('redirectWhenLoggedOut', redirectWhenLoggedOut);
 			$httpProvider.interceptors.push('redirectWhenLoggedOut');
 
@@ -83,7 +84,7 @@
 			$rootScope.$on('$stateChangeStart', function(event, toState) {
 
 				console.log(toState);
-				
+
 				/*if($rootScope.authenticated){
 
 					if(toState.name === 'login') {
@@ -98,6 +99,21 @@
 				}*/
 
 			});
+
+			$rootScope.scrollconfig = {
+	              autoHideScrollbar: false,
+	              theme: 'light',
+	              advanced:{
+	                  updateOnContentResize: true
+	              },
+	              setHeight: '70vh',
+	              scrollInertia: 500,
+	              mouseWheel:{
+	                  scrollAmount: 250
+	              }
+
+	        };
+
 
 		});
 })();

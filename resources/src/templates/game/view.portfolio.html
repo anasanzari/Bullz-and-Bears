@@ -8,118 +8,119 @@
 
           <lx-tabs lx-active-tab="vm.activeTab" lx-color="white">
               <lx-tab lx-label="Bought Stocks" >
-                <div class="container-fluid">
+                <div ng-scrollbars ng-scrollbars-config="scrollconfig">
 
                   <p ng-show="bought.length==0" class="pad_l">You have no Bought Stocks </p>
+                      <ul class="customlist">
+                        <li class="customlist-item" ng-repeat="stock in bought">
+                          <div class="row">
+                            <div class="col-xs">
+                              <p class="large">{{stock.name}}</p>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-xs-6 col-md-4">
+                                <p>Amount : {{stock.amount}}</p>
+                            </div>
+                            <div class="col-xs-6 col-md-4">
+                                <p>Avg. Bought Price : {{stock.avg|currency:"&#8377"}}</p>
+                            </div>
+                            <div class="col-xs-6 col-md-4">
+                                <p>Live Price : {{stock.value|currency:"&#8377"}}</p>
+                            </div>
+                            <div class="col-xs-6 col-md-4">
+                                <p>Investment Value : {{stock.invested_value|currency:"&#8377"}}</p>
+                            </div>
+                            <div class="col-xs-6 col-md-4">
+                                <p>Latest Value : {{stock.present_value|currency:"&#8377"}}</p>
+                            </div>
+                             <div class="col-xs-6 col-md-4">
+                                <p>Brokerage : {{stock.brokerage|currency:"&#8377"}}</p>
+                            </div>
+                            <div class="col-xs-6 col-md-4">
+                                <p>Overall Gain : <span ng-bind-html="stock.gain| change:false:true"></p>
+                            </div>
+                          </div>
 
-                  <ul class="customlist">
-                    <li class="customlist-item" ng-repeat="stock in bought">
-                      <div class="row">
-                        <div class="col-xs">
-                          <p class="large">{{stock.name}}</p>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-xs-6 col-md-4">
-                            <p>Amount : {{stock.amount}}</p>
-                        </div>
-                        <div class="col-xs-6 col-md-4">
-                            <p>Avg. Bought Price : {{stock.avg|currency:"&#8377"}}</p>
-                        </div>
-                        <div class="col-xs-6 col-md-4">
-                            <p>Live Price : {{stock.value|currency:"&#8377"}}</p>
-                        </div>
-                        <div class="col-xs-6 col-md-4">
-                            <p>Investment Value : {{stock.invested_value|currency:"&#8377"}}</p>
-                        </div>
-                        <div class="col-xs-6 col-md-4">
-                            <p>Latest Value : {{stock.present_value|currency:"&#8377"}}</p>
-                        </div>
-                         <div class="col-xs-6 col-md-4">
-                            <p>Brokerage : {{stock.brokerage|currency:"&#8377"}}</p>
-                        </div>
-                        <div class="col-xs-6 col-md-4">
-                            <p>Overall Gain : <span ng-bind-html="stock.gain| change:false:true"></p>
-                        </div>
-                      </div>
+                        </li>
+                      </ul>
 
-                    </li>
-                  </ul>
 
                 </div>
               </lx-tab>
 
               <lx-tab lx-label="Shorted Stocks" >
+                <div ng-scrollbars ng-scrollbars-config="scrollconfig">
+                    <p ng-show="shorted.length==0" class="pad_l">You have no Shorted Stocks. </p>
 
-                <p ng-show="shorted.length==0" class="pad_l">You have no Shorted Stocks. </p>
+                    <ul class="customlist">
+                      <li class="customlist-item" ng-repeat="stock in shorted">
+                        <div class="row">
+                          <div class="col-xs">
+                            <p class="large">{{stock.name}}</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-xs-6 col-md-4">
+                              <p>Amount : {{stock.amount}}</p>
+                          </div>
+                          <div class="col-xs-6 col-md-4">
+                              <p>Avg. Sold Price : {{stock.avg|currency:"&#8377"}}</p>
+                          </div>
+                          <div class="col-xs-6 col-md-4">
+                              <p>Live Price : {{stock.value|currency:"&#8377"}}</p>
+                          </div>
+                          <div class="col-xs-6 col-md-4">
+                              <p>Total Sold Value : {{stock.sold_value|currency:"&#8377"}}</p>
+                          </div>
+                          <div class="col-xs-6 col-md-4">
+                              <p>Brokerage : {{stock.brokerage|currency:"&#8377"}}</p>
+                          </div>
 
-                <ul class="customlist">
-                  <li class="customlist-item" ng-repeat="stock in shorted">
-                    <div class="row">
-                      <div class="col-xs">
-                        <p class="large">{{stock.name}}</p>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-xs-6 col-md-4">
-                          <p>Amount : {{stock.amount}}</p>
-                      </div>
-                      <div class="col-xs-6 col-md-4">
-                          <p>Avg. Sold Price : {{stock.avg|currency:"&#8377"}}</p>
-                      </div>
-                      <div class="col-xs-6 col-md-4">
-                          <p>Live Price : {{stock.value|currency:"&#8377"}}</p>
-                      </div>
-                      <div class="col-xs-6 col-md-4">
-                          <p>Total Sold Value : {{stock.sold_value|currency:"&#8377"}}</p>
-                      </div>
-                      <div class="col-xs-6 col-md-4">
-                          <p>Brokerage : {{stock.brokerage|currency:"&#8377"}}</p>
-                      </div>
+                          <div class="col-xs-6 col-md-4">
+                              <p>Overall Gain : <span ng-bind-html="stock.gain| change:false:true"></p>
+                          </div>
 
-                      <div class="col-xs-6 col-md-4">
-                          <p>Overall Gain : <span ng-bind-html="stock.gain| change:false:true"></p>
-                      </div>
+                        </div>
 
-                    </div>
-
-                  </li>
-                </ul>
-
+                      </li>
+                    </ul>
+                </div>
               </lx-tab>
 
               <lx-tab lx-label="History">
-                <p ng-show="history.length==0" class="pad_l" >You haven't done any transactions yet. </p>
+                <div ng-scrollbars ng-scrollbars-config="scrollconfig">
+                    <p ng-show="history.length==0" class="pad_l" >You haven't done any transactions yet. </p>
 
-                <ul class="customlist">
-                  <li class="customlist-item" ng-repeat="entry in history">
+                    <ul class="customlist">
+                      <li class="customlist-item" ng-repeat="entry in history">
 
-                    <div class="row">
-                      <div class="col-xs-6 col-md-4">
-                            <p>{{entry.transaction_time|date:"h:mm a, MMM d"}}</p>
-                      </div>
-                      <div class="col-xs-6 col-md-4">
-                          <p>{{entry.transaction_type}}</p>
-                      </div>
-                      <div class="col-xs-6 col-md-4">
-                          <p>{{entry.symbol}}</p>
-                      </div>
-                      <div class="col-xs-6 col-md-4">
-                          <p>Stock Price : {{entry.value|currency:"&#8377"}}</p>
-                      </div>
-                      <div class="col-xs-6 col-md-4">
-                          <p>Value : {{entry.total|currency:"&#8377"}}</p>
-                      </div>
+                        <div class="row">
+                          <div class="col-xs-6 col-md-4">
+                                <p>{{entry.transaction_time|date:"h:mm a, MMM d"}}</p>
+                          </div>
+                          <div class="col-xs-6 col-md-4">
+                              <p>{{entry.transaction_type}}</p>
+                          </div>
+                          <div class="col-xs-6 col-md-4">
+                              <p>{{entry.symbol}}</p>
+                          </div>
+                          <div class="col-xs-6 col-md-4">
+                              <p>Stock Price : {{entry.value|currency:"&#8377"}}</p>
+                          </div>
+                          <div class="col-xs-6 col-md-4">
+                              <p>Value : {{entry.total|currency:"&#8377"}}</p>
+                          </div>
 
-                      <div class="col-xs-6 col-md-4">
-                          <p>Brokerage : {{entry.brokerage|currency:"&#8377"}}</p>
-                      </div>
+                          <div class="col-xs-6 col-md-4">
+                              <p>Brokerage : {{entry.brokerage|currency:"&#8377"}}</p>
+                          </div>
 
-                    </div>
+                        </div>
 
-                  </li>
-                </ul>
-
+                      </li>
+                    </ul>
+                </div>
               </lx-tab>
           </lx-tabs>
         </div>

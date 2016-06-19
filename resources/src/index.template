@@ -26,6 +26,8 @@
       <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
       <script src="bower_components/satellizer/satellizer.min.js"></script>
       <script src="bower_components/lumx/dist/lumx.min.js"></script>
+      <script src="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script src="bower_components/ng-scrollbars/dist/scrollbars.min.js"></script>
 
       <!-- Application Scripts -->
       <script src="app/app.js"></script>

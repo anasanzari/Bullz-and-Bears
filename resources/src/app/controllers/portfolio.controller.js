@@ -27,8 +27,7 @@
         console.log(err);
       });
 
-
-
+    
       /*var player = new PlayerService();
       player.$get(function(data) {
           $scope.player = data;

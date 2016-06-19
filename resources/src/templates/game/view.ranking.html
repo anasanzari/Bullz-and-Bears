@@ -3,23 +3,23 @@
 		<div class="col-xs-12 col-md-12">
 
 			<div class="p+">
-			
+
 				<div class="card customcard">
-	
+
 		          	<lx-tabs lx-active-tab="active" lx-color="white">
-		              
+
 		              <lx-tab lx-label="Today's Leaders" >
-		                <div class="container-fluid">
-		
+		                <div ng-scrollbars ng-scrollbars-config="scrollconfig">
+
 		                  <ul class="customlist">
-		                    <li class="customlist-item" ng-repeat="player in rankings.daily">
-		                      
+		                    <li class="customlist-item" ng-repeat="player in daily">
+
 		                      <div class="row">
 		                        <div class="col-xs-6 col-md-4">
 		                            <p>{{$index+1}}</p>
 		                        </div>
 		                        <div class="col-xs-6 col-md-4">
-		                            <img class="prof-image" ng-src="https://graph.facebook.com/{{player.id}}/picture" />     
+		                            <img class="prof-image" ng-src="https://graph.facebook.com/{{player.id}}/picture" />
 		                        </div>
 		                        <div class="col-xs-6 col-md-4">
 		                            <p>{{player.name}}</p>
@@ -27,27 +27,27 @@
 		                        <div class="col-xs-6 col-md-4">
 		                            <p><span ng-bind-html="player.tot| change:false:true"></p>
 		                        </div>
-		                        
+
 		                      </div>
-		
+
 		                    </li>
 		              	  </ul>
-		
+
 		                </div>
 		              </lx-tab>
-		
+
 		              <lx-tab lx-label="This Week's Leaders">
-		                  <div class="container-fluid">
-		
+		                <div ng-scrollbars ng-scrollbars-config="scrollconfig">
+
 		                  <ul class="customlist">
 		                    <li class="customlist-item" ng-repeat="player in rankings.weekly">
-		                      
+
 		                      <div class="row">
 		                        <div class="col-xs-6 col-md-4">
 		                            <p>{{$index+1}}</p>
 		                        </div>
 		                        <div class="col-xs-6 col-md-4">
-		                            <img class="prof-image" ng-src="https://graph.facebook.com/{{player.id}}/picture" />     
+		                            <img class="prof-image" ng-src="https://graph.facebook.com/{{player.id}}/picture" />
 		                        </div>
 		                        <div class="col-xs-6 col-md-4">
 		                            <p>{{player.name}}</p>
@@ -55,27 +55,27 @@
 		                        <div class="col-xs-6 col-md-4">
 		                            <p><span ng-bind-html="player.tot| change:false:true"></p>
 		                        </div>
-		                        
+
 		                      </div>
-		
+
 		                    </li>
 		              	  </ul>
-		
+
 		                </div>
 		               </lx-tab>
-		
+
 		              <lx-tab lx-label="Leaderboard">
-		                  <div class="container-fluid">
-		
+		                <div ng-scrollbars ng-scrollbars-config="scrollconfig">
+
 		                  <ul class="customlist">
 		                    <li class="customlist-item" ng-repeat="player in rankings.overall">
-		                      
+
 		                      <div class="row">
 		                        <div class="col-xs-6 col-md-4">
 		                            <p>{{$index+1}}</p>
 		                        </div>
 		                        <div class="col-xs-6 col-md-4">
-		                            <img class="prof-image" ng-src="https://graph.facebook.com/{{player.id}}/picture" />     
+		                            <img class="prof-image" ng-src="https://graph.facebook.com/{{player.id}}/picture" />
 		                        </div>
 		                        <div class="col-xs-6 col-md-4">
 		                            <p>{{player.name}}</p>
@@ -83,20 +83,19 @@
 		                        <div class="col-xs-6 col-md-4">
 		                            <p><span ng-bind-html="player.tot| change:false:true"></p>
 		                        </div>
-		                        
+
 		                      </div>
-		
+
 		                    </li>
 		              	  </ul>
-		
+
 		                </div>
 		              </lx-tab>
-		          	
+
 		          	</lx-tabs>
 	        	</div>
-			
+
 			</div>
 		</div>
 	</div>
 </div>
-          
