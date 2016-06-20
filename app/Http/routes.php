@@ -38,6 +38,11 @@ Route::group(['prefix' => 'api'], function(){
   Route::post('dotrade','ApiController@doTrade');
   Route::post('doschedule','ApiController@doSchedule');
 
-  Route::post('debug','ApiController@valupdate');
+  //Route::post('debug','ApiController@valupdate');
+
+  //Finance Api
+
+  Route::post('charts/overall','FinanceApiController@overall');
+
 
 });
