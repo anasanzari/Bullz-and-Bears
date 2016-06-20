@@ -4,8 +4,8 @@
   var controllers = angular.module('AppControllers');
 
   controllers.controller('ScheduleController',
-      function($scope,$location,StockUtils) {
-	  
+      function($scope,$location,StockUtils,ScheduleService,stocksFilter,LxNotificationService) {
+
 
       $scope.total = 0;
       $scope.state = {}; // inputs
@@ -13,9 +13,11 @@
       StockUtils.keepOnUpdating(function(data){
           console.log(data);
           $scope.stocks = data;
-          $scope.filteredStocks = stocksFilter($scope.stocks,$scope.selectedTradeOption.option);
+          if($scope.selectedTradeOption){
+              $scope.filteredStocks = stocksFilter($scope.stocks,$scope.selectedTradeOption.option);
+          }
       });
-      
+
       $scope.$on('$destroy', function() {
           StockUtils.cancel(); //kill the timer.
       });
@@ -57,7 +59,7 @@
         $scope.value = $scope.selectedStock.value;
         $scope.tAmount = 0;
       };
-      
+
       var priceUpdate = function(){
     	  if($scope.state.tAmount> $scope.maxAmount){
               $scope.state.tAmount = $scope.maxAmount;
@@ -69,32 +71,32 @@
 
       $scope.$watch('state.tAmount', priceUpdate);
       $scope.$watch('state.sPrice',  priceUpdate);
-      
-      
-      
-     
+
+
+
+
 
       var reset = function(){
           $scope.typeChange();
           $scope.tAmount = 0;
       };
-      
+
 
       $scope.doTrade = function(){
 
           var data = {
               type : $scope.selectedTradeOption.option,
               symbol : $scope.selectedStock.symbol,
-              amount : $scope.state.tAmount
+              amount : $scope.state.tAmount,
+              scheduledPrice: $scope.state.sPrice
           };
 
           console.log(data);
 
-          TradeService.trade(data,function(response){
-              $scope.stocks = data;
-              $scope.filteredStocks = stocksFilter($scope.stocks,$scope.selectedTradeOption.option);
+          ScheduleService.add(data,function(response){
+              console.log(response);
               LxNotificationService.alert('Success',
-               'Transaction has been done successfully.', 'Ok', function(answer){
+               'Trade is scheduled.', 'Ok', function(answer){
 
               });
               reset();
@@ -109,7 +111,7 @@
           });
       };
 
-        /* 
+        /*
 
         StockService.updateStocks(FacebookService.user.id);
         $scope.stocks = StockService.stocks;

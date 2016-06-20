@@ -7,7 +7,7 @@
         <div class="card customcard formpage">
 
           <h3>Schedule Transaction</h3>
-          
+
           <div>
             <form name="trade">
 
@@ -27,7 +27,7 @@
                       {{ $choice.option }}
                   </lx-select-choices>
               </lx-select>
-              
+
               <!-- lx-filter wasn't working -->
               <lx-select ng-model="selectedStock"
                 ng-show="selectedTradeOption!=null"
@@ -47,8 +47,8 @@
                       {{ $choice.name }}
                   </lx-select-choices>
               </lx-select>
-              
-              
+
+
 
               <p class="text-field-error" ng-show="filteredStocks.length==0">You have no stock to {{selectedTradeOption.option}}</p>
 
@@ -64,7 +64,7 @@
                   <input type="text" name="amount" ng-model="state.tAmount" ng-pattern="/^[0-9]+$/">
                 </lx-text-field>
                 <span class="text-field-error" ng-if="trade.amount.$dirty && !trade.amount.$valid">Invalid Amount</span>
-                
+
                 <lx-text-field
                   lx-label="Value"
                   lx-theme="dark"
@@ -72,19 +72,20 @@
                   <input type="text" name="sPrice" ng-model="state.sPrice" ng-pattern="/^[0-9]*(\.[0-9][0-9]?)?$/">
                 </lx-text-field>
                 <span class="text-field-error" ng-if="trade.sPrice.$dirty && !trade.sPrice.$valid">Invalid Value</span>
-                
-                
+
+
                 <div class="row  middle-xs center-xs" style="margin-top:20px">
                     <div class="col-xs">
                       <p class="super">Total</p>
                       <p class="l">{{total|currency:"&#8377"}}</p>
                     </div>
                     <div class="col-xs">
-                        <lx-button ng-click="doTrade()" 
-                        	lx-size="l" 
-                        	lx-type="raised" 
-                        	ng-disabled="!state.tAmount || !trade.amount.$valid || !trade.sPrices.$valid">
-                        	{{selectedTradeOption.option}}
+
+                        <lx-button ng-click="doTrade()"
+                        	lx-size="l"
+                        	lx-type="raised"
+                        	ng-disabled="!state.tAmount || !trade.amount.$valid || !trade.sPrice.$valid">
+                        	Schedule
                         </lx-button>
                     </div>
                 </div>

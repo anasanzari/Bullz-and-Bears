@@ -31,7 +31,7 @@
 				$scope.filteredStocks = stocksFilter($scope.stocks,$scope.selectedTradeOption.option);
 			}
         });
-        
+
         $scope.$on('$destroy', function() {
             StockUtils.cancel(); //kill the timer.
         });
@@ -102,7 +102,8 @@
             console.log(data);
 
             TradeService.trade(data,function(response){
-                $scope.stocks = data;
+                console.log(response);
+                $scope.stocks = response;
                 $scope.filteredStocks = stocksFilter($scope.stocks,$scope.selectedTradeOption.option);
                 LxNotificationService.alert('Success',
                  'Transaction has been done successfully.', 'Ok', function(answer){
