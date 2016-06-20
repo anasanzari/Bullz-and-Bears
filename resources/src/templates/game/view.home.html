@@ -33,15 +33,13 @@
               <li class="customlist-item">
 
                 <div class="row  center-xs">
-                  <div class="col-xs">
-                    <p>Today's Gain:
-                      <span ng-bind-html="player.daygain| change:false:true"></span>
-                    </p>
+                  <div class="col-xs center-xs">
+                      <p class="small">Today's Gain</p>
+                      <p class="main"><span ng-bind-html="player.daygain| change:false:true"></span></p>
                   </div>
-                  <div class="col-xs">
-                    <p>Week's Gain:
-                      <span ng-bind-html="player.weekgain| change:false:true"></span>
-                    </p>
+                  <div class="col-xs center-xs">
+                      <p class="small">Week's Gain</p>
+                      <p class="main"><span ng-bind-html="player.weekgain| change:false:true"></span></p>
                   </div>
                 </div>
 
@@ -54,7 +52,7 @@
 
         <div class="card customcard">
           <div class="p+">
-            <div class="row middle-xs">
+            <div class="row middle-xs center-xs">
               <div class="col-xs-6 center-xs">
                 <i style="font-size:6rem" class="mdi mdi-trophy" ></i>
               </div>

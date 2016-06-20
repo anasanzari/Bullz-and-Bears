@@ -31,7 +31,7 @@ class User extends Authenticatable
       $this->daygain = $this->getDayGain();
       $this->networth = $this->getNetWorth();
 
-      if ($this->rank != 1) {
+      if ($this->rank == 1) {
         $this->overallrank = $this->getOverAllRank();
         $this->dailyrank = $this->getDailyRank();
         $this->weeklyrank = $this->getWeeklyRank();
