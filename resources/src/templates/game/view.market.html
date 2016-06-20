@@ -24,16 +24,16 @@
                             <p>Value : {{stock.value |currency:"&#8377" }}</p>
                         </div>
                         <div class="col-xs-6 col-md-4">
-                            <p>Day High: {{stock.day_high|currency:"&#8377"}}</p>
+                            <p>Day High: {{stock.dayhigh|currency:"&#8377"}}</p>
                         </div>
                         <div class="col-xs-6 col-md-4">
-                            <p>Day Low: {{stock.day_low|currency:"&#8377"}}</p>
+                            <p>Day Low: {{stock.daylow|currency:"&#8377"}}</p>
                         </div>
                         <div class="col-xs-6 col-md-4">
-                            <p>Week High: {{stock.week_high|currency:"&#8377"}}</p>
+                            <p>Week High: {{stock.weekhigh|currency:"&#8377"}}</p>
                         </div>
                         <div class="col-xs-6 col-md-4">
-                            <p>Week Low: {{stock.week_low|currency:"&#8377"}}</p>
+                            <p>Week Low: {{stock.weeklow|currency:"&#8377"}}</p>
                         </div>
                          <div class="col-xs-6 col-md-4">
                             <p>Change: <span ng-bind-html="stock.change_perc| change:true:false"></span></p>
