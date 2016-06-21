@@ -2,7 +2,7 @@
 
 	'use strict';
 
-	var app = angular.module('moments', [
+	var app = angular.module('bnb', [
 			'ui.router',
 			'satellizer',
 			'lumx',
@@ -13,7 +13,8 @@
 			'AppDirectives',
 			'ngAnimate',
 			'ngResource',
-			'ngScrollbars'
+			'ngScrollbars',
+			'chart.js'
 		]);
 
 	angular.module('AppControllers',[]);
@@ -100,7 +101,7 @@
 
 			});
 
-			
+
 
 
 		});

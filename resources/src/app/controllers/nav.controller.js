@@ -4,11 +4,15 @@
 
 	var controllers = angular.module('AppControllers');
 
-	controllers.controller('NavController', function($scope, $auth, AuthService, $state, $http, $rootScope){
+	controllers.controller('NavController', function($scope, $timeout, $auth, AuthService, $state, $http, $rootScope){
 
 		$scope.isOpen = true;
 		$scope.toggle = function(){
 			$scope.isOpen = !$scope.isOpen;
+			//animation is for .6s
+			$timeout(function () {
+                    window.dispatchEvent(new Event('resize'));
+            }, 700);
 		};
 
 		$scope.menu = [

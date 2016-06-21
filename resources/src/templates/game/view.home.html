@@ -1,102 +1,115 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-xs-12 col-md-6">
+    <div class="p+">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
 
-      <div class="p+">
+                <div class="card customcard">
+                  <div class="p+">
+                      <div class="row around-xs middle-xs">
+                          <div class="col-xs center-xs">
+                              <img class="ava_pic" ng-src="https://graph.facebook.com/{{player.fbid}}/picture?height=200&width=200" />
+                          </div>
+                          <div class="col-xs">
+                              <h1>{{player.name}}</h1>
+                              <p class="small">Net Worth</p>
+                              <p class="large">{{player.networth|currency:"&#8377"}}</p>
+                          </div>
 
-        <div class="card customcard">
-          <div class="p+">
-            <h1 style="text-align:center">{{player.name}}</h1>
-            <ul class="customlist">
-              <li class="customlist-item">
-                <div class="row center-xs">
-                  <div class="col-xs">
-                    <p class="small">Cash At Hand</p>
-                    <p class="main">{{player.liquidcash|currency:"&#8377"}}</p>
-                  </div>
-                  <div class="col-xs">
-                    <p class="small">Market Value</p>
-                    <p class="main">{{player.marketvalue|currency:"&#8377"}}</p>
-                  </div>
-                </div>
-              </li>
-              <li class="customlist-item">
-                <div class="row">
-                  <div class="col-xs center-xs">
-                    <p class="small">Net Worth</p>
-                    <p class="large">{{player.networth|currency:"&#8377"}}</p>
+                      </div>
                   </div>
                 </div>
 
-              </li>
+                <div class="card customcard">
+                  <div class="p+">
+                    <ul class="customlist">
+                      <li class="customlist-item">
+                        <div class="row center-xs">
+                          <div class="col-xs">
+                            <p class="small">Cash At Hand</p>
+                            <p class="main">{{player.liquidcash|currency:"&#8377"}}</p>
+                          </div>
+                          <div class="col-xs">
+                            <p class="small">Market Value</p>
+                            <p class="main">{{player.marketvalue|currency:"&#8377"}}</p>
+                          </div>
+                        </div>
+                      </li>
 
-              <li class="customlist-item">
+                      <li class="customlist-item">
 
-                <div class="row  center-xs">
-                  <div class="col-xs center-xs">
-                      <p class="small">Today's Gain</p>
-                      <p class="main"><span ng-bind-html="player.daygain| change:false:true"></span></p>
-                  </div>
-                  <div class="col-xs center-xs">
-                      <p class="small">Week's Gain</p>
-                      <p class="main"><span ng-bind-html="player.weekgain| change:false:true"></span></p>
+                        <div class="row  center-xs">
+                          <div class="col-xs center-xs">
+                              <p class="small">Today's Gain</p>
+                              <p class="main"><span ng-bind-html="player.daygain| change:false:true"></span></p>
+                          </div>
+                          <div class="col-xs center-xs">
+                              <p class="small">Week's Gain</p>
+                              <p class="main"><span ng-bind-html="player.weekgain| change:false:true"></span></p>
+                          </div>
+                        </div>
+
+                      </li>
+
+                    </ul>
+
                   </div>
                 </div>
 
-              </li>
-
-            </ul>
-
-          </div>
-        </div>
-
-        <div class="card customcard">
-          <div class="p+">
-            <div class="row middle-xs center-xs">
-              <div class="col-xs-6 center-xs">
-                <i style="font-size:6rem" class="mdi mdi-trophy" ></i>
-              </div>
-
-              <div class="col-xs-6">
-                <ul class="customlist">
-                  <li class="customlist-item">
-                    <p class="small">Overall Rank</p>
-                    <p class="main">{{player.overallrank}}</p>
-                  </li>
-                  <li class="customlist-item">
-                    <p class="small">Daily Rank</p>
-                    <p class="main">{{player.dailyrank}}</p>
-                  </li>
-                  <li class="customlist-item">
-                    <p class="small">Weekly Rank</p>
-                    <p class="main">{{player.weeklyrank}}</p>
-                  </li>
-                </ul>
+                <div class="card customcard">
+                  <div class="p+">
+                      <div class="p+">
+                          <p class="quote justify">"One of the funny things about the stock market is that every time one person buys,
+                               another sells, and both think they are astute."</p>
+                          <p class="quote right"> &nbsp-William Feather</p>
+                      </div>
+                  </div>
               </div>
 
             </div>
-          </div>
-        </div>
+            <div class="col-xs-12 col-md-6">
 
-      </div>
-    </div>
+                <div class="card customcard">
+                  <h3 style="text-align:center;margin-top:15px;">NSE</h3>
+                  <div class="p+">
+                        <canvas id="line" class="chart chart-line" chart-data="data"
+                        chart-labels="labels" chart-series="series" chart-options="options"
+                        chart-dataset-override="datasetOverride" chart-click="onClick"
+                        </canvas>
+                 </div>
+                </div>
 
-    <div class="col-xs-12 col-md-6">
+                <div class="card customcard">
+                  <div class="p+">
+                    <div class="row middle-xs center-xs">
+                      <div class="col-xs-6 center-xs">
+                        <i style="font-size:6rem" class="mdi mdi-trophy" ></i>
+                      </div>
 
-      <div class="p+">
+                      <div class="col-xs-6">
+                        <ul class="customlist">
+                          <li class="customlist-item">
+                            <p class="small">Overall Rank</p>
+                            <p class="main">{{player.overallrank}}</p>
+                          </li>
+                          <li class="customlist-item">
+                            <p class="small">Daily Rank</p>
+                            <p class="main">{{player.dailyrank}}</p>
+                          </li>
+                          <li class="customlist-item">
+                            <p class="small">Weekly Rank</p>
+                            <p class="main">{{player.weeklyrank}}</p>
+                          </li>
+                        </ul>
+                      </div>
 
-        <div class="card customcard">
-          <div class="p+">
-            <div class="nifty-chart">
-              <img src="http://chart.finance.yahoo.com/t?s=^NSEI&lang=en-IN&region=IN&width=800&height=300"/>
+                    </div>
+                  </div>
+                </div>
+
+
             </div>
-          </div>
+
         </div>
-      </div>
-
-    </div>
-
-
   </div>
 </div>
 

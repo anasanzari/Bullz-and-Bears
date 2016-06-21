@@ -4,6 +4,23 @@ div.customcard {
     margin-bottom: 10px;
 }
 
+.ava_pic{
+    max-width: 150px;
+    border-radius: 100%;
+    display: inline;
+}
+
+p.quote{
+ font-style: italic;
+ font-weight: 200;
+}
+p.right{
+    text-align: right;
+}
+p.justify{
+    text-align: justify;
+}
+
 //paddings
 
 .pad_s{

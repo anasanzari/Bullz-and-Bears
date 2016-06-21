@@ -39,7 +39,7 @@ class FinanceApiController extends Controller
     {
         $symbol = '^NSEI';
         $end = Carbon::now()->toDateString();
-        $start = Carbon::now()->subYear()->toDateString();
+        $start = Carbon::now()->subMonth()->toDateString();
 
         $query = "select * from yahoo.finance.historicaldata where startDate='"
                 .$start."' and endDate='"
@@ -50,7 +50,17 @@ class FinanceApiController extends Controller
         $res = @file_get_contents($url);
         $data = json_decode($res,TRUE);
 
-        return $data;
+        $out = [];
+        $quotes = $data['query']['results']['quote'];
+        $qlen = sizeof($quotes);
+        for($k=$qlen-1;$k>=0;$k--){
+            $out['open'][] = $quotes[$k]['Open'];
+            $out['high'][] = $quotes[$k]['High'];
+            $out['low'][] = $quotes[$k]['Low'];
+            $out['dates'][] = Carbon::createFromFormat('Y-m-d', $quotes[$k]['Date'])->format('M-d');
+        }
+
+        return $out;
 
     }
 

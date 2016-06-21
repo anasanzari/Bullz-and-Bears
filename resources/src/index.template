@@ -5,11 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="en">
     <meta name="viewport" content="width=device-width">
-    <title>Moments</title>
+    <title>Bulls n Bears</title>
     <link rel="stylesheet" href="css/vendor.css" />
     <link rel="stylesheet" href="css/app.css" />
   </head>
-  <body ng-app="moments" >
+  <body ng-app="bnb" >
 
 
       <div class="">
@@ -28,6 +28,8 @@
       <script src="bower_components/lumx/dist/lumx.min.js"></script>
       <script src="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="bower_components/ng-scrollbars/dist/scrollbars.min.js"></script>
+      <script src="bower_components/Chart.js/Chart.js"></script>
+      <script src="bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
 
       <!-- Application Scripts -->
       <script src="app/app.js"></script>
