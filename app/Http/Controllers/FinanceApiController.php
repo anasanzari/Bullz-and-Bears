@@ -35,9 +35,19 @@ class FinanceApiController extends Controller
        return "http://query.yahooapis.com/v1/public/yql?".http_build_query($params);
     }
 
+    public function symbol($symbol){
+        $symbol = $symbol.".NS";
+        return $this->getValues($symbol);
+    }
+
     public function overall()
     {
         $symbol = '^NSEI';
+        return $this->getValues($symbol);
+
+    }
+    private function getValues($symbol){
+
         $end = Carbon::now()->toDateString();
         $start = Carbon::now()->subMonth()->toDateString();
 
@@ -60,8 +70,11 @@ class FinanceApiController extends Controller
             $out['dates'][] = Carbon::createFromFormat('Y-m-d', $quotes[$k]['Date'])->format('M-d');
         }
 
-        return $out;
+        if(sizeof($out)==0){
+            return response()->json(['error' => 'Not available.'], 500);
+        }
 
+        return $out;
     }
 
 

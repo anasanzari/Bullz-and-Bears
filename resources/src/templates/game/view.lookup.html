@@ -1,8 +1,7 @@
 <div class="container-fluid">
+  <div class="p+">
 	<div class="row">
 		<div class="col-xs-12 col-md-6">
-
-			<div class="p+">
 
 				<div class="card customcard formpage">
 
@@ -44,12 +43,21 @@
 
 				</div>
 
-			</div>
 		</div>
 		<div class="col-xs-12 col-md-6">
+			<div class="card customcard" ng-show="selectedStock!=null">
+				<div class="p+">
+				  <h3 style="text-align:center;margin-top:15px;"></h3>
 
+					<canvas id="line" class="chart chart-line" chart-data="data"
+					chart-labels="labels" chart-series="series" chart-options="options"
+					chart-dataset-override="datasetOverride" chart-click="onClick"
+					</canvas>
+				</div>
+			</div>
 		</div>
 	</div>
+  </div>
 </div>
 
 

@@ -43,6 +43,8 @@ Route::group(['prefix' => 'api'], function(){
   //Finance Api
 
   Route::post('charts/overall','FinanceApiController@overall');
+  Route::post('charts/{symbol}','FinanceApiController@symbol');
+
 
 
 });
