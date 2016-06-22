@@ -45,6 +45,11 @@ Route::group(['prefix' => 'api'], function(){
   Route::post('charts/overall','FinanceApiController@overall');
   Route::post('charts/{symbol}','FinanceApiController@symbol');
 
+  //Statistics
+
+  Route::post('stats/trade', 'ApiController@trade_stats');
+  Route::post('stats/schedule', 'ApiController@schedule_stats');
+
 
 
 });

@@ -146,7 +146,7 @@ class ApiController extends Controller
       $value = $value->value;
       $transactions[$key]->total = number_format($value*$amount, 2, '.', '');
       $transactions[$key]->brokerage = number_format(0.002*$value*$amount, 2, '.', '');
-      
+
     }
 
     return $transactions;
@@ -341,6 +341,31 @@ class ApiController extends Controller
                            ->where('schedules.playerid', '=', $user->id);
                     })->orderBy('skey','ASC')->get();
     return $schedules;
+  }
+
+  public function trade_stats(){
+      $today = Carbon::now();
+      $nextday = Carbon::now()->addDay();
+      $stats = History::select(DB::raw('count(*) as count, transaction_type'))
+                ->where('transaction_time','>=',$today->format('Y-m-d'))
+                ->where('transaction_time','<=',$nextday->format('Y-m-d'))
+                ->groupBy('transaction_type')
+                ->get();
+     if(sizeof($stats)==0){
+         return json_encode (json_decode ("{}"));
+     }
+     $out = [];
+     foreach ($stats as $value) {
+         $out['types'][] = $value['transaction_type'];
+         $out['data'][] = $value['count'];
+     }
+
+     return $out;
+
+  }
+
+  public function schedule_stats(){
+ 
   }
 
 

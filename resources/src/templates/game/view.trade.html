@@ -1,8 +1,7 @@
 <div class="container-fluid">
+ <div class="p+">
   <div class="row">
     <div class="col-xs-12 col-md-6">
-
-      <div class="p+">
 
         <div class="card customcard formpage">
 
@@ -32,7 +31,7 @@
                       {{ $choice.option }}
                   </lx-select-choices>
               </lx-select>
-              
+
               <!-- lx-filter wasn't working -->
               <lx-select ng-model="selectedStock"
                 ng-show="selectedTradeOption!=null"
@@ -85,8 +84,18 @@
 
         </div>
 
-      </div>
+    </div>
+    <div class="col-xs-12 col-md-6">
+        <div class="card customcard">
+          <h3 style="text-align:center;margin-top:15px;">Stats</h3>
+          <div class="p+">
+              <canvas id="pie" class="chart chart-doughnut"
+                chart-data="data"
+                chart-colours="colors"
+                chart-labels="labels" chart-options="options">
+              </canvas>
+         </div>
+        </div>
     </div>
   </div>
 </div>
-

@@ -22,7 +22,7 @@
 	angular.module('AppServices',['ngResource']);
 	angular.module('AppFilters',[]);
 
-	app.config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider, $provide, config) {
+	app.config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider, $provide, config, ChartJsProvider) {
 
 			function redirectWhenLoggedOut($q, $injector) {
 				return {
@@ -47,6 +47,8 @@
 			$authProvider.loginUrl = 'api/fbauthenticate';
 
 			$urlRouterProvider.otherwise('/home');
+
+			Chart.defaults.global.colors =  [ '#D9534F', '#F0AD4E', '#5CB85C', '#5BC0DE', '#FDB45C', '#949FB1', '#4D5360'];
 
 
 		})

@@ -14,7 +14,7 @@
         }
       );
 
-    
+      
       ChartService.fetch({type:'overall'},function(response){
          $scope.labels = response.dates;
          $scope.series = ['Open','High','Low'];

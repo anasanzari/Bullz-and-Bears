@@ -13,7 +13,16 @@
         method: 'POST',
         cache: false,
         isArray: false
-      }
+       },
+       stats:{
+           url: './api/stats/:type',
+           params: {
+               type: '@type'
+           },
+           method: 'POST',
+           cache: false,
+           isArray: false
+       }
     });
   });
 
