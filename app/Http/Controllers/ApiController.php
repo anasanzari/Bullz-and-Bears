@@ -365,7 +365,21 @@ class ApiController extends Controller
   }
 
   public function schedule_stats(){
- 
+      $today = Carbon::now();
+      $nextday = Carbon::now()->addDay();
+      $stats = Schedules::select(DB::raw('count(*) as count, transaction_type'))
+                ->groupBy('transaction_type')
+                ->get();
+     if(sizeof($stats)==0){
+         return json_encode (json_decode ("{}"));
+     }
+     $out = [];
+     foreach ($stats as $value) {
+         $out['types'][] = $value['transaction_type'];
+         $out['data'][] = $value['count'];
+     }
+
+     return $out;
   }
 
 

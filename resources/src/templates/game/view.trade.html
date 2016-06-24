@@ -3,16 +3,16 @@
   <div class="row">
     <div class="col-xs-12 col-md-6">
 
-        <div class="card customcard formpage">
+        <div class="card customcard mincard">
 
           <h3>Trade</h3>
-          <h4 class="status" ng-hide="isLive">
-              The Market is now closed.
+          <p class="status" ng-hide="isLive">
+              The Market is now closed. <br/>
               The Market is open from 9:30 AM - 3:30 PM on all weekdays except public holidays.
               Happy Trading!!
-          </h4>
+          </p>
 
-          <div ng-show="isLive">
+          <div class="formpage" ng-show="isLive">
             <form name="trade">
 
               <lx-select ng-model="selectedTradeOption"
@@ -86,15 +86,19 @@
 
     </div>
     <div class="col-xs-12 col-md-6">
-        <div class="card customcard">
-          <h3 style="text-align:center;margin-top:15px;">Stats</h3>
-          <div class="p+">
+        <div class="card customcard mincard">
+          <h3>Stats</h3>
+          <p class="status" ng-show="chartDataLoaded && !piedata">
+              No trade has happened today.
+          </p>
+
+          <div class="chart-container">
               <canvas id="pie" class="chart chart-doughnut"
-                chart-data="data"
+                chart-data="piedata"
                 chart-colours="colors"
-                chart-labels="labels" chart-options="options">
+                chart-labels="labels" chart-options="chartOptions">
               </canvas>
-         </div>
+          </div>
         </div>
     </div>
   </div>

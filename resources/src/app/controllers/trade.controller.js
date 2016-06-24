@@ -4,7 +4,7 @@
   var controllers = angular.module('AppControllers');
 
   controllers.controller('TradeController',
-      function($scope,StockUtils,TradeService,stocksFilter,LxNotificationService,ChartService) {
+      function($scope,StockUtils,config,TradeService,stocksFilter,LxNotificationService,ChartService) {
 
         $scope.isLive = true;
 
@@ -37,13 +37,13 @@
         });
 
         $scope.options = [{
-          option: 'Buy'
+          option: config.buy
         },{
-          option: 'Sell'
+          option: config.sell
         },{
-          option: 'Short Sell'
+          option: config.short_sell
         },{
-          option: 'Cover'
+          option: config.cover
         }];
 
         $scope.typeChange = function(){
@@ -58,13 +58,13 @@
 
            if(!$scope.selectedStock) return;
            switch($scope.selectedTradeOption.option){
-                case "Buy": $scope.maxAmount = $scope.selectedStock.max_buy;
+                case config.buy: $scope.maxAmount = $scope.selectedStock.max_buy;
                             break;
-                case "Short Sell":$scope.maxAmount = $scope.selectedStock.max_short;
+                case config.short_sell :$scope.maxAmount = $scope.selectedStock.max_short;
                              break;
-                case "Cover":$scope.maxAmount = $scope.selectedStock.shorted_amount;
+                case config.cover :$scope.maxAmount = $scope.selectedStock.shorted_amount;
                               break;
-                case "Sell": $scope.maxAmount = $scope.selectedStock.bought_amount;
+                case config.sell : $scope.maxAmount = $scope.selectedStock.bought_amount;
                               break;
                 default:
                     console.log($scope.transationType+"error");
@@ -105,6 +105,7 @@
                 console.log(response);
                 $scope.stocks = response;
                 $scope.filteredStocks = stocksFilter($scope.stocks,$scope.selectedTradeOption.option);
+                loadChart();
                 LxNotificationService.alert('Success',
                  'Transaction has been done successfully.', 'Ok', function(answer){
 
@@ -120,22 +121,27 @@
                 reset();
             });
         };
-        $scope.colors = [ '#545588', '#536491', '#678FA9', '#86C1BF', '#FDB45C', '#949FB1', '#4D5360'];
-        ChartService.stats({type:'trade'},function(response){
-           $scope.labels = response.types;
-           $scope.data = response.data;
-           $scope.options = {
-               /*segmentShowStroke: false,*/
-               segmentStrokeWidth: 0,
-               segmentStrokeColor: 'rgba(255,255,255,.2)',
-               animation:{
-                   duration: 2500
-               }
-           };
-           console.log(response);
-        },function(err) {
-            console.log(err);
-        });
+
+        $scope.chartOptions = {
+            /*segmentShowStroke: false,*/
+            segmentStrokeWidth: 0,
+            segmentStrokeColor: 'rgba(255,255,255,.2)',
+            animation:{
+                duration: 2500
+            }
+        };
+        $scope.colors = config.pieColors;
+        var loadChart = function(){
+            ChartService.stats({type:'trade'},function(response){
+               $scope.labels = response.types;
+               $scope.piedata = response.data;
+               $scope.chartDataLoaded = true;
+            },function(err) {
+                console.log(err);
+            });
+        };
+        loadChart();
+
   });
 
 

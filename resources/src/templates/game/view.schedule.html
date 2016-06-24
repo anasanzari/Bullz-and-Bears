@@ -1,14 +1,13 @@
 <div class="container-fluid">
+ <div class="p+">
   <div class="row">
     <div class="col-xs-12 col-md-6">
 
-      <div class="p+">
-
-        <div class="card customcard formpage">
+        <div class="card customcard mincard">
 
           <h3>Schedule Transaction</h3>
 
-          <div>
+          <div class="formpage">
             <form name="trade">
 
               <lx-select ng-model="selectedTradeOption"
@@ -98,107 +97,25 @@
 
         </div>
 
-      </div>
     </div>
-  </div>
+
+    <div class="col-xs-12 col-md-6">
+        <div class="card customcard mincard">
+          <h3>Stats</h3>
+
+          <p class="status" ng-show="chartDataLoaded && !piedata">
+              No trade has been scheduled today.
+          </p>
+          <div class="chart-container">
+              <canvas id="pie" class="chart chart-doughnut"
+                chart-data="piedata"
+                chart-colours="colors"
+                chart-labels="labels" chart-options="chartOptions">
+              </canvas>
+          </div>
+
+        </div>
+    </div>
+   </div>
+ </div>
 </div>
-
-
-
-
-<!--  div layout="column" layout-align="center center" style="margin-top:20px">
-<md-whiteframe class="md-whiteframe-z1" style="width: 90%;background:#eeeeee" >
-    <div class="container-fluid">
-        <p style="text-align: center;padding-top: 20px;font-size: 20px"> Schedule Transaction </h1>
-        <form name="schedule">
-        <div class="row">
-
-            <div class="col-md-10 col-md-offset-1">
-                <md-select placeholder="Select a Transaction Type" name="transactionType" ng-model="transactionType" ng-change="typeChange()">
-                    <md-option value="Buy">Buy</md-option>
-                    <md-option value="Sell">Sell</md-option>
-                    <md-option value="Short">Short Sell</md-option>
-                    <md-option value="Cover">Cover</md-option>
-                </md-select>
-
-                <md-select placeholder="Select a Stock" name="selectedStock"  ng-show="transactionType!=null" ng-model="selectedStock" ng-change="changeStock()">
-                    <md-option ng-repeat="stock in stocks|filter:filterStocks" ng-value="{{stock}}">{{stock.name}}</md-option>
-                </md-select>
-               <p ng-show="noStocks">You have no stock to {{transactionType}}</p>
-
-            </div>
-        </div>
-
-        <div class="row" ng-show="selectedStock!=null">
-
-            <div class="col-md-10 col-md-offset-1" >
-                <p class="big">Value:{{value|currency:"&#8377"}} </p>
-                <p class="big">Maximum Amount permitted : {{maxAmount}} </p>
-
-                <div class="row">
-
-                    <div class="col-md-6">
-                    <md-icon class="schedule-icon" md-svg-src="images/icons/commerce.svg" ></md-icon>
-
-                    <md-input-container style="margin-left: 24px;">
-                       <label>Amount</label>
-                       <input ng-model="scheduledAmount" name="scheduledAmount" required ng-pattern="/^[0-9]+$/">
-                       <div ng-messages="schedule.scheduledAmount.$error" ng-show="schedule.scheduledAmount.$dirty && !schedule.scheduledAmount.$valid">
-                        <div ng-message="pattern">Invalid Amount</div>
-
-                      </div>
-                     </md-input-container>
-                    </div>
-                    <div class="col-md-6">
-                    <md-icon class="schedule-icon" md-svg-src="images/icons/moneybag.svg" ></md-icon>
-                      <md-input-container style="margin-left: 24px;">
-                        <label>Value</label>
-                        <input ng-model="scheduledPrice" required name="scheduledPrice" ng-pattern="/^[0-9]*(\.[0-9][0-9]?)?$/">
-                        <div ng-messages="schedule.scheduledPrice.$error" ng-show="schedule.scheduledPrice.$dirty && !schedule.scheduledPrice.$valid">
-                        <div ng-message="pattern">Invalid Amount</div>
-
-                      </div>
-                      </md-input-container>
-                    </div>
-
-                </div>
-
-
-                <p class="big">Total : {{total|currency:"&#8377"}}</p>
-
-                <div class="commonbtn-container">
-                    <md-button class="md-raised" ng-disabled="!schedule.scheduledAmount.$valid || !schedule.scheduledPrice.$valid || isScheduling"
-                            ng-click="scheduleTransaction()">Schedule</md-button>
-
-                    <div ng-show="isScheduling">
-                         <md-progress-circular class="md-accent md-hue-1" md-mode="indeterminate" ></md-progress-circular>
-                    </div>
-
-                </div>
-
-
-
-                 </div>
-
-        </div>
-        </form>
-
-
-
-    </div>
-
-
-
-
-    <div>
-
-    </div>
-
-
-
-
-</md-whiteframe>
-
-    <md-button class="md-raised" ng-click="navigateToScheduled()">Show Scheduled Transactions</md-button>
-
-</div-->

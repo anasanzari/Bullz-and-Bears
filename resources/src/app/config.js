@@ -7,7 +7,8 @@
 	sell: 'Sell',
 	buy: 'Buy',
 	short_sell : 'Short Sell',
-	cover: 'Cover'
+	cover: 'Cover',
+	pieColors: [ '#545588', '#536491', '#678FA9', '#86C1BF', '#FDB45C', '#949FB1', '#4D5360']
   });
 
 })();

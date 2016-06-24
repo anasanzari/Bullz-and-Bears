@@ -2,6 +2,19 @@ div.customcard {
 
     background-color: #2B343A;
     margin-bottom: 10px;
+
+}
+div.mincard{
+    padding: 15px;
+    padding-top: 10px;
+    min-height: 320px;
+    >h3{
+        text-align: center;
+        margin: 15px 0px 0px 0px;
+    }
+    .chart-container{
+        padding: 0px 15px;
+    }
 }
 
 .ava_pic{
@@ -19,6 +32,16 @@ p.right{
 }
 p.justify{
     text-align: justify;
+}
+
+.status{
+    color:#F86A5C;
+}
+
+p.status{
+    padding: 10px;
+    text-align: center;
+    color: #F86A5C;
 }
 
 //paddings
