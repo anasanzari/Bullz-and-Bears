@@ -2,7 +2,7 @@
 .maincontainer {
   position: relative;
 }
-
+/*
 .viewcontainer {
 
 
@@ -24,7 +24,28 @@
 	&.ng-leave-active {
 	    opacity: 0;
 	}
+}*/
+
+
+
+.maincontainer{
+    [ui-view].ng-leave {
+        -webkit-animation: moveToBottom .5s ease both;
+        animation: moveToBottom .5s ease both;
+        z-index: 100;
+        &.ng-leave-active{
+            opacity: 0
+        }
+    }
+
+
+    [ui-view].ng-enter {
+      -webkit-animation: comeFromTop .9s ease both;
+      animation: comeFromTop .9s ease both;
+    }
 }
+
+
 
 @-webkit-keyframes scaleDown {
   from { }
@@ -44,7 +65,49 @@
   to { -webkit-transform: translateX(-100%); transform: translateX(-100%); }
 }
 
+@-webkit-keyframes moveToBottom {
+	to { -webkit-transform: translateY(100%); }
+}
+@keyframes moveToBottom {
+	to { -webkit-transform: translateY(100%); transform: translateY(100%); }
+}
 
+@-webkit-keyframes moveToBottom {
+	to { -webkit-transform: translateY(100%); }
+}
+@keyframes moveToBottom {
+	to { -webkit-transform: translateY(100%); transform: translateY(100%); }
+}
+
+@-webkit-keyframes comeFromTop {
+	from { -webkit-transform: translateY(-100%); }
+}
+@keyframes comeFromTop {
+	from { -webkit-transform: translateY(-100%); transform: translateY(-100%); }
+}
+
+
+@-webkit-keyframes moveFromTop {
+	from { -webkit-transform: translateY(-100%); }
+}
+@keyframes moveFromTop {
+	from { -webkit-transform: translateY(-100%); transform: translateY(-100%); }
+}
+
+@-webkit-keyframes moveToTopFade {
+	from { }
+	to { opacity: 0.3; -webkit-transform: translateY(-100%); }
+}
+@keyframes moveToTopFade {
+	from { }
+	to { opacity: 0.3; -webkit-transform: translateY(-100%); transform: translateY(-100%); }
+}
+@-webkit-keyframes moveFromTopFade {
+	to { opacity: 0.3; -webkit-transform: translateY(100%); }
+}
+@keyframes moveFromTopFade {
+	to { opacity: 0.3; -webkit-transform: translateY(100%); transform: translateY(100%); }
+}
 /*
 [ui-view].ng-enter, [ui-view].ng-leave {
   position: absolute;

@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
+
 
 class History extends Model
 {
@@ -29,5 +31,11 @@ class History extends Model
   public $timestamps = false;
 
   public $table = 'history';
+
+  public function getTransactionTimeAttribute($value)
+  {
+      $val = Carbon::createFromFormat('Y-m-d H:i:s', $value,'Asia/Calcutta')->toIso8601String();
+      return $val;
+  }
 
 }

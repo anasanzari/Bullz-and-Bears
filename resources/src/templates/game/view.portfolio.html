@@ -10,12 +10,12 @@
               <lx-tab lx-label="Bought Stocks" >
                 <div ng-scrollbars ng-scrollbars-config="scrollconfig">
 
-                  <p ng-show="bought.length==0" class="pad_l">You have no Bought Stocks </p>
-                      <ul class="customlist">
+                  <p ng-show="bought.length==0" class="pad_l red">You have no Bought Stocks </p>
+                  <ul class="customlist">
                         <li class="customlist-item" ng-repeat="stock in bought">
                           <div class="row">
                             <div class="col-xs">
-                              <p class="large">{{stock.name}}</p>
+                              <p class="large blue">{{stock.name}}</p>
                             </div>
                           </div>
                           <div class="row">
@@ -38,7 +38,7 @@
                                 <p>Brokerage : {{stock.brokerage|currency:"&#8377"}}</p>
                             </div>
                             <div class="col-xs-6 col-md-4">
-                                <p>Overall Gain : <span ng-bind-html="stock.gain| change:false:true"></p>
+                                <p>Overall Gain : <pn-text value="stock.gain" is-percent="false" is-currency="true"></pn-text>
                             </div>
                           </div>
 
@@ -51,13 +51,13 @@
 
               <lx-tab lx-label="Shorted Stocks" >
                 <div ng-scrollbars ng-scrollbars-config="scrollconfig">
-                    <p ng-show="shorted.length==0" class="pad_l">You have no Shorted Stocks. </p>
+                    <p ng-show="shorted.length==0" class="pad_l red">You have no Shorted Stocks. </p>
 
                     <ul class="customlist">
                       <li class="customlist-item" ng-repeat="stock in shorted">
                         <div class="row">
                           <div class="col-xs">
-                            <p class="large">{{stock.name}}</p>
+                            <p class="large blue">{{stock.name}}</p>
                           </div>
                         </div>
                         <div class="row">
@@ -78,7 +78,7 @@
                           </div>
 
                           <div class="col-xs-6 col-md-4">
-                              <p>Overall Gain : <span ng-bind-html="stock.gain| change:false:true"></p>
+                              <p>Overall Gain : <pn-text value="stock.gain" is-percent="false" is-currency="true"></pn-text></p>
                           </div>
 
                         </div>
@@ -90,20 +90,20 @@
 
               <lx-tab lx-label="History">
                 <div ng-scrollbars ng-scrollbars-config="historyconfig">
-                    <p ng-show="history.length==0" class="pad_l" >You haven't done any transactions yet. </p>
+                    <p ng-show="history.length==0" class="pad_l red" >You haven't done any transactions yet. </p>
 
                     <ul class="customlist">
                       <li class="customlist-item" ng-repeat="entry in history">
 
                         <div class="row">
                           <div class="col-xs-6 col-md-4">
-                                <p>{{entry.transaction_time|date:"h:mm a, MMM d"}}</p>
+                              <p class="blue">{{entry.transaction_time|date:"h:mm a, MMM d"}}</p>
                           </div>
                           <div class="col-xs-6 col-md-4">
-                              <p>{{entry.transaction_type}}</p>
+                              <p class="blue">{{entry.transaction_type}}</p>
                           </div>
                           <div class="col-xs-6 col-md-4">
-                              <p>{{entry.symbol}}</p>
+                              <p class="blue">{{entry.symbol}}</p>
                           </div>
                           <div class="col-xs-6 col-md-4">
                               <p>Stock Price : {{entry.value|currency:"&#8377"}}</p>

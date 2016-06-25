@@ -12,7 +12,7 @@
                           <div class="col-xs">
                               <h1>{{player.name}}</h1>
                               <p class="small">Net Worth</p>
-                              <p class="large">{{player.networth|currency:"&#8377"}}</p>
+                              <p class="large blue">{{player.networth|currency:"&#8377"}}</p>
                           </div>
 
                       </div>
@@ -26,11 +26,11 @@
                         <div class="row center-xs">
                           <div class="col-xs">
                             <p class="small">Cash At Hand</p>
-                            <p class="main">{{player.liquidcash|currency:"&#8377"}}</p>
+                            <p class="main green">{{player.liquidcash|currency:"&#8377"}}</p>
                           </div>
                           <div class="col-xs">
                             <p class="small">Market Value</p>
-                            <p class="main">{{player.marketvalue|currency:"&#8377"}}</p>
+                            <p class="main green">{{player.marketvalue|currency:"&#8377"}}</p>
                           </div>
                         </div>
                       </li>
@@ -40,11 +40,11 @@
                         <div class="row  center-xs">
                           <div class="col-xs center-xs">
                               <p class="small">Today's Gain</p>
-                              <p class="main"><span ng-bind-html="player.daygain| change:false:true"></span></p>
+                              <p class="main"><pn-text value="player.daygain" is-percent="false" is-currency="true"></pn-text></p>
                           </div>
                           <div class="col-xs center-xs">
                               <p class="small">Week's Gain</p>
-                              <p class="main"><span ng-bind-html="player.weekgain| change:false:true"></span></p>
+                              <p class="main"><pn-text value="player.weekgain" is-percent="false" is-currency="true"></pn-text></p>
                           </div>
                         </div>
 
@@ -81,22 +81,22 @@
                 <div class="card customcard">
                     <div class="row middle-xs center-xs">
                       <div class="col-xs-6 center-xs">
-                        <i style="font-size:6rem" class="mdi mdi-trophy" ></i>
+                        <i style="font-size:6rem" class="mdi mdi-trophy red-amber" ></i>
                       </div>
 
                       <div class="col-xs-6">
                         <ul class="customlist">
                           <li class="customlist-item">
                             <p class="small">Overall Rank</p>
-                            <p class="main">{{player.overallrank}}</p>
+                            <p class="main red-amber">{{player.overallrank}}</p>
                           </li>
                           <li class="customlist-item">
                             <p class="small">Daily Rank</p>
-                            <p class="main">{{player.dailyrank}}</p>
+                            <p class="main red-amber">{{player.dailyrank}}</p>
                           </li>
                           <li class="customlist-item">
                             <p class="small">Weekly Rank</p>
-                            <p class="main">{{player.weeklyrank}}</p>
+                            <p class="main red-amber">{{player.weeklyrank}}</p>
                           </li>
                         </ul>
                       </div>

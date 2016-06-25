@@ -22,10 +22,10 @@
 		                            <img class="prof-image" ng-src="https://graph.facebook.com/{{player.fbid}}/picture?height=100&width=100" />
 		                        </div>
 		                        <div class="col-xs-6 col-md">
-		                            <p>{{player.name}}</p>
+		                            <p class="blue">{{player.name}}</p>
 		                        </div>
 		                        <div class="col-xs-6 col-md">
-		                            <p class="mg-1"><span ng-bind-html="player.total| change:false:true"></p>
+		                            <p class="mg-1">{{player.total|currency:'&#8377'}}</p>
 		                        </div>
 
 		                      </div>
@@ -50,10 +50,10 @@
 		                            <img class="prof-image" ng-src="https://graph.facebook.com/{{player.fbid}}/picture?height=100&width=100" />
 		                        </div>
 		                        <div class="col-xs-6 col-md">
-		                            <p>{{player.name}}</p>
+		                            <p class="blue">{{player.name}}</p>
 		                        </div>
 		                        <div class="col-xs-6 col-md">
-		                            <p class=mg-1><span ng-bind-html="player.total| change:false:true"></p>
+		                            <p class=mg-1>{{player.total|currency:'&#8377'}}></p>
 		                        </div>
 
 		                      </div>
@@ -78,14 +78,14 @@
 								   <img class="prof-image" ng-src="https://graph.facebook.com/{{player.fbid}}/picture?height=100&width=100" />
 							   </div>
 							   <div class="col-xs-6 col-md">
-								   <p>{{player.name}}</p>
+								   <p class="blue">{{player.name}}</p>
 							   </div>
 							   <div class="col-xs-6 col-md">
-								   <p class="mg-1"><span ng-bind-html="player.total| change:false:true"></p>
+								   <p class="mg-1">{{player.total|currency:'&#8377'}}</p>
 							   </div>
 
 							 </div>
-							 
+
 
 		                    </li>
 		              	  </ul>

@@ -27,4 +27,16 @@ p{
         font-size: 1.8rem;
     }
 
+    &.small{
+      font-size: .8rem;
+      margin-bottom: -5px;
+    }
+
+    &.main{
+      font-size: 1.3rem;
+    }
+
+    &.large{
+      font-size: 1.6rem;
+    }
 }
