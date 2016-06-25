@@ -4,9 +4,13 @@
   var controllers = angular.module('AppControllers');
 
   controllers.controller('TradeController',
-      function($scope,StockUtils,config,TradeService,stocksFilter,LxNotificationService,ChartService) {
+      function($scope,$timeout, StockUtils,config,TradeService,stocksFilter,LxNotificationService,ChartService) {
 
         $scope.isLive = true;
+
+        $timeout(function(){
+            $scope.isLoading = true;
+        },100000);
 
         var checkTime = function(){
              var now = new moment();
@@ -90,9 +94,9 @@
         var reset = function(){
             $scope.typeChange();
         };
-
+        $scope.isLoading = false;
         $scope.doTrade = function(){
-
+            $scope.isLoading = true;
             var data = {
                 type : $scope.selectedTradeOption.option,
                 symbol : $scope.selectedStock.symbol,
@@ -103,6 +107,7 @@
 
             TradeService.trade(data,function(response){
                 console.log(response);
+                $scope.isLoading = false;
                 $scope.stocks = response;
                 $scope.filteredStocks = stocksFilter($scope.stocks,$scope.selectedTradeOption.option);
                 loadChart();
@@ -113,6 +118,7 @@
                 reset();
             },function(err){
                 console.log(err);
+                $scope.isLoading = false;
                 //error logic here.
                 LxNotificationService.alert('Sorry.',
                  'Unknown error occured.', 'Ok', function(answer){

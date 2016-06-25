@@ -81,9 +81,9 @@
           $scope.tAmount = 0;
       };
 
-
+      $scope.isLoading = false;
       $scope.doTrade = function(){
-
+          $scope.isLoading = true;
           var data = {
               type : $scope.selectedTradeOption.option,
               symbol : $scope.selectedStock.symbol,
@@ -95,6 +95,7 @@
 
           ScheduleService.add(data,function(response){
               console.log(response);
+              $scope.isLoading = false;
               loadChart();
               LxNotificationService.alert('Success',
                'Trade is scheduled.', 'Ok', function(answer){
@@ -103,6 +104,7 @@
               reset();
           },function(err){
               console.log(err);
+              $scope.isLoading = false;
               //error logic here.
               LxNotificationService.alert('Sorry.',
                'Unknown error occured.', 'Ok', function(answer){

@@ -153,7 +153,7 @@ module.exports = function(grunt) {
     connect: {
         server: {
             options: {
-                port: 80,
+                port: 8080,
                 base: 'public',
                 hostname: 'localhost',
                 livereload: true,
@@ -166,7 +166,7 @@ module.exports = function(grunt) {
                 {
                 context: '/api',
                 host: 'localhost',
-                port: 8080,
+                port: 80,
                 changeOrigin: true,
                 rewrite: {
                     '^/api': '/Github/Bullz/public/api'

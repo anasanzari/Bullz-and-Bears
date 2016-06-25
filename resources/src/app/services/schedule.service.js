@@ -7,17 +7,14 @@
   services.factory('ScheduleService', function($resource) {
     return $resource('./api/scheduled', {}, {
       get: {
-        method: 'GET',
-        params: {
-          id: '@id'
-        },
+        method: 'POST',
         cache: false,
         isArray: true
       },
       remove: {
         method: 'POST',
         cache: false,
-        isArray: false,
+        isArray: true,
         url: './api/cancelschedule'
       },
       add: {

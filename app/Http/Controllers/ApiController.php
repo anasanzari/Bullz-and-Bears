@@ -187,9 +187,9 @@ class ApiController extends Controller
   public function cancelSchedule(Request $request){
     $user = User::find(1); //get authenticated user.
     $values = $request->all();
-    $skey = $values['skey'];
+    $skey = $values['id'];
     Schedules::where('playerid',$user->id)
-                ->where('skey',$skey)->delete();
+                ->where('id',$skey)->delete();
     return $this->schedules($user);
   }
 
@@ -339,7 +339,7 @@ class ApiController extends Controller
                     function ($join) use ($user) {
                       $join->on('schedules.symbol', '=', 'stocks.symbol')
                            ->where('schedules.playerid', '=', $user->id);
-                    })->orderBy('skey','ASC')->get();
+                    })->orderBy('id','ASC')->get();
     return $schedules;
   }
 

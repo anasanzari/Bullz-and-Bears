@@ -1,0 +1,77 @@
+<div class="container-fluid">
+    <div class="p+">
+    	<div class="row">
+    		<div class="col-xs-12 col-md-12">
+
+
+
+    				<div class="card customcard formpage">
+
+                        <p class="status" ng-show="scheduled && scheduled.length==0">
+                            You've no scheduled transactions.
+                        </p>
+                    <div ng-hide="scheduled && scheduled.length==0">
+                        <lx-text-field
+                          lx-label="Search"
+                          lx-theme="dark">
+                          <input type="text" name="name" ng-model="state.name">
+                        </lx-text-field>
+
+
+
+                        <div ng-scrollbars ng-scrollbars-config="scrollconfig">
+                        <ul class="customlist">
+                            <li class="customlist-item" ng-repeat="item in scheduled | filter:state.name">
+                              <div class="row">
+                                <div class="col-xs">
+                                  <p class="large blue">{{item.name}}</p>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-xs-6 col-md-4">
+                                    <p>Transaction : {{item.transaction_type }}</p>
+                                </div>
+                                <div class="col-xs-6 col-md-4">
+                                    <p>Scheduled Price : {{item.scheduled_price |currency:"&#8377"}}</p>
+                                </div>
+                                <div class="col-xs-6 col-md-4">
+                                    <p>Current Price : {{item.value|currency:"&#8377"}}</p>
+                                </div>
+                                <div class="col-xs-6 col-md-4">
+                                    <p>Amount : {{item.no_shares}}</p>
+                                </div>
+                                <div class="col-xs-6 col-md-4">
+                                    <p>Pending : {{ item.pend_no_shares | currency:"&#8377"}}</p>
+                                </div>
+                                 <div class="col-xs-6 col-md-4">
+                                    <p>Status: <span class="red"> {{ item .pend_no_shares ==0 ? "Done": "Waiting"}}</span></p>
+                                </div>
+
+                              </div>
+                              <div class="row">
+                                  <div class="col-sm-3 pad_s">
+                                      <loading-button
+                                        ng-click="cancel(item)"
+                                        lx-type="raised"
+                                        lx-size="xs"
+                                        lx-diameter="50"
+                                        value="Cancel"
+                                        ng-click="cancel(item)"
+                                        is-loading="item.isLoading">
+
+                                      </loading-button>
+                                  </div>
+                              </div>
+
+                            </li>
+                         </ul>
+
+        				</div>
+
+                      </div>
+    				</div>
+
+    		</div>
+    	</div>
+	</div>
+</div>

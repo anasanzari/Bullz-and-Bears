@@ -1,0 +1,9 @@
+<lx-button
+  lx-size="{{lxSize}}"
+  lx-type="{{lxType}}" ng-class="{loading:isLoading}" ng-disabled="isLoading || disableCriteria">
+  <span ng-class="{hidden:isLoading}">{{value}}</span>
+  <div class="overlay"></div>
+  <div class="prog" ng-show="isLoading">
+      <app-progress  lx-diameter="{{lxDiameter}}" lx-color="white" lx-type="circular"></app-progress>
+  </div>
+</lx-button>

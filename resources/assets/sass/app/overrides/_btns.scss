@@ -1,0 +1,33 @@
+.btn--raised.btn--primary{
+    background-color: $red-amber-color;
+    &.loading{
+        background-color:transparent;
+        background: none;
+        box-shadow: none;
+        cursor: auto;
+
+        .ripple{
+            display: none;
+        }
+    }
+}
+
+.btn--raised[disabled], .btn--raised.btn--is-disabled{
+    &.loading{
+        background-color: transparent !important;
+        background: none !important;
+    }
+}
+
+.hidden{
+    visibility: hidden;
+}
+
+.prog{
+    position:absolute;
+    z-index:10;
+    top:50%;
+    left:50%;
+    margin-left:-50px;
+    margin-top:-50px
+}

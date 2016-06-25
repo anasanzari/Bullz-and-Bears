@@ -29,12 +29,10 @@
     {
         var lxProgress = this;
         init();
+        lxProgress.getProgressDiameter = getProgressDiameter;
         /*lxProgress.getCircularProgressValue = getCircularProgressValue;
         lxProgress.getLinearProgressValue = getLinearProgressValue;
-        lxProgress.getProgressDiameter = getProgressDiameter;
-
-
-
+        
         ////////////
         /*
         function getCircularProgressValue()
@@ -55,7 +53,7 @@
                     'transform': 'scale(' + lxProgress.lxValue / 100 + ', 1)'
                 };
             }
-        }
+        }*/
 
         function getProgressDiameter()
         {
@@ -67,7 +65,7 @@
             }
 
             return;
-        }*/
+        }
 
         function init()
         {

@@ -48,6 +48,12 @@
         templateUrl: './templates/game/view.schedule.html',
         controller: 'ScheduleController'
       })
+	  .state('scheduled', {
+        url: '/scheduled',
+		parent: 'game',
+        templateUrl: './templates/game/view.scheduled.html',
+        controller: 'ScheduledController'
+      })
       .state('lookup', {
         url: '/lookup',
 		parent: 'game',

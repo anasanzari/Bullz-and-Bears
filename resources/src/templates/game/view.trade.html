@@ -6,6 +6,7 @@
         <div class="card customcard mincard">
 
           <h3>Trade</h3>
+
           <p class="status" ng-hide="isLive">
               The Market is now closed. <br/>
               The Market is open from 9:30 AM - 3:30 PM on all weekdays except public holidays.
@@ -72,7 +73,22 @@
                       <p class="l">{{total|currency:"&#8377"}}</p>
                     </div>
                     <div class="col-xs">
-                        <lx-button ng-click="doTrade()" lx-size="l" lx-type="raised" ng-disabled="!state.tAmount || !trade.amount.$valid">{{selectedTradeOption.option}}</lx-button>
+                        <loading-button is-loading="isLoading">
+
+                            <loading-button
+                              ng-click="doTrade()"
+                              lx-type="raised"
+                              lx-size="l"
+                              lx-diameter="70"
+                              value="selectedTradeOption.option"
+                              is-loading="isLoading"
+                              disable-criteria="!state.tAmount || !trade.amount.$valid"
+                              >
+                            </loading-button>
+
+
+                        </loading-button>
+
                     </div>
                 </div>
 

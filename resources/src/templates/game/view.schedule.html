@@ -79,13 +79,17 @@
                       <p class="l">{{total|currency:"&#8377"}}</p>
                     </div>
                     <div class="col-xs">
+                        <loading-button
+                          ng-click="doTrade()"
+                          lx-type="raised"
+                          lx-size="l"
+                          lx-diameter="70"
+                          value="Schedule"
+                          is-loading="isLoading"
+                          disable-criteria="!state.tAmount || !state.sPrice || !trade.amount.$valid || !trade.sPrice.$valid"
+                          >
+                        </loading-button>
 
-                        <lx-button ng-click="doTrade()"
-                        	lx-size="l"
-                        	lx-type="raised"
-                        	ng-disabled="!state.tAmount || !trade.amount.$valid || !trade.sPrice.$valid">
-                        	Schedule
-                        </lx-button>
                     </div>
                 </div>
 
@@ -115,6 +119,18 @@
           </div>
 
         </div>
+
+        <div class="card customcard">
+          <div class="p+ row center-xs">
+                <lx-button  ui-sref="scheduled"
+                    lx-size="l"
+                    lx-type="raised"
+                    >
+                    View Scheduled Transactions
+                </lx-button>
+           </div>
+        </div>
+
     </div>
    </div>
  </div>

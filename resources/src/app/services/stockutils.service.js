@@ -16,7 +16,7 @@
             },function(err){
               console.log(err);
             });
-            timer = $timeout(update,10000); //call every 2 seconds
+            timer = $timeout(update,100000); //call every 2 seconds
         };
 
         var keepOnUpdating = function(cb){
