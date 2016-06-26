@@ -17,9 +17,8 @@
                 },
                 link: function(scope, element, attr) {
 
-
                 },
-                templateUrl: '../templates/directives/loadingbutton.html'
+                templateUrl: './templates/directives/loadingbutton.html'
             };
         });
 

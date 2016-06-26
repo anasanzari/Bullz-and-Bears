@@ -10,7 +10,7 @@
     {
         return {
             restrict: 'E',
-            templateUrl: '../templates/directives/progress.html',
+            templateUrl: './templates/directives/progress.html',
             scope:
             {
                 lxColor: '@?',
@@ -32,7 +32,7 @@
         lxProgress.getProgressDiameter = getProgressDiameter;
         /*lxProgress.getCircularProgressValue = getCircularProgressValue;
         lxProgress.getLinearProgressValue = getLinearProgressValue;
-        
+
         ////////////
         /*
         function getCircularProgressValue()

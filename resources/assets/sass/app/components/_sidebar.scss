@@ -7,10 +7,13 @@
     @include transition(all .6s ease-in);
     z-index: 10;
     overflow-y: auto;
-    box-shadow: 0 1px 1px rgba(0,0,0,.1);
+    box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.14);
     @media (max-width: $screen-sm-max) {
       left:-$sidebar-width;
       width: $sidebar-width;
+      height: 120vh;
+      top: $sm-tool-hieght;
+      position: fixed;
     }
     @media (min-width: $screen-sm-min) {
 
@@ -18,7 +21,6 @@
 }
 
 .sidebar-closed{
-  @include transform(translateX(-$sidebar-width));
   @media (max-width: $screen-sm-max) {
       @include transform(translateX($sidebar-width));
   }

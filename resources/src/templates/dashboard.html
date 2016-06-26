@@ -1,12 +1,12 @@
 <div class="header">
   <div class="toolbar">
     <div `class="toolbar__left mr++">
-      <lx-button lx-size="l" lx-color="white" lx-type="icon" ng-click="toggle()">
+      <lx-button class="navbtn" lx-size="l" lx-color="white" lx-type="icon" ng-click="toggle()">
         <i class="mdi mdi-menu"></i>
       </lx-button>
     </div>
-    <span class="toolbar__label fs-title">BnB</span>
-    
+    <span class="toolbar__label fs-title">Bulls n Bears</span>
+
 
     <div class="toolbar__right">
       <lx-search-filter lx-color="white" lx-closed="true">
@@ -51,7 +51,7 @@
 
       <ul class="menu">
         <li ng-repeat="item in menu" class="menu-item">
-          <a ui-sref="{{item.link}}"><i class="mdi {{item.img}}" ></i>
+          <a ng-click="go(item)"><i class="mdi {{item.img}}" ></i>
           {{ item.name }}
           </a>
 

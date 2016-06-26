@@ -15,6 +15,12 @@
             }, 700);
 		};
 
+		$scope.go = function(item){
+			console.log(item);
+			$state.go(item.link);
+			$scope.toggle();
+		};
+
 		$scope.menu = [
 				{name:'Home', link: 'home', img: 'mdi-home'},
 				{name:'Portfolio', link: 'portfolio', img: 'mdi-account'},

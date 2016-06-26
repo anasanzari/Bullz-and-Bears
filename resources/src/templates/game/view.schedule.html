@@ -79,6 +79,7 @@
                       <p class="l">{{total|currency:"&#8377"}}</p>
                     </div>
                     <div class="col-xs">
+                        <!-- not getting rendered on mobiles!! -->
                         <loading-button
                           ng-click="doTrade()"
                           lx-type="raised"
@@ -89,7 +90,6 @@
                           disable-criteria="!state.tAmount || !state.sPrice || !trade.amount.$valid || !trade.sPrice.$valid"
                           >
                         </loading-button>
-
                     </div>
                 </div>
 

@@ -8,6 +8,8 @@ body{
   overflow-x: hidden;
 }
 
+
+
 .header {
     background-color: #1E262B;
     min-height: $toolbar-height;
@@ -18,9 +20,22 @@ body{
     width: 100%;
     left: 0;
     top: 0;
-    padding: 0 20px;
     color:#fff;
 
+    @media (max-width: $screen-sm-max) {
+        min-height: $sm-tool-hieght;
+    }
+
+    .toolbar{
+        .navbtn{
+            display: none;
+        }
+        @media (max-width: $screen-sm-max) {
+            .navbtn{
+                display: block;
+            }
+        }
+    }
 }
 
 .maincontainer {
@@ -41,11 +56,12 @@ body{
 
 }
 
-.main-sidebar-closed{
-  transform: translateX(0);
-  padding-right: 0;
-  @media (max-width: $screen-sm-max) {
 
+.main-sidebar-closed{
+
+  @media (max-width: $screen-sm-max) {
+      transform: translateX(0);
+      padding-right: 0;
   }
 }
 

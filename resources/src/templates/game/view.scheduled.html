@@ -11,7 +11,7 @@
                             You've no scheduled transactions.
                         </p>
                     <div ng-hide="scheduled && scheduled.length==0">
-                        <lx-text-field
+                        <lx-text-field 
                           lx-label="Search"
                           lx-theme="dark">
                           <input type="text" name="name" ng-model="state.name">
@@ -49,7 +49,7 @@
 
                               </div>
                               <div class="row">
-                                  <div class="col-sm-3 pad_s">
+                                  <div class="col-sm-3 col-xs-12 pad_s">
                                       <loading-button
                                         ng-click="cancel(item)"
                                         lx-type="raised"
