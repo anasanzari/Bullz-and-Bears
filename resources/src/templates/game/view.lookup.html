@@ -27,7 +27,7 @@
 
 	              	<div  ng-show="selectedStock!=null">
 		              	<h1>Value: <span class="blue">{{selectedStock.value|currency:"&#8377"}}</span></h1>
-	                    <h2>Change: <pn-text value="selectedStock.change_perc" is-percent="true" is-currency="false"></pn-text></h2>
+	                    <h2>Change: <pn-text value="selectedStock.change_perc|number:2" is-percent="true" is-currency="false"></pn-text></h2>
 	                    <div class="row" style="margin-top:10px">
 	                        <div class="col-xs">
 	                            <p>Day High: {{selectedStock.dayhigh|currency:"&#8377"}}</p>
