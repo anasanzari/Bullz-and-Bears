@@ -6,7 +6,7 @@
 
 				<div class="card customcard formpage">
 
-				<lx-text-field 
+				<lx-text-field
                   lx-label="Search"
                   lx-theme="dark">
                   <input type="text" name="name" ng-model="state.name">
@@ -20,22 +20,22 @@
                         </div>
                       </div>
                       <div class="row">
-                        <div class="col-xs-6 col-md-4">
+                        <div class="col-xs-12 col-md-4">
                             <p>Value : {{stock.value |currency:"&#8377" }}</p>
                         </div>
-                        <div class="col-xs-6 col-md-4">
+                        <div class="col-xs-12 col-md-4">
                             <p>Day High: {{stock.dayhigh|currency:"&#8377"}}</p>
                         </div>
-                        <div class="col-xs-6 col-md-4">
+                        <div class="col-xs-12 col-md-4">
                             <p>Day Low: {{stock.daylow|currency:"&#8377"}}</p>
                         </div>
-                        <div class="col-xs-6 col-md-4">
+                        <div class="col-xs-12 col-md-4">
                             <p>Week High: {{stock.weekhigh|currency:"&#8377"}}</p>
                         </div>
-                        <div class="col-xs-6 col-md-4">
+                        <div class="col-xs-12 col-md-4">
                             <p>Week Low: {{stock.weeklow|currency:"&#8377"}}</p>
                         </div>
-                         <div class="col-xs-6 col-md-4">
+                         <div class="col-xs-12 col-md-4">
                             <p>Change: <pn-text value="stock.change_perc" is-percent="true" is-currency="false"></pn-text></p>
                         </div>
 
