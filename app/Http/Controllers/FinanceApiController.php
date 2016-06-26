@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use Carbon\Carbon;
+use Auth;
 
 class FinanceApiController extends Controller
 {

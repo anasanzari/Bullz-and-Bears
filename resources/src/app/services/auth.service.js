@@ -4,7 +4,7 @@
 
   var services = angular.module('AppServices');
 
-  services.factory('AuthService', function($rootScope,$auth,$state){
+  services.factory('AuthService', function($rootScope,$auth,$state,$http){
 
 	var isLogggedOut = false;
 
@@ -20,10 +20,14 @@
 
 			$auth
 			 .login(credentials)
-			 .then(function(data) {
+			 .then(function(response) {
 
 					isLogggedOut = false;
+					var data = response.data;
+					console.log(data.token);
 					$auth.setToken(data.token);
+					console.log(data.token);
+					$http.defaults.headers.common.Authorization = 'Bearer '+data.token;
 					$rootScope.authenticated = true;
 					$rootScope.user = data.user;
 
@@ -84,10 +88,11 @@
 	};
 
     var logout = function(cb) {
-	  
+
       FB.logout(function(response) {
         $rootScope.$apply(function() {
 		  isLogggedOut = true;
+		  $http.defaults.headers.common.Authorization = '';
 		  $rootScope.authenticated = false;
   		  $rootScope.user = null;
   		  $auth.removeToken();

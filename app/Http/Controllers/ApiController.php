@@ -17,6 +17,7 @@ use Carbon\Carbon;
 use Validator;
 
 use App\Transaction;
+use Auth;
 
 
 class ApiController extends Controller
@@ -26,7 +27,8 @@ class ApiController extends Controller
       // Apply the jwt.auth middleware to all methods in this controller
       // except for the authenticate method. We don't want to prevent
       // the user from retrieving their token if they don't already have it
-    //  $this->middleware('jwt.auth', ['except' => ['authenticate']]);
+
+      $this->middleware('jwt.auth', ['except' => ['authenticate']]);
 
     date_default_timezone_set('Asia/Calcutta');
     setlocale(LC_MONETARY, 'en_IN');
@@ -36,11 +38,9 @@ class ApiController extends Controller
   public function getStocks(){
 
     //get authenticated user
-    $user = User::find(1);
+    $user = Auth::user();
     return $this->stocks($user);
   }
-
-
 
 
   private function stocks($user){
@@ -82,7 +82,7 @@ class ApiController extends Controller
   }
 
   public function getPlayer(Request $request){
-    $user = User::find(1);
+    $user = Auth::user();
     $user->setDetails();
     return $user;
   }
@@ -90,7 +90,7 @@ class ApiController extends Controller
   //return user's stocks.
   public function getBought(Request $request){
 
-    $user = User::find(1); //get authenticated user.
+    $user = Auth::user();
 
     $stocks = BoughtStock::join('stocks',
                     function ($join) use ($user) {
@@ -114,7 +114,7 @@ class ApiController extends Controller
   //return user's shorts.
   public function getShorted(Request $request){
 
-    $user = User::find(1); //get authenticated user.
+    $user = Auth::user(); //get authenticated user.
 
     $stocks = ShortSell::join('stocks',
                     function ($join) use ($user) {
@@ -136,7 +136,7 @@ class ApiController extends Controller
 
   public function getHistory(Request $request){
 
-    $user = User::find(1); //get authenticated user.
+    $user = Auth::user(); //get authenticated user.
     $transactions = History::where('playerid',$user->id)->orderBy('transaction_time', 'DESC')->paginate();
 
     foreach ($transactions as $key => $value) {
@@ -177,7 +177,7 @@ class ApiController extends Controller
   }
 
   public function getScheduled(Request $request){
-    $user = User::find(1); //get authenticated user.
+    $user = Auth::user();//get authenticated user.
 
     return $this->schedules($user);
   }
@@ -185,7 +185,7 @@ class ApiController extends Controller
 
 
   public function cancelSchedule(Request $request){
-    $user = User::find(1); //get authenticated user.
+    $user = Auth::user(); //get authenticated user.
     $values = $request->all();
     $skey = $values['id'];
     Schedules::where('playerid',$user->id)
@@ -195,7 +195,7 @@ class ApiController extends Controller
 
   public function doTrade(Request $request){
 
-    $user = User::find(1); //get authenticated user.
+    $user = Auth::user(); //get authenticated user.
     $data = $request->all();
     $validator = Validator::make($request->all(), [
 			'type' => 'required|in:'.implode(History::TYPES,","),
@@ -280,7 +280,7 @@ class ApiController extends Controller
 
   public function doSchedule(Request $request){
 
-    $user = User::find(1); //get authenticated user.
+    $user = Auth::user();//get authenticated user.
     $data = $request->all();
     $validator = Validator::make($request->all(), [
 			'type' => 'required|in:'.implode(History::TYPES,","),

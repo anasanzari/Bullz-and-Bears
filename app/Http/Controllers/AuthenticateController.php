@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use App\User;
+use Auth;
 
 
 class AuthenticateController extends Controller
@@ -56,8 +57,8 @@ class AuthenticateController extends Controller
       //new fb user.
       $start_money = config('bullz.start_money');
       $user = User::create(['name'=>$data['name'],'fbid'=>$fbid, 'liquidcash'=> $start_money,
-                            'marketvalue'=>$start_money, 'shortval' => $start_money,
-                             'weekWorth'=>0,'dayWorth'=>0,'rank'=>0,
+                            'marketvalue'=>0, 'shortval' => 0,
+                             'weekworth'=>$start_money,'dayworth'=>$start_money,'rank'=>0,
                              'email'=> "mail"]);
     }
 
