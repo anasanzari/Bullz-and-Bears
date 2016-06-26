@@ -37,13 +37,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $timezone = 'Asia/Calcutta';
 
-      $schedule->call(function () {
-        //run this daily: At the start of each day before market opens
-
-
-      })->everyMinute();
-
+        $schedule->command('update:stocks')->everyMinute()->timezone($timezone);
+        $schedule->command('update:daystart')->dailyAt('9:00')->timezone($timezone);
+        $schedule->command('update:dayend')->dailyAt('16:00')->timezone($timezone);
+        $schedule->command('update:weekly')->weekly()->fridays()->at('16:00')->timezone($timezone);
 
     }
 

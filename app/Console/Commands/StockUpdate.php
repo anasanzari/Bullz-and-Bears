@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 
 use App\Stock;
+use Artisan;
 
 class StockUpdate extends Command
 {
@@ -72,6 +73,7 @@ class StockUpdate extends Command
                       'change_perc' => str_replace(",","",$data->per)
                 ]);
     		    }
-    	  }
+    	 }
+         $exitCode = Artisan::call('update:values', []);
     }
 }
