@@ -14,6 +14,10 @@
 
         var checkTime = function(){
              var now = new moment();
+             if(now.day()===6||now.day()===0){ //sat or sun. Need to figure out public holiday check!!!
+                 $scope.isLive = false;
+                 return;
+             }
              var start = (new moment()).hour(9).minute(15);
              var end = (new moment()).hour(15).minute(30);
              if(now.isAfter(start) && now.isBefore(end)){
