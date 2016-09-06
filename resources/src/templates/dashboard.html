@@ -9,9 +9,6 @@
 
 
     <div class="toolbar__right">
-      <lx-search-filter lx-color="white" lx-closed="true">
-        <input type="text" ng-model="vm.toolbar" />
-      </lx-search-filter>
 
       <lx-dropdown lx-position="right" lx-over-toggle="true">
         <lx-dropdown-toggle>
@@ -23,20 +20,10 @@
         <lx-dropdown-menu>
           <ul>
             <li>
-              <a class="dropdown-link">Action</a>
+              <a class="dropdown-link" ng-click="share();">Share on facebook</a>
             </li>
             <li>
-              <a class="dropdown-link">Another action</a>
-            </li>
-            <li>
-              <a class="dropdown-link">Something else here</a>
-            </li>
-            <li class="dropdown-divider"></li>
-            <li>
-              <a class="dropdown-link dropdown-link--is-header">Header</a>
-            </li>
-            <li>
-              <a class="dropdown-link">Separated link</a>
+              <a class="dropdown-link" href="http://tathva.org" target="_blank">visit tathva.org</a>
             </li>
           </ul>
         </lx-dropdown-menu>

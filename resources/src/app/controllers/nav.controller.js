@@ -45,6 +45,13 @@
 
         };
 
+		$scope.share = function(){
+			FB.ui({
+			 method: 'share',
+			 href: 'http://bullsnbears.tathva.org'
+			 }, function(response){});
+		};
+
 	});
 
 })();

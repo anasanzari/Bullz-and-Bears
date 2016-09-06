@@ -73,21 +73,20 @@
                       <p class="l">{{total|currency:"&#8377"}}</p>
                     </div>
                     <div class="col-xs">
-                        <loading-button is-loading="isLoading">
 
                             <loading-button
                               ng-click="doTrade()"
                               lx-type="raised"
                               lx-size="l"
                               lx-diameter="70"
-                              value="selectedTradeOption.option"
+                              value="{{selectedTradeOption.option}}"
                               is-loading="isLoading"
                               disable-criteria="!state.tAmount || !trade.amount.$valid"
                               >
                             </loading-button>
 
 
-                        </loading-button>
+
 
                     </div>
                 </div>

@@ -53,14 +53,14 @@
 
 		})
 
-		.run(function($rootScope, $state,$auth, $window, AuthService) {
+		.run(function($rootScope, $state,$auth,config, $window, AuthService) {
 
 			  $rootScope.user = {};
 
 			  $window.fbAsyncInit = function() {
 
 			    FB.init({
-			      appId: '882961331768341',
+			      appId: config.appId,
 			      status: true,
 			      cookie: true,
 			      xfbml: true
