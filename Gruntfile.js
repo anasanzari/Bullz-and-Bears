@@ -55,6 +55,15 @@ module.exports = function(grunt) {
           ext: '.css'
         }]
       },
+      admin: {
+        files: [{
+          expand: true,
+          cwd: 'resources/assets/sass',
+          src: ['admin.scss'],
+          dest: 'public/css',
+          ext: '.css'
+        }]
+      },
       prod:{
           options: {                       // Target options
            style: 'compressed'
@@ -73,9 +82,9 @@ module.exports = function(grunt) {
         src: ['resources/src/app/**/*.js'],
         dest: 'public/app/app.js',
       },
-      extras: {
-        src: ['src/main.js', 'src/extras.js'],
-        dest: 'dist/with_extras.js',
+      admin: {
+        src: ['resources/src/admin/**/*.js'],
+        dest: 'public/app/admin.js',
       },
     },
     copy: {
@@ -107,7 +116,7 @@ module.exports = function(grunt) {
            options: {
              nospawn: true,
              keepalive: true,
-             livereload: true
+             livereload: 35731
            },
            tasks: ['build:dev']
          },
@@ -115,7 +124,7 @@ module.exports = function(grunt) {
            files: 'resources/src/app/**/*.js',
            options: {
              nospawn: true,
-             livereload: true
+             livereload: 35732
            },
            tasks: ['jshint', 'concat:basic']
          },
@@ -123,7 +132,7 @@ module.exports = function(grunt) {
            files: ['resources/src/index.template', 'resources/src/templates/**/*.html'],
            options: {
              nospawn: true,
-             livereload: true
+             livereload: 35733
            },
            tasks: [ 'copy:main', 'preprocess:dev', 'preprocess:prod']
          },
@@ -131,10 +140,37 @@ module.exports = function(grunt) {
            files: ['resources/assets/sass/**'],
            options: {
              nospawn: true,
-             livereload: true
+             livereload: 35734
            },
            tasks: ['sass:dist']
-         }
+         },
+
+         /*admins*/
+
+             admin_js: {
+               files: 'resources/src/admin/**/*.js',
+               options: {
+                 nospawn: true,
+                 livereload: 35735
+               },
+               tasks: ['jshint', 'concat:admin']
+             },
+             admin_html: {
+               files: ['resources/src/admin/index.template', 'resources/src/templates/**/*.html'],
+               options: {
+                 nospawn: true,
+                 livereload: 35736
+               },
+               tasks: [ 'copy:main', 'preprocess:admin_dev', 'preprocess:admin_prod']
+             },
+             admin_sass: {
+               files: ['resources/assets/sass/**'],
+               options: {
+                 nospawn: true,
+                 livereload: 35737
+               },
+               tasks: ['sass:admin']
+             }
 
     },
 
@@ -158,7 +194,29 @@ module.exports = function(grunt) {
             },
             src: 'resources/src/index.template',
             dest: 'resources/views/index.blade.php'
-          }
+          },
+          admin_dev:{
+                  options: {
+                    context: {
+                      MODE: 'prod',
+                      BUILD_TS: '<%= ((new Date()).valueOf().toString()) + (Math.floor((Math.random()*1000000)+1).toString()) %>'
+                    }
+                  },
+                  src: 'resources/src/admin/index.template',
+                  dest: 'public/index2.html'
+              },
+         admin_prod:{
+                  options: {
+                    context: {
+                      MODE: 'prod',
+                      BUILD_TS: '<%= ((new Date()).valueOf().toString()) + (Math.floor((Math.random()*1000000)+1).toString()) %>'
+                    }
+                  },
+                  src: 'resources/src/admin/index.template',
+                  dest: 'resources/views/admin.blade.php'
+              }
+
+
     },
 
 
@@ -186,6 +244,26 @@ module.exports = function(grunt) {
               }
             ]
         }
+    },
+
+    concurrent: {
+      options: {
+        logConcurrentOutput: true
+      },
+      app: {
+        tasks: ['watch:js',
+            'watch:html',
+            'watch:grunt',
+            'watch:sass'
+        ]
+      },
+      admin: {
+          tasks: [
+              'watch:admin_js',
+              'watch:admin_html',
+              'watch:admin_sass'
+          ]
+      }
     }
 
   });
@@ -210,8 +288,27 @@ module.exports = function(grunt) {
            'build:dev',
            'configureProxies:server',
            'connect',
-           'watch'
+           'concurrent:app'
        ]);
    });
+
+   grunt.registerTask('build:admin', function (target) {
+        grunt.task.run([
+         'copy:main',
+         'preprocess:admin_dev',
+         'preprocess:admin_prod'
+        ]);
+    });
+
+   grunt.registerTask('admin', function (target) {
+        grunt.task.run([
+            'build:admin',
+            'configureProxies:server',
+            'connect',
+            'concurrent:admin'
+        ]);
+    });
+
+
 
 };
