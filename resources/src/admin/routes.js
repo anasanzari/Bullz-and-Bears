@@ -27,22 +27,22 @@
       .state('home', {
         url: '/home',
 		parent: 'game',
-        templateUrl: './templates/game/view.home.html',
+        templateUrl: './templates/admin/admin_home.html',
         controller: 'HomeController'
+	})
+      .state('stocks', {
+        url: '/stocks',
+		parent: 'game',
+        templateUrl: './templates/admin/admin_stocks.html',
+        controller: 'StocksController'
+	})
+      .state('users', {
+        url: '/users',
+		parent: 'game',
+        templateUrl: './templates/admin/admin_users.html',
+        controller: 'UserController'
 	});
-      /*.state('portfolio', {
-        url: '/portfolio',
-		parent: 'game',
-        templateUrl: './templates/game/view.portfolio.html',
-        controller: 'PortfolioController'
-      })
-      .state('trade', {
-        url: '/trade',
-		parent: 'game',
-        templateUrl: './templates/game/view.trade.html',
-        controller: 'TradeController'
-      })
-      .state('schedule', {
+      /*.state('schedule', {
         url: '/schedule',
 		parent: 'game',
         templateUrl: './templates/game/view.schedule.html',

@@ -1,0 +1,67 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-xs-12 col-md-12">
+
+			<div class="p+">
+
+				<div class="card customcard">
+
+                    <lx-dialog id="{{ userDialog.id }}">
+                        <lx-dialog-header>
+                            <div class="toolbar bgc-dark pl++">
+                                <span class="toolbar__label tc-white fs-title">
+                                    Edit
+                                </span>
+                            </div>
+                        </lx-dialog-header>
+
+                        <lx-dialog-content>
+                            <div class="p+">
+                                <div class="row center-xs middle-xs">
+                                    <div class="col-xs-12 col-md">
+     								   <img class="prof-image" ng-src="https://graph.facebook.com/{{player.fbid}}/picture?height=100&width=100" />
+     							   </div>
+                                   <div class="col-xs-12 col-md">
+    								   <p class="blue">{{player.name}}</p>
+                                       <p class="blue">Liquid Cash: {{player.liquidcash|currency:'&#8377'}}</p>
+                                       <p class="blue">Market Value: {{player.marketvalue|currency:'&#8377'}}</p>
+    							   </div>
+                                </div>
+                            </div>
+                        </lx-dialog-content>
+
+                        <lx-dialog-footer>
+                            <lx-button lx-color="black" lx-type="flat" lx-dialog-close>Cancel</lx-button>
+                        </lx-dialog-footer>
+                    </lx-dialog>
+
+		                <div ng-scrollbars ng-scrollbars-config="scrollconfig">
+
+		                  <ul class="customlist">
+		                    <li class="customlist-item" ng-repeat="player in users">
+
+								<div class="row center-xs middle-xs">
+							   <div class="col-xs-12 col-md-2">
+								   <p class="mg-1">{{$index+1}}</p>
+							   </div>
+
+							   <div class="col-xs-12 col-md">
+								   <p class="blue">{{player.name}}</p>
+							   </div>
+							   <div class="col-xs-12 col-md">
+                                   <lx-button lx-type="raised" ng-click="openPlayer(player)">Show</lx-button>
+							   </div>
+
+							 </div>
+
+
+		                    </li>
+		              	  </ul>
+
+		                </div>
+	        	</div>
+
+			</div>
+		</div>
+	</div>
+</div>

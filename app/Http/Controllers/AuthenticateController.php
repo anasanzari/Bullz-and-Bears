@@ -79,6 +79,41 @@ class AuthenticateController extends Controller
   }
 
 
+  public function admin_authenticate(Request $request){
+
+    $values = $request->all();
+    $fb_token = $values['fb_token'];
+    $res = @file_get_contents("https://graph.facebook.com/me?access_token=$fb_token");
+    $data = json_decode($res,TRUE);
+
+    if(!isset($data) || isset($data['error'])){
+      return response()->json(['error' => 'invalid_token'], 401);
+    }
+    $fbid = $data['id'];
+
+    $user = User::where('fbid',$fbid)->get()->first();
+    //check admin
+    if(!$user){
+
+    }
+
+    $user->setDetails();
+
+    try {
+        if (! $token = JWTAuth::fromUser($user)) {
+            return response()->json(['error' => 'invalid_credentials'], 401);
+        }
+    } catch (JWTException $e) {
+        // something went wrong
+        return response()->json(['error' => 'could_not_create_token'], 500);
+    }
+
+    return ['token'=> $token, 'user' => $user];
+
+
+  }
+
+
   public function authenticate(Request $request)
   {
       $credentials = $request->only('email', 'password');

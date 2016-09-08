@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/admin', function () {
+    return view('admin');
+});
+
 Route::group(['prefix' => 'api'], function(){
 	Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);
 	Route::post('authenticate', 'AuthenticateController@authenticate');
@@ -50,6 +54,19 @@ Route::group(['prefix' => 'api'], function(){
   Route::post('stats/trade', 'ApiController@trade_stats');
   Route::post('stats/schedule', 'ApiController@schedule_stats');
 
+});
+
+
+//admin
+Route::group(['prefix' => 'api/admin/'], function(){
+    Route::post('overview' , 'AdminController@getOverview');
+    Route::post('stocks', 'AdminController@stocks');
+    Route::post('stocks/edit', 'AdminController@editStock');
+    Route::post('stocks/delete', 'AdminController@deleteStock');
+    Route::post('users', 'AdminController@users');
+
+    Route::post('state', 'AdminController@state');
+    Route::post('state/edit', 'AdminController@editState');
 });
 
 //backend

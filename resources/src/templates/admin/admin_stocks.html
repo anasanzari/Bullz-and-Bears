@@ -1,0 +1,96 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-xs-12 col-md-12">
+
+            <lx-dialog id="{{ edit.id }}">
+                <lx-dialog-header>
+                    <div class="toolbar bgc-dark pl++">
+                        <span class="toolbar__label tc-white fs-title">
+                            Edit
+                        </span>
+                    </div>
+                </lx-dialog-header>
+
+                <lx-dialog-content>
+                    <div class="p+">
+                        <lx-text-field lx-label="Name" lx-allow-clear="true">
+                            <input type="text" ng-model="edit.newname">
+                        </lx-text-field>
+                    </div>
+                </lx-dialog-content>
+
+                <lx-dialog-footer>
+                    <lx-button lx-color="black" lx-type="flat" lx-dialog-close>Cancel</lx-button>
+                    <lx-button lx-type="flat" ng-click="save()">Save</lx-button>
+                </lx-dialog-footer>
+            </lx-dialog>
+
+            <lx-dialog id="{{ deleteStock.id }}">
+                <lx-dialog-header>
+                    <div class="toolbar bgc-dark pl++">
+                        <span class="toolbar__label tc-white fs-title">
+                            Confirm
+                        </span>
+                    </div>
+                </lx-dialog-header>
+
+                <lx-dialog-content>
+                    <div class="p+">
+                        <p class="black">Are you sure about this?</p>
+                    </div>
+                </lx-dialog-content>
+
+                <lx-dialog-footer>
+                    <lx-button lx-color="black" lx-type="flat" lx-dialog-close>Cancel</lx-button>
+                    <lx-button lx-type="flat" ng-click="delStock()">Delete</lx-button>
+                </lx-dialog-footer>
+            </lx-dialog>
+
+			<div class="p+">
+
+				<div class="card customcard formpage">
+
+				<lx-text-field
+                  lx-label="Search"
+                  lx-theme="dark">
+                  <input type="text" name="name" ng-model="state.name">
+                </lx-text-field>
+            	<div ng-scrollbars ng-scrollbars-config="scrollconfig">
+                <ul class="customlist">
+                    <li class="customlist-item" ng-repeat="stock in stocks | filter:state.name">
+                      <div class="row">
+                        <div class="col-xs">
+                          <p class="large blue">{{stock.name}}</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-xs-12 col-md-4">
+                            <p>Name : {{stock.name}}</p>
+                        </div>
+                        <div class="col-xs-12 col-md-4">
+                            <p>Symbol : {{stock.symbol}}</p>
+                        </div>
+                        <div class="col-xs-12 col-md-4">
+                            <p>Last Update : {{stock.time_stamp}}</p>
+                        </div>
+                    </div>
+                      <div class="row">
+                        <div class="col-xs-12 col-md-4">
+                            <lx-button lx-type="raised" ng-click="openEdit(stock)">Edit</lx-button>
+                        </div>
+                        <div class="col-xs-12 col-md-4">
+                            <lx-button lx-type="raised" ng-click="openDelete(stock)">Delete</lx-button>
+                        </div>
+
+
+                      </div>
+
+                    </li>
+                 </ul>
+
+				</div>
+			 </div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,96 @@
+<div class="container-fluid">
+    <div class="p+">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+
+                <lx-dialog id="{{ confirmDialog.id }}">
+                    <lx-dialog-header>
+                        <div class="toolbar bgc-dark pl++">
+                            <span class="toolbar__label tc-white fs-title">
+                                Confirm
+                            </span>
+                        </div>
+                    </lx-dialog-header>
+
+                    <lx-dialog-content>
+                        <div class="p+">
+                            <p class="black">Are you sure about this?</p>
+                        </div>
+                    </lx-dialog-content>
+
+                    <lx-dialog-footer>
+                        <lx-button lx-color="black" lx-type="flat" lx-dialog-close>Cancel</lx-button>
+                        <lx-button lx-type="flat" ng-click="changeState()">Change</lx-button>
+                    </lx-dialog-footer>
+                </lx-dialog>
+
+                <div class="card customcard">
+                  <div class="p+">
+                      <div class="row around-xs middle-xs">
+                          <div class="col-xs">
+                              <h1>Overview</h1>
+                              <ul class="list mt++">
+                                   <li class="list-row list-row--has-separator">
+                                       <div class="list-row__content">
+                                           <span>Total Users: {{overview.total_users}}</span>
+                                       </div>
+                                   </li>
+                                   <li class="list-row list-row--has-separator">
+                                       <div class="list-row__content">
+                                           <span>Total Transactions: {{overview.total_transactions}}</span>
+                                       </div>
+                                   </li>
+                                   <li class="list-row list-row--has-separator">
+                                       <div class="list-row__content">
+                                           <span>Total Scheduled: {{overview.total_scheduled}}</span>
+                                       </div>
+                                   </li>
+                               </ul>
+                          </div>
+
+                      </div>
+                  </div>
+                </div>
+
+
+            </div>
+            <div class="col-xs-12 col-md-6">
+
+                <div class="card customcard">
+                  <div class="p+">
+
+                      <p class="red">Application State: {{app.state}} </p>
+
+                      <lx-select ng-model="currentstate"
+  	                 lx-allow-clear="true"
+  	                 lx-choices="states"
+  	                 lx-display-filter="true"
+  	                 lx-fixed-label="true"
+  	                 lx-theme="dark"
+  	                 lx-label="State"
+  	                 ng-change="changeStock()"
+  	                >
+  	                  <lx-select-selected>
+  	                      {{ $selected }}
+  	                  </lx-select-selected>
+
+  	                  <lx-select-choices>
+  	                      {{ $choice }}
+  	                  </lx-select-choices>
+  	              	</lx-select>
+
+                    <lx-button lx-type="raised" ng-click="openConfirm()">Change</lx-button>
+
+
+
+                 </div>
+                </div>
+
+
+
+
+            </div>
+
+        </div>
+  </div>
+</div>
