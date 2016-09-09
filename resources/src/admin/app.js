@@ -44,7 +44,7 @@
 			$provide.factory('redirectWhenLoggedOut', redirectWhenLoggedOut);
 			$httpProvider.interceptors.push('redirectWhenLoggedOut');
 			$authProvider.baseUrl = './';
-			$authProvider.loginUrl = 'api/fbauthenticate';
+			$authProvider.loginUrl = 'api/admin/authenticate';
 
 			$urlRouterProvider.otherwise('/home');
 
@@ -84,7 +84,7 @@
 			    ref.parentNode.insertBefore(js, ref);
 			  }(document));
 
-			/*$rootScope.$on('$stateChangeStart', function(event, toState) {
+			$rootScope.$on('$stateChangeStart', function(event, toState) {
 
 				console.log(toState);
 
@@ -101,7 +101,7 @@
 					}
 				}
 
-			});*/
+			});
 
 
 

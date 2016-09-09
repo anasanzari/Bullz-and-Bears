@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use App\User;
+use App\Admin;
 use Auth;
 
 
@@ -21,7 +22,7 @@ class AuthenticateController extends Controller
       // Apply the jwt.auth middleware to all methods in this controller
       // except for the authenticate method. We don't want to prevent
       // the user from retrieving their token if they don't already have it
-      $this->middleware('jwt.auth', ['except' => ['authenticate','fb_authenticate']]);
+      $this->middleware('jwt.auth', ['except' => ['authenticate','fb_authenticate', 'admin_authenticate']]);
   }
 
   /**
@@ -92,9 +93,9 @@ class AuthenticateController extends Controller
     $fbid = $data['id'];
 
     $user = User::where('fbid',$fbid)->get()->first();
-    //check admin
-    if(!$user){
-
+    $admin = Admin::where('fbid',$fbid)->get()->first();
+    if(!$user&&!$admin){
+        return response()->json(['error' => 'invalid_admin'], 401);
     }
 
     $user->setDetails();

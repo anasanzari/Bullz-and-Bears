@@ -42,43 +42,7 @@
         templateUrl: './templates/admin/admin_users.html',
         controller: 'UserController'
 	});
-      /*.state('schedule', {
-        url: '/schedule',
-		parent: 'game',
-        templateUrl: './templates/game/view.schedule.html',
-        controller: 'ScheduleController'
-      })
-	  .state('scheduled', {
-        url: '/scheduled',
-		parent: 'game',
-        templateUrl: './templates/game/view.scheduled.html',
-        controller: 'ScheduledController'
-      })
-      .state('lookup', {
-        url: '/lookup',
-		parent: 'game',
-        templateUrl: './templates/game/view.lookup.html',
-        controller: 'LookUpController'
-      })
-      .state('market', {
-        url: '/market',
-		parent: 'game',
-        templateUrl: './templates/game/view.market.html',
-        controller: 'MarketController'
-      })
-      .state('rankings', {
-        url: '/rankings',
-		parent: 'game',
-        templateUrl: './templates/game/view.ranking.html',
-        controller: 'RankingController'
-      })
-      .state('help', {
-        url: '/help',
-		parent: 'game',
-        templateUrl: './templates/game/view.help.html',
-        controller: 'HelpController'
-	});*/
-
+     
   });
 
 })();
