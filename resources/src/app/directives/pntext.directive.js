@@ -15,7 +15,7 @@
                 template: '<span ng-class="{red:value<0,green:value>=0}">'+
                           '{{value>0? \' &#8593 \' : \' &#8595 \' }}'+
                           '{{isCurrency? \'&#8377\' : \'\'}}'+
-                          '{{value}}'+
+                          '{{value|number:2}}'+
                          '{{isPercent?\'%\':\'\'}}'+
                          '</span>'
             };
