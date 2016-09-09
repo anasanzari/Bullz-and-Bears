@@ -52,13 +52,16 @@ Route::group(['prefix' => 'api'], function(){
   Route::post('stats/trade', 'ApiController@trade_stats');
   Route::post('stats/schedule', 'ApiController@schedule_stats');
 
+  //cron
+  Route::post('cron', 'ApiController@cron');
+
 });
 
 
 //admin
 Route::group(['prefix' => 'api/admin/'], function(){
     Route::post('authenticate','AuthenticateController@admin_authenticate');
-    
+
     Route::post('overview' , 'AdminController@getOverview');
     Route::post('stocks', 'AdminController@stocks');
     Route::post('stocks/edit', 'AdminController@editStock');

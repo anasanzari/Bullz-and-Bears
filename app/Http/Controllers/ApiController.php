@@ -18,6 +18,7 @@ use Validator;
 
 use App\Transaction;
 use Auth;
+use Artisan;
 
 
 class ApiController extends Controller
@@ -28,10 +29,19 @@ class ApiController extends Controller
       // except for the authenticate method. We don't want to prevent
       // the user from retrieving their token if they don't already have it
 
-      $this->middleware('jwt.auth', ['except' => ['authenticate']]);
+      $this->middleware('jwt.auth', ['except' => ['cron']]);
 
     date_default_timezone_set('Asia/Calcutta');
     setlocale(LC_MONETARY, 'en_IN');
+
+  }
+
+  public function cron(){
+
+      //return Artisan::call('schedule:run', []); If only I'd found a way to fix the php path problem.
+
+      $out = shell_exec('/opt/php56/bin/php /home2/nitcfest/public_html/bullsnbears.tathva.org/artisan schedule:run >> /dev/null 2>&1');
+      return $out;
 
   }
 
