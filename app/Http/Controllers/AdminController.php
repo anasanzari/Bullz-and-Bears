@@ -30,22 +30,17 @@ class AdminController extends Controller
         // except for the authenticate method. We don't want to prevent
         // the user from retrieving their token if they don't already have it
 
-        $this->middleware('jwt.auth', ['except' => ['authenticate']]);
+        $this->middleware('jwt.auth');
         //check if admin!
+        $this->middleware('admin.check');
 
         date_default_timezone_set('Asia/Calcutta');
         setlocale(LC_MONETARY, 'en_IN');
 
-        $user = Auth::user();
-        if(!$user){
-            return response()->json(['error' => 'not_auth'], 401);
-        }
-        $admin = Admin::where('fbid',$user->fbid)->get()->first();
-        if(!$admin){
-            return response()->json(['76:29' => 'Indeed, this is a remainder, so he who wills make take to his Lord a way.'], 401);
-        }
+
 
     }
+
 
     public function getOverview(){
 

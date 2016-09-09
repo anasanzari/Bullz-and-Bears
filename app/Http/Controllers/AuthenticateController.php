@@ -94,7 +94,8 @@ class AuthenticateController extends Controller
 
     $user = User::where('fbid',$fbid)->get()->first();
     $admin = Admin::where('fbid',$fbid)->get()->first();
-    if(!$user&&!$admin){
+
+    if(!$user||!$admin){
         return response()->json(['error' => 'invalid_admin'], 401);
     }
 
