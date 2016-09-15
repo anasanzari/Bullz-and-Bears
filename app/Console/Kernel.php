@@ -26,7 +26,8 @@ class Kernel extends ConsoleKernel
         Commands\StockUpdate::class,
         Commands\ValueUpdate::class,
         Commands\WeekUpdate::class,
-        Commands\InitStocks::class
+        Commands\InitStocks::class,
+        Commands\HitBack::class
     ];
 
     /**
@@ -44,6 +45,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('update:dayend')->dailyAt('16:00')->timezone($timezone);
         $schedule->command('update:weekly')->weekly()->fridays()->at('16:00')->timezone($timezone);
 
+        $schedule->command('hitback:now')->hourly()->timezone($timezone);;
     }
 
 

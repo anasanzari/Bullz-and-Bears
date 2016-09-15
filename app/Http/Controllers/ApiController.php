@@ -204,6 +204,21 @@ class ApiController extends Controller
   }
 
   public function doTrade(Request $request){
+      //time check
+      $now = Carbon::now('Asia/Calcutta');
+      if($now->dayOfWeek==6||$now->dayOfWeek==0){ //sat or sun. Need to figure out public holiday check!!!
+          return response()->json(['errors' => 'Market is closed.'], 400);
+      }
+      $start = Carbon::now('Asia/Calcutta');
+      $start->hour = 9;
+      $start->minute = 15;
+      $end = Carbon::now('Asia/Calcutta');
+      $end->hour = 15;
+      $end->minute = 30;
+
+      if(!$now->between($start,$end)){
+          return response()->json(['errors' => 'Market is closed.'], 400);
+      }
 
     $user = Auth::user(); //get authenticated user.
     $data = $request->all();
