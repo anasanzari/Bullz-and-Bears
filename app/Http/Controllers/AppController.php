@@ -32,7 +32,15 @@ class AppController extends Controller
 
         return view('index');
 
-
     }
+
+    public function admin(){
+        return view('admin');
+    }
+
+    public function test(){
+        return view('index');
+    }
+
 
 }

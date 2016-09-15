@@ -27,7 +27,6 @@
         <div ui-view ></div>
       </div>
 
-      <!-- Application Dependencies -->
       <script src="bower_components/jquery/dist/jquery.min.js"></script>
       <script src="bower_components/velocity/velocity.min.js"></script>
       <script src="bower_components/moment/min/moment-with-locales.min.js"></script>
@@ -42,9 +41,17 @@
       <script src="bower_components/Chart.js/Chart.js"></script>
       <script src="bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
 
-      <!-- Application Scripts -->
       <script src="app/app.js"></script>
+      <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
+          ga('create', 'UA-84223206-1', 'auto');
+          ga('send', 'pageview');
+      </script>
+      <!-- sane. -->
     </body>
 
   </html>

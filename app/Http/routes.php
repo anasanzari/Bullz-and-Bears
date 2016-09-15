@@ -13,9 +13,8 @@
 
 Route::get('/', 'AppController@index');
 
-Route::get('/admin', function () {
-    return view('admin');
-});
+Route::get('/admin', 'AppController@admin');
+Route::get('/testapp', 'AppController@test');
 
 Route::group(['prefix' => 'api'], function(){
 	Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);
