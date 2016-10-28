@@ -6,6 +6,8 @@ use Illuminate\Console\Command;
 
 use App\Stock;
 use Artisan;
+use Carbon\Carbon;
+
 
 class StockUpdate extends Command
 {

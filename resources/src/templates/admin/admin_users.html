@@ -35,7 +35,7 @@
                         </lx-dialog-footer>
                     </lx-dialog>
 
-		                <div ng-scrollbars ng-scrollbars-config="scrollconfig">
+		                <!--div ng-scrollbars ng-scrollbars-config="scrollconfig">
 
 		                  <ul class="customlist">
 		                    <li class="customlist-item" ng-repeat="player in users">
@@ -58,7 +58,37 @@
 		                    </li>
 		              	  </ul>
 
-		                </div>
+					  </div>-->
+
+					  <div ng-scrollbars ng-scrollbars-config="overallconfig">
+
+						<ul class="customlist">
+						  <li class="customlist-item" ng-repeat="player in overall">
+
+							  <div class="row center-xs middle-xs">
+							 <div class="col-xs-12 col-md-2">
+								 <p class="mg-1">{{$index+1}}</p>
+							 </div>
+							 <div class="col-xs-12 col-md">
+								 <img class="prof-image" ng-src="https://graph.facebook.com/{{player.fbid}}/picture?height=100&width=100" />
+							 </div>
+							 <div class="col-xs-12 col-md">
+								 <p class="blue">{{player.name}}</p>
+								 <a href="https://www.facebook.com/{{player.fbid}}" target="_blank"><p class="blue" style="font-size:.5em">https://www.facebook.com/{{player.fbid}}</p></a>
+							 </div>
+							 <div class="col-xs-12 col-md">
+								 <p class="mg-1">{{player.total|currency:'&#8377'}}</p>
+							 </div>
+
+						   </div>
+
+
+						  </li>
+						</ul>
+
+					  </div>
+
+
 	        	</div>
 
 			</div>

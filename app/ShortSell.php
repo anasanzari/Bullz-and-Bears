@@ -37,6 +37,23 @@ class ShortSell extends Model
       return $short;
   }
 
+  public static function shortRevert($userid, $symbol, $amount, $average){
+
+      $short = ShortSell::where('playerid', $userid)
+                            ->where('symbol', $symbol)
+                            ->first();
+      if($short->amount>$amount){
+        $short->avg = ($short->avg * $short->amount - $amount * $average)/( $short->amount - $amount);
+        $short->amount -= $amount;
+        $short->updateValues($userid,$symbol);
+
+      }else{
+        $short->deleteStock($userid,$symbol);
+      }
+      return $short;
+  }
+
+
   public static function coverUpdate($userid, $symbol, $amount, $stock_data){
     $average = $stock_data['value'];
     $short = ShortSell::where('playerid', $userid)
@@ -54,6 +71,29 @@ class ShortSell extends Model
 
     }else{
       //throw an exception
+    }
+    return $short;
+  }
+
+  public static function coverRevert($userid, $symbol, $amount, $average){
+
+    $short = ShortSell::where('playerid', $userid)
+                          ->where('symbol', $symbol)
+                          ->first();
+    if($short){
+
+
+        $short->avg = ($short->avg * $short->amount + $amount * $average)/( $short->amount + $amount);
+        $short->amount += $amount;
+        $short->updateValues($userid,$symbol);
+
+    }else{
+        $short = ShortSell::create([
+          'playerid' => $userid,
+          'symbol' => $symbol,
+          'amount' => $amount,
+          'avg' => $average
+        ]);
     }
     return $short;
   }

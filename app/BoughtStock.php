@@ -49,6 +49,21 @@ class BoughtStock extends Model
       return $bought;
   }
 
+  public static function buyRevert($userid, $symbol, $amount, $average){
+
+      $bought = BoughtStock::where('playerid', $userid)
+                            ->where('symbol', $symbol)
+                            ->first();
+      if($bought->amount>$amount){
+        $bought->avg = ($bought->avg * $bought->amount - $amount * $average)/( $bought->amount - $amount);
+        $bought->amount -= $amount;
+        $bought->updateValues($userid,$symbol);
+      }else{
+        $bought->deleteStock($userid,$symbol);
+      }
+      return $bought;
+  }
+
   public static function sellUpdate($userid, $symbol, $amount, $stock_data){
     $average = $stock_data['value'];
     $bought = BoughtStock::where('playerid', $userid)
@@ -66,6 +81,27 @@ class BoughtStock extends Model
 
     }else{
       //throw an exception
+    }
+  }
+
+  public static function sellRevert($userid, $symbol, $amount, $average){
+
+    $bought = BoughtStock::where('playerid', $userid)
+                          ->where('symbol', $symbol)
+                          ->first();
+    if($bought){
+
+        $bought->avg = ($bought->avg * $bought->amount + $amount * $average)/( $bought->amount + $amount);
+        $bought->amount += $amount;
+        $bought->updateValues($userid,$symbol);
+
+    }else{
+        $bought = BoughtStock::create([
+          'playerid' => $userid,
+          'symbol' => $symbol,
+          'amount' => $amount,
+          'avg' => $average
+        ]);
     }
   }
 

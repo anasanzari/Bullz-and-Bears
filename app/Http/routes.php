@@ -53,6 +53,7 @@ Route::group(['prefix' => 'api'], function(){
 
   //cron
   Route::post('cron', 'ApiController@cron');
+  Route::get('secsleft', 'ApiController@secsleft');
 
 });
 

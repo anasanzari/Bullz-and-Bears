@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\AppState;
+use App\Winner;
 
 class AppController extends Controller
 {
@@ -25,7 +26,9 @@ class AppController extends Controller
                     return view('backend_progress');
                     break;
                 case AppState::STATE_GAME_ENDED :
-                    return view('game_ended');
+                    $homewinners = Winner::where('inside',1)->with('user')->orderBy('rank')->get();
+                    $awaywinners = Winner::where('inside',0)->with('user')->orderBy('rank')->get();
+                    return view('game_ended',['home' => $homewinners, 'away' => $awaywinners]);
                     break;
 
         }

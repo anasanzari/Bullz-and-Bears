@@ -9,10 +9,10 @@
     <meta property="og:title" content="Bulls n Bears" />
     <meta property="og:site_name" content="bullsnbears.tathva.org"/>
     <meta property="og:url" content="http://bullsnbears.tathva.org"/>
-    <meta property="og:description" content="Virtual Stock Market." />
+    <meta property="og:description" content="Online stock market simulation game conducted as part of Tathva." />
     <meta property="og:type" content="article" />
     <meta property="fb:app_id" content="882961331768341" />
-    <meta property="og:image" content="http://bullsnbears.tathva.org/wallst.jpg">
+    <meta property="og:image" content="http://bullsnbears.tathva.org/images/bulls.jpg">
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
 
@@ -30,6 +30,7 @@
       <script src="bower_components/jquery/dist/jquery.min.js"></script>
       <script src="bower_components/velocity/velocity.min.js"></script>
       <script src="bower_components/moment/min/moment-with-locales.min.js"></script>
+      <script src="bower_components/humanize-duration/humanize-duration.js"></script>
       <script src="bower_components/angular/angular.min.js"></script>
       <script src="bower_components/angular-resource/angular-resource.min.js"></script>
       <script src="bower_components/angular-animate/angular-animate.js"></script>
@@ -40,6 +41,7 @@
       <script src="bower_components/ng-scrollbars/dist/scrollbars.min.js"></script>
       <script src="bower_components/Chart.js/Chart.js"></script>
       <script src="bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
+      <script src="bower_components/angular-timer/dist/angular-timer.min.js"></script>
 
       <script src="app/app.js"></script>
       <script>

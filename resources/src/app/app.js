@@ -1,3 +1,4 @@
+//console.log = function(){};
 (function() {
 
 	'use strict';
@@ -14,7 +15,8 @@
 			'ngAnimate',
 			'ngResource',
 			'ngScrollbars',
-			'chart.js'
+			'chart.js',
+			'timer'
 		]);
 
 	angular.module('AppControllers',[]);

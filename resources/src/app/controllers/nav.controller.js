@@ -4,7 +4,30 @@
 
 	var controllers = angular.module('AppControllers');
 
-	controllers.controller('NavController', function($scope, $timeout, $auth, AuthService, $state, $http, $rootScope){
+	controllers.controller('NavController', function($scope, $timeout, $auth, AuthService, PlayerService,  $state, $http, $rootScope, $compile, $element){
+
+		PlayerService.getTimeLeft(function(data){
+			console.log(data);
+			console.log($element);
+			$timeout(function () {
+				$scope.time_left = data.secs;
+				var div = $element[0].querySelector('.msg');
+				console.log(div);
+				var html = 'Ends in &nbsp'+
+						   '<timer  finish-callback="finish()" countdown="time_left" max-time-unit="\'day\'"'+
+						    'interval="1000">{{days}} day{{daysS}} {{hours}} : {{mminutes}} : {{sseconds}} '+
+							'</timer>';
+				div = angular.element(div);
+				div.append(html);
+				$compile(div.contents())($scope);
+			}, 1000);
+		});
+
+		$scope.finish = function(){
+			$timeout(function(){
+				window.location = "http://bullsnbears.tathva.org";
+			},2000);
+		};
 
 		$scope.isOpen = true;
 		$scope.toggle = function(){

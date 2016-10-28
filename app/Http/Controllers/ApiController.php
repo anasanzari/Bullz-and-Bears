@@ -29,11 +29,22 @@ class ApiController extends Controller
       // except for the authenticate method. We don't want to prevent
       // the user from retrieving their token if they don't already have it
 
-      $this->middleware('jwt.auth', ['except' => ['cron']]);
+      $this->middleware('jwt.auth', ['except' => ['cron', 'secsleft']]);
 
     date_default_timezone_set('Asia/Calcutta');
     setlocale(LC_MONETARY, 'en_IN');
 
+  }
+
+  public function secsleft(){
+      $timezone = 'Asia/Calcutta';
+      $now = Carbon::now($timezone);
+      $end = Carbon::createFromFormat(Carbon::ISO8601, config('bullz.game_end_timestamp'));
+      $timezone = 'Asia/Calcutta';
+      $now = Carbon::now($timezone);
+      $end = Carbon::createFromFormat(Carbon::ISO8601, config('bullz.game_end_timestamp'));
+      $time = ["secs" => $now->diffInSeconds($end)];
+      return $time;
   }
 
   public function cron(){

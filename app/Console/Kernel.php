@@ -11,6 +11,7 @@ use App\BoughtStock;
 use App\ShortSell;
 use App\User;
 use App\Schedules;
+use Carbon\Carbon;
 
 class Kernel extends ConsoleKernel
 {
@@ -27,7 +28,9 @@ class Kernel extends ConsoleKernel
         Commands\ValueUpdate::class,
         Commands\WeekUpdate::class,
         Commands\InitStocks::class,
-        Commands\HitBack::class
+        Commands\HitBack::class,
+        Commands\Simulate::class,
+        Commands\Rollback::class
     ];
 
     /**
@@ -39,11 +42,17 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $timezone = 'Asia/Calcutta';
+        $now = Carbon::now($timezone);
+        $end = Carbon::createFromFormat(Carbon::ISO8601, config('bullz.game_end_timestamp'));
+        if($now->gt($end)){
+            return; // Game Ended.
+        }
 
         $schedule->command('update:stocks')->everyMinute()->timezone($timezone);
         $schedule->command('update:daystart')->dailyAt('9:00')->timezone($timezone);
         $schedule->command('update:dayend')->dailyAt('16:00')->timezone($timezone);
-        $schedule->command('update:weekly')->weekly()->fridays()->at('16:00')->timezone($timezone);
+        //!update on mondays
+        $schedule->command('update:weekly')->weekly()->mondays()->at('9:00')->timezone($timezone);
 
         $schedule->command('hitback:now')->hourly()->timezone($timezone);;
     }

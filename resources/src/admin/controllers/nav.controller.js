@@ -24,7 +24,7 @@
 		$scope.menu = [
 				{name:'Home', link: 'home', img: 'mdi-home'},
 				{name:'Stocks', link: 'stocks', img: 'mdi-account'},
-				{name:'Users', link: 'users', img: 'mdi-rotate-3d'}
+				{name:'Leaderboard', link: 'users', img: 'mdi-rotate-3d'}
 
 		];
 

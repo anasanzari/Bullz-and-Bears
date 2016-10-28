@@ -66,7 +66,7 @@ class ValueUpdate extends Command
           return;
       }
 
-      
+
 
       DB::statement("CREATE TEMPORARY TABLE ScheduleProc (id VARCHAR(15) NOT NULL, p_liqcash INT NOT NULL DEFAULT 0, p_mval INT NOT NULL DEFAULT 0, p_sval INT NOT NULL DEFAULT 0, amount INT NOT NULL DEFAULT 0,  symbol VARCHAR(12) NOT NULL, skey BIGINT DEFAULT 0, type VARCHAR(15), value INT, bought_amount INT NOT NULL DEFAULT 0, shorted_amount INT NOT NULL DEFAULT 0) ENGINE=MEMORY;");
       DB::statement("INSERT INTO ScheduleProc (SELECT playerid, 0, 0, 0, pend_no_shares, schedules.symbol, schedules.id, transaction_type, stocks.value, 0, 0 FROM schedules JOIN stocks ON schedules.symbol = stocks.symbol AND ( (schedules.flag = 'low' AND schedules.scheduled_price >= stocks.value) OR (schedules.flag = 'high' AND schedules.scheduled_price <= stocks.value) ))");

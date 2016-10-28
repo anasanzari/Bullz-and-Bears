@@ -92,6 +92,19 @@ class User extends Authenticatable
 
   	}
 
+    function buyRevert($amount, $average){
+
+      $this->rank = 1;
+      $this->liquidcash += round( $amount * $average * 1.002, 2);
+      if($this->marketvalue < round($amount * $average, 2) ){
+        $this->marketvalue = 0;
+      }else{
+        $this->marketvalue -= round($amount * $average, 2);
+      }
+      return $this->save();
+
+  	}
+
     function sellUpdate($amount, $average){
 
       $this->liquidcash += round($amount * $average * 0.998, 2);
@@ -106,12 +119,34 @@ class User extends Authenticatable
 
   	}
 
+    function sellRevert($amount, $average){
+
+      $this->liquidcash -= round($amount * $average * 0.998, 2);
+      $this->marketvalue += round($amount * $average, 2);
+      $this->save();
+
+  	}
+
     function shortUpdate($amount, $average){
 
       $this->rank = 1;
       $this->liquidcash -= round($amount * $average * 0.002, 2); // y not 1.002 ?
       $this->shortval += round( $amount * $average, 2);
       $this->save();
+
+    }
+
+
+    function shortRevert($amount, $average){
+
+          $this->rank = 1;
+          $this->liquidcash += round($amount * $average * 0.002, 2); // y not 1.002 ?
+          if($this->shortval < round($amount * $average, 2) ){
+            $this->shortval = 0;
+          }else{
+            $this->shortval -= round($amount * $average, 2);
+          }
+          $this->save();
 
     }
 
@@ -124,6 +159,15 @@ class User extends Authenticatable
       }else{
         $this->shortval -= round($amount * $average, 2);
       }
+
+      $this->save();
+
+    }
+
+    function coverRevert($amount,$average,$oldaverage){
+
+      $this->liquidcash -= round(($oldaverage - $average * 1.002) * $amount, 2); // got to understand this
+      $this->shortval += round($amount * $average, 2);
 
       $this->save();
 
