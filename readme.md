@@ -8,7 +8,7 @@
 ### Running locally
 #### Frontend
 
-run `grunt server` from project root
+run `grunt server` from project root. Access it with http://localhost:800
 
 #### Backend
 
