@@ -6,7 +6,15 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     jshint: {
-      files: ['Gruntfile.js', 'resources/src/**/*.js', 'test/**/*.js'],
+      js:{
+        files: [{
+        src: [
+          'Gruntfile.js',
+          'resources/src/**/*.js',
+          'test/**/*.js'
+        ]
+       }]
+      },
       options: {
         globals: {
           'jQuery': true,
@@ -275,9 +283,10 @@ module.exports = function(grunt) {
        grunt.task.run([
          'copy:main',
          'copy:fonts',
-/*         'htmlhint',*/
+         /*'htmlhint',*/
          'jshint',
          'sass',
+         'concat:basic',
          'preprocess:dev',
          'preprocess:prod'
        ]);
