@@ -19,6 +19,9 @@ run `grunt server` from project root. Access it with http://localhost:8080
 5. run `php artisan update:initStocks` [to initialize stocks. You need to enable Curl extension for php]
 6. run `php artisan serve` from root. [keep it running in the background & use http://localhost:8080 to view the Game.]
 
+Cron Scripts
+1. run `php artisan list`. See the `update` section
+
 ### Database Overview
 
 1. Stocks : Most important table in the application, where all the live stocks are saved. Stocks are updated every minute by cronjob.
