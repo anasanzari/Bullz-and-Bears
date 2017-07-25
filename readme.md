@@ -14,8 +14,10 @@ run `grunt server` from project root. Access it with http://localhost:8080
 
 1. create env file in root (refer .env.example)
 2. run `php artisan key:generate`
-3. run `php artisan db:seed`
-4. run `php artisan serve` from root.
+3. run `php artisan migrate`
+4. run `php artisan db:seed`
+5. run `php artisan update:initStocks` [to initialize stocks. You need to enable Curl extension for php]
+6. run `php artisan serve` from root. [keep it running in the background & use http://localhost:8080 to view the Game.]
 
 ### Database Overview
 
