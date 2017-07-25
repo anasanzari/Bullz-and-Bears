@@ -35,10 +35,20 @@ class InitStocks extends Command
 
     private function curl_get_contents($url){
 
+
+       $headers = array(
+         "Accept: application/json",
+         "Content-type: application/json",
+         "Connection: keep-alive"
+       );
+
         $ch = curl_init();
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_VERBOSE, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch,CURLOPT_USERAGENT,'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch,CURLOPT_USERAGENT,'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36');
         $json = curl_exec($ch);
         curl_close($ch);
         return $json;
@@ -54,6 +64,7 @@ class InitStocks extends Command
       //clear db
       DB::table('stocks')->delete();
       $res = $this->curl_get_contents("https://nseindia.com/live_market/dynaContent/live_watch/stock_watch/niftyStockWatch.json");
+      $this->info($res);
       $jsonobj = json_decode($res);
       $this->info('Fetch Complete: Time Stamp : '.$jsonobj->time);
       $update_time = date('Y-m-d H:i:s', strtotime($jsonobj->time));
