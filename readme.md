@@ -12,7 +12,10 @@ run `grunt server` from project root. Access it with http://localhost:8080
 
 #### Backend
 
-Any php server that supports laravel applications can be used to host backend.
+1. create env file in root (refer .env.example)
+2. run `php artisan key:generate`
+3. run `php artisan db:seed`
+4. run `php artisan serve` from root.
 
 ### Database Overview
 

@@ -244,10 +244,10 @@ module.exports = function(grunt) {
                 {
                 context: '/api',
                 host: 'localhost',
-                port: 80,
+                port: 8000,
                 changeOrigin: true,
                 rewrite: {
-                    '^/api': '/Github/Bullz/public/api'
+                    '^/api': '/api'
                 }
               }
             ]
