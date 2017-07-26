@@ -233,7 +233,7 @@ module.exports = function(grunt) {
             options: {
                 port: 8080,
                 base: 'public',
-                hostname: 'localhost',
+                hostname: '*',
                 livereload: true,
                 middleware: function (connect, options, middlewares) {
                   middlewares.unshift(require('grunt-connect-proxy/lib/utils').proxyRequest);
@@ -244,7 +244,7 @@ module.exports = function(grunt) {
                 {
                 context: '/api',
                 host: 'localhost',
-                port: 8000,
+                port: 80,
                 changeOrigin: true,
                 rewrite: {
                     '^/api': '/api'

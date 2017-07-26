@@ -1,0 +1,63 @@
+[1mdiff --git a/.env.example b/.env.example[m
+[1mdeleted file mode 100644[m
+[1mindex 9a9d0dc..0000000[m
+[1m--- a/.env.example[m
+[1m+++ /dev/null[m
+[36m@@ -1,26 +0,0 @@[m
+[31m-APP_ENV=local[m
+[31m-APP_DEBUG=true[m
+[31m-APP_KEY=SomeRandomString[m
+[31m-APP_URL=http://localhost[m
+[31m-[m
+[31m-DB_CONNECTION=mysql[m
+[31m-DB_HOST=127.0.0.1[m
+[31m-DB_PORT=3306[m
+[31m-DB_DATABASE=homestead[m
+[31m-DB_USERNAME=homestead[m
+[31m-DB_PASSWORD=secret[m
+[31m-[m
+[31m-CACHE_DRIVER=file[m
+[31m-SESSION_DRIVER=file[m
+[31m-QUEUE_DRIVER=sync[m
+[31m-[m
+[31m-REDIS_HOST=127.0.0.1[m
+[31m-REDIS_PASSWORD=null[m
+[31m-REDIS_PORT=6379[m
+[31m-[m
+[31m-MAIL_DRIVER=smtp[m
+[31m-MAIL_HOST=mailtrap.io[m
+[31m-MAIL_PORT=2525[m
+[31m-MAIL_USERNAME=null[m
+[31m-MAIL_PASSWORD=null[m
+[31m-MAIL_ENCRYPTION=null[m
+[1mdiff --git a/Gruntfile.js b/Gruntfile.js[m
+[1mindex 88f1886..de02dae 100644[m
+[1m--- a/Gruntfile.js[m
+[1m+++ b/Gruntfile.js[m
+[36m@@ -233,7 +233,7 @@[m [mmodule.exports = function(grunt) {[m
+             options: {[m
+                 port: 8080,[m
+                 base: 'public',[m
+[31m-                hostname: 'localhost',[m
+[32m+[m[32m                hostname: '*',[m
+                 livereload: true,[m
+                 middleware: function (connect, options, middlewares) {[m
+                   middlewares.unshift(require('grunt-connect-proxy/lib/utils').proxyRequest);[m
+[36m@@ -244,7 +244,7 @@[m [mmodule.exports = function(grunt) {[m
+                 {[m
+                 context: '/api',[m
+                 host: 'localhost',[m
+[31m-                port: 8000,[m
+[32m+[m[32m                port: 80,[m
+                 changeOrigin: true,[m
+                 rewrite: {[m
+                     '^/api': '/api'[m
+[36m@@ -294,7 +294,7 @@[m [mmodule.exports = function(grunt) {[m
+ [m
+   grunt.registerTask('server', function (target) {[m
+        grunt.task.run([[m
+[31m-           'build:dev',[m
+[32m+[m[32m           //'build:dev',[m
+            'configureProxies:server',[m
+            'connect',[m
+            'concurrent:app'[m
